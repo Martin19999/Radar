@@ -13,7 +13,7 @@ import Blog from "../components/Blog/index.js";
 import Aside from "../components/Aside/index.js";
 
 
-const Home = () => {
+const HomePage = () => {
 
   window.addEventListener("beforeunload", () => {
     // clear text in the box when refreshed
@@ -31,4 +31,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -16,7 +16,9 @@ aside {
 	border-style: solid;
 }
 
-@media (max-width: 860px) {
+
+
+@media (max-width: 950px) {
 	.blog-home {
 		width: 100%;
 	}

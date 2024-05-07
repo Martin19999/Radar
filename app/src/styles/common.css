@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
 	background-color: #ccc090;
 }
@@ -6,23 +10,35 @@ body {
 	margin: 0;
 }
 
+#root {
+	min-width: 360px;
+}
+
 header {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+	padding: 0 5em;
 	position: fixed;
 	height: 3em;
 	top: 0.5em;
-	width: 100%;
 	left: 0;
 	right: 0;
+	min-width: 360px;
 	border: 1px black;
 	border-style: solid;
 }
 
+.logo-n-search-container {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+}
+
 #logo {
-	max-height: 3em;
+	max-height: 100%;
 	padding-right: 2em;
+
 }
 
 /* search bar */
@@ -35,47 +51,114 @@ input+button {
 	padding: 0.5em 0.5em;
 	text-align: center;
 	font-size: large;
-	width: 30vw;
+	width: clamp(200px, 45vw, 1000px);
 }
 
-form {
+.search-form {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: left;
+	height: 100%;
 }
 
-.auth {
+.menu {
 	flex-wrap: nowrap;
 }
 
-.auth p {
+.menu {
+	height: 90%;
+	border: 1px black;
+	border-style: solid;
+	position: relative;
 	display: inline;
-	text-decoration: underline;
-	padding: 0 1em;
 	white-space: nowrap;
+	/* ???? */
 }
 
-.hidden {
-	visibility: hidden;
+
+
+.three-dots-dropdown-content {
+	color: white;
+	width: 10em;
+	height: 100%;
+	padding: 0;
+	overflow: hidden;
+	border: none;
+	position: relative;
 }
 
-@media (max-width: 860px) {
-	header {
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		position: fixed;
-		height: 9em;
-		top: 0em;
-		width: 100%;
-	}
 
-	.auth {
-		padding-left: 0em;
-		flex-wrap: nowrap;
-	}
+
+.dropdown-content {
+	position: absolute;
+	right: 0;
+	display: flex;
+	flex-direction: column;
+	/* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+	z-index: 1;
+}
+
+.dropdown-content button {
+	height: 3em;
+	width: 10em;
+	border: none;
+}
+
+.menu button:hover {
+	background-color: green;
+
+	/* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
+
+}
+
+.menu .signup-button,
+.menu .login-button {
+	background-color: #ccc090;
+	color: black;
+	border: none;
+	text-decoration: underline;
+}
+
+/* three dots for "login, sign up" buttons are not shown when width is big */
+.three-dots-button {
+	display: none;
+	/* Hide the menu button by default */
+	background: none;
+	border: none;
+	font-size: 24px;
+	/* Larger click area for accessibility */
+	cursor: pointer;
+}
+
+.three-dots-dropdown-content {
+	display: flex;
+}
+
+.three-dots-dropdown-content button {
+	display: block;
+	/* Each button on a new line for the dropdown */
+	width: 100%;
+}
+
+.post-n-setting-buttons {
+	height: 100%;
+	display: flex;
+
+}
+
+
+.post-n-setting-buttons button {
+	height: 100%;
+	aspect-ratio: 1 / 1;
+}
+
+.setting-button {
+	/* width: 4em; */
+	background-size: cover;
+	margin-left: 1em;
+
 }
 
 .content {
@@ -85,13 +168,101 @@ form {
 	width: 100%;
 	border: 1px black;
 	border-style: solid;
+	justify-content: center;
 }
 
-@media (max-width: 860px) {
-	.content {
-		margin-top: 10em;
-		height: calc(100vh - 10em);
-		overflow-y: scroll;
+@media (max-width: 1400px) {
+	#searchField {
+		width: clamp(200px, 40vw, 600px);
+	}
+}
+
+@media (max-width: 1024px) {
+	#searchField {
+		width: clamp(200px, 35vw, 400px);
+	}
+}
+
+@media (max-width: 850px) {
+	header {
+		padding-left: 2em;
+	}
+}
+
+@media (max-width: 768px) {
+	header {
+		padding: 0 1em;
+		position: fixed;
+		top: 0.5em;
+		justify-content: center;
 	}
 
+	#logo {
+		display: none;
+	}
+
+	.logo-n-search-container {
+		margin-right: 1em;
+	}
+
+	.menu {
+		padding-left: 0em;
+		flex-wrap: nowrap;
+	}
+
+
+
+	.content {
+		/* margin-top: 10em;
+		height: calc(100vh - 10em); */
+		/* overflow-y: scroll; */
+		/* padding-top: 10em; */
+	}
+
+	.three-dots-button {
+		display: block;
+		height: 100%;
+	}
+
+	.three-dots-dropdown-content {
+		position: absolute;
+		right: 0;
+		height: 7em;
+		display: flex;
+		flex-direction: column;
+		z-index: 1;
+	}
+
+	.three-dots-dropdown-content .signup-button,
+	.three-dots-dropdown-content .login-button {
+		/* display: none; */
+		height: 3em;
+	}
+
+	#searchField {
+		width: clamp(100px, 50vw, 400px);
+	}
+
+}
+
+@media (max-width: 540px) {
+	header {
+		padding: 0;
+	}
+
+
+
+	#searchField {
+		width: clamp(100px, 52vw, 280px);
+	}
+}
+
+
+
+.hidden {
+	visibility: hidden;
+}
+
+.do-not-display {
+	display: none;
 }

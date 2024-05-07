@@ -1,3 +1,5 @@
+import "../../styles/common.css";
+
 const Blog = () => {
 	return(
 		<section className="blog-home">

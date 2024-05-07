@@ -7,14 +7,18 @@
 
 import Logo from "./Logo.js";
 import Search from "./Search.js";
-import Auth from "./Auth.js";
+import Menu from "./Menu.js";
+import "../../styles/common.css";
 
 
 const Banner = () => (
 	<header>
-		<Logo />
-		<Search />
-		<Auth />
+		<div className="logo-n-search-container">
+			<Logo />
+			<Search />
+		</div>
+		
+		<Menu />
 	</header>
 );
 

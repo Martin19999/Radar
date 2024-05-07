@@ -63,7 +63,7 @@ const Search = () => {
   }, []);
 
   return (
-    <form onSubmit={handleFormSubmit}> 
+    <form onSubmit={handleFormSubmit} className="search-form"> 
         <input
           id="searchField"
           type="text"

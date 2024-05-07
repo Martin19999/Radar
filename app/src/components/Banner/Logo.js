@@ -11,7 +11,7 @@ const Logo = () => {
 	let navigate = useNavigate();
 	return(
 		<div >
-      	<img src="logo.png" alt="Website Logo" id="logo" onClick={() => navigate('/')}/>
+      	<img src="/logo.png" alt="Website Logo" id="logo" onClick={() => navigate('/')}/>
   	</div>
 	); 
 };

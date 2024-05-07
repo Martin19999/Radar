@@ -1,0 +1,19 @@
+.user-sidebar-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+  padding: 2em;
+  border: 1px black;
+  border-style: solid;
+}
+
+
+.profile-pic {
+  width: 10em;
+  height: 10em;
+  align-self: center;
+}
+
+.user-sidebar-container .profile-pic+p {
+  font-weight: bold;
+}
