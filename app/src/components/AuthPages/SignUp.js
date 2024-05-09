@@ -3,6 +3,7 @@ import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import WebDescription from './WebDescription';
+import { useAuth } from '../../context/authContext';
 import "../../styles/common.css";
 import "../../styles/authpages.css";
 
@@ -17,19 +18,25 @@ const SignUp = () => {
   const [nameError, setNameError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
 
+  const { currentUser, userDetails, setUserDetails } = useAuth();
+
   const signup = (e) => { 
     e.preventDefault();
 
     setEmailError(null);
     setNameError(null);
     setPasswordError(null);
-
+ 
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       updateProfile(userCredential.user, {
         displayName: name
       }).then(() => {
-        navigate('/');
+        setUserDetails({
+          ...userDetails,
+          displayName: name
+        });
+        navigate('/', { state:{ fresh: true } });
       }).catch((error) => {
         console.error('Error updating user profile:', error.message);
       });

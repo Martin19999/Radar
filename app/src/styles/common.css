@@ -14,6 +14,35 @@ body {
 	min-width: 360px;
 }
 
+.fresh-user-popup {
+	position: absolute;
+	z-index: 100;
+	width: clamp(360px, 33%, 500px);
+	height: 60vh;
+	padding: 3em;
+	background-color: rgb(255, 255, 255);
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: column;
+}
+
+.fresh-user-popup .card-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.fresh-user-popup .card-container a {
+	margin: 0;
+	min-width: 2em;
+	margin-left: auto;
+}
+
+.fresh-user-popup button {
+	margin-top: auto;
+}
+
 header {
 	display: flex;
 	align-items: center;
@@ -42,7 +71,7 @@ header {
 }
 
 /* search bar */
-input+button {
+.search-form input+button {
 	padding: 0.5em;
 	font-size: large;
 }
@@ -157,6 +186,7 @@ input+button {
 .setting-button {
 	/* width: 4em; */
 	background-size: cover;
+	background-repeat: no-repeat;
 	margin-left: 1em;
 
 }
@@ -208,15 +238,6 @@ input+button {
 	.menu {
 		padding-left: 0em;
 		flex-wrap: nowrap;
-	}
-
-
-
-	.content {
-		/* margin-top: 10em;
-		height: calc(100vh - 10em); */
-		/* overflow-y: scroll; */
-		/* padding-top: 10em; */
 	}
 
 	.three-dots-button {

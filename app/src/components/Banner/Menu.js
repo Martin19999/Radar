@@ -29,7 +29,6 @@ const Auth = () => {
 	const logOut = () => {
 		signOut(auth).then(() => {
 			navigate('/');
-			console.log("log out successfully");
 		}).catch((error) => {
 			console.log(error);
 		})
@@ -96,7 +95,7 @@ const Auth = () => {
 			{ isHovering && (
 					<div className="dropdown-content" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
 						<button onClick={() => navigate(`/userdetail/${currentUser.uid}`)}>User Profile</button>
-						<button>Settings</button>
+						<button onClick={() => navigate("/settings/account")}>Settings</button>
 						<button onClick={() => logOut()}>Log Out</button>
 					</div>
 				)
