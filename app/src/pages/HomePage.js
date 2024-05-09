@@ -12,7 +12,6 @@ import Content from "../components/Content/index.js"
 import Blog from "../components/Blog/index.js";
 import Aside from "../components/Aside/index.js";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useAuth } from "../context/authContext.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";

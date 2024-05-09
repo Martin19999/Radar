@@ -18,7 +18,7 @@ const SignUp = () => {
   const [nameError, setNameError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
 
-  const { currentUser, userDetails, setUserDetails } = useAuth();
+  const { userDetails, setUserDetails } = useAuth();
 
   const signup = (e) => { 
     e.preventDefault();

@@ -104,9 +104,9 @@ const SettingsContent = ({settingType}) => {
           <div className='setting-card'>
             <div className={pfpMagnified ? 'pfp-magnifier' : 'do-not-display'}>
               <button onClick={()=> setPfpMagnified(false)}>x</button>
-              <img src={userDetails.photoURL}></img>
+              <img src={userDetails.photoURL} alt="profile pic"></img>
             </div>
-            <img src={userDetails.photoURL} onClick={()=> setPfpMagnified(true)}></img>
+            <img src={userDetails.photoURL} onClick={()=> setPfpMagnified(true)} alt="profile pic"></img>
             <div id='update-photo-buttons'>
               <input type='file'
                     accept='image/*' 
@@ -114,7 +114,7 @@ const SettingsContent = ({settingType}) => {
                       console.log(e.target.files);
                       if(e.target.files.length === 1 && e.target.files[0].type.startsWith('image/')) setPfp(e.target.files[0]); 
                     }}></input>
-              <button onClick={ handlePfpChange }>Change Profile</button>
+              <button onClick={ handlePfpChange } disabled={!pfp}>Change Profile</button>
             </div>
             
           </div>
