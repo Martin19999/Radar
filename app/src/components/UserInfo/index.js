@@ -28,9 +28,12 @@ const UserInfo = () => {
         </div>
         <div className='more-userinfo-container'>
           <div className='more-userinfo-banner-container'>
-            <button onClick={(e)=> setRequestPage("posts")}>Posts: [int]</button>
-            <button onClick={(e)=> setRequestPage("following")}>Following: [int]</button>
-            <button onClick={(e)=> setRequestPage("followers")}>Follwers: [int]</button>
+            <button onClick={(e)=> setRequestPage("posts")}
+                    className={requestPage==='posts' ? 'selected-button' : ''}>Posts: [int]</button>
+            <button onClick={(e)=> setRequestPage("following")}
+                    className={requestPage==='following' ? 'selected-button' : ''}>Following: [int]</button>
+            <button onClick={(e)=> setRequestPage("followers")}
+                    className={requestPage==='followers' ? 'selected-button' : ''}>Follwers: [int]</button>
           </div>
           
           <UserinfoContent req={ requestPage } />

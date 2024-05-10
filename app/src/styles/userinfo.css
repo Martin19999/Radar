@@ -55,6 +55,12 @@
   /* flex: 0 1 auto; */
   width: 10em;
   height: 2.5em;
+  border-style: none;
+  background-color: transparent;
+}
+
+.more-userinfo-banner-container .selected-button {
+  border-style: none none solid none;
 }
 
 .more-userinfo-content-container {

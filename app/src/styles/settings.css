@@ -5,6 +5,15 @@
   padding: 0 1em;
 }
 
+.setting-options button {
+  border: none;
+  background-color: transparent;
+}
+
+.setting-options .selected-button {
+  border-style: none none solid none;
+}
+
 .settings-content {
   border: 1px black;
   border-style: solid;
