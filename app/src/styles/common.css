@@ -2,10 +2,6 @@
 	box-sizing: border-box;
 }
 
-html {
-	background-color: #ccc090;
-}
-
 body {
 	margin: 0;
 }
@@ -14,6 +10,7 @@ body {
 	min-width: 360px;
 }
 
+/* when new users are created */
 .fresh-user-popup {
 	position: absolute;
 	z-index: 100;
@@ -43,21 +40,21 @@ body {
 	margin-top: auto;
 }
 
+/* header */
 header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 5em;
+	padding: 0.5em 5em;
 	position: fixed;
-	height: 3em;
-	top: 0.5em;
+	height: 4em;
+	top: 0;
 	left: 0;
 	right: 0;
 	min-width: 360px;
-	border: 1px black;
-	border-style: solid;
 }
 
+/* banner */
 .logo-n-search-container {
 	display: flex;
 	flex-direction: row;
@@ -65,22 +62,10 @@ header {
 }
 
 #logo {
+	min-height: 2.5em;
 	max-height: 100%;
 	padding-right: 2em;
 
-}
-
-/* search bar */
-.search-form input+button {
-	padding: 0.5em;
-	font-size: large;
-}
-
-#searchField {
-	padding: 0.5em 0.5em;
-	text-align: center;
-	font-size: large;
-	width: clamp(200px, 45vw, 1000px);
 }
 
 .search-form {
@@ -97,100 +82,45 @@ header {
 }
 
 .menu {
-	height: 90%;
-	border: 1px black;
-	border-style: solid;
 	position: relative;
 	display: inline;
 	white-space: nowrap;
 	/* ???? */
 }
 
-
-
-.three-dots-dropdown-content {
-	color: white;
-	width: 10em;
-	height: 100%;
-	padding: 0;
-	overflow: hidden;
-	border: none;
-	position: relative;
-}
-
-
-
-.dropdown-content {
-	position: absolute;
-	right: 0;
-	display: flex;
-	flex-direction: column;
-	/* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
-	z-index: 1;
-}
-
-.dropdown-content button {
-	height: 3em;
-	width: 10em;
-	border: none;
-}
-
-.menu button:hover {
-	background-color: green;
-
-	/* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
-
-}
-
-.menu .signup-button,
-.menu .login-button {
-	background-color: #ccc090;
-	color: black;
-	border: none;
-	text-decoration: underline;
-}
-
 /* three dots for "login, sign up" buttons are not shown when width is big */
-.three-dots-button {
-	display: none;
-	/* Hide the menu button by default */
-	background: none;
-	border: none;
-	font-size: 24px;
-	/* Larger click area for accessibility */
-	cursor: pointer;
-}
 
 .three-dots-dropdown-content {
 	display: flex;
+	width: 10em;
 }
 
-.three-dots-dropdown-content button {
-	display: block;
-	/* Each button on a new line for the dropdown */
+.three-dots-dropdown-content a {
 	width: 100%;
 }
 
+
+/* when signed in */
 .post-n-setting-buttons {
-	height: 100%;
 	display: flex;
-
+	flex-direction: row;
 }
 
-
-.post-n-setting-buttons button {
-	height: 100%;
-	aspect-ratio: 1 / 1;
+#post-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 1em;
 }
 
-.setting-button {
-	/* width: 4em; */
-	background-size: cover;
-	background-repeat: no-repeat;
-	margin-left: 1em;
+.setting-button:hover {
+	border: 2px black;
+	border-style: solid;
 
+	filter: none;
 }
 
+/* content for home page */
 .content {
 	margin-top: 5em;
 	height: calc(100vh - 5em);
@@ -221,57 +151,33 @@ header {
 
 @media (max-width: 768px) {
 	header {
-		padding: 0 1em;
-		position: fixed;
-		top: 0.5em;
-		justify-content: center;
-	}
 
-	#logo {
-		display: none;
+		justify-content: center;
 	}
 
 	.logo-n-search-container {
 		margin-right: 1em;
 	}
 
-	.menu {
-		padding-left: 0em;
-		flex-wrap: nowrap;
-	}
-
-	.three-dots-button {
-		display: block;
-		height: 100%;
-	}
-
-	.three-dots-dropdown-content {
-		position: absolute;
-		right: 0;
-		height: 7em;
-		display: flex;
-		flex-direction: column;
-		z-index: 1;
-	}
-
-	.three-dots-dropdown-content .signup-button,
-	.three-dots-dropdown-content .login-button {
-		/* display: none; */
-		height: 3em;
+	#logo {
+		display: none;
 	}
 
 	#searchField {
 		width: clamp(100px, 50vw, 400px);
 	}
 
+	.menu {
+		padding-left: 0em;
+		flex-wrap: nowrap;
+	}
 }
 
 @media (max-width: 540px) {
 	header {
-		padding: 0;
+		padding-left: 0;
+		padding-right: 0;
 	}
-
-
 
 	#searchField {
 		width: clamp(100px, 52vw, 280px);
@@ -279,7 +185,7 @@ header {
 }
 
 
-
+/* general */
 .hidden {
 	visibility: hidden;
 }

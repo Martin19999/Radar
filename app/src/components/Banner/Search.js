@@ -11,6 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { Link, IconButton } from '@chakra-ui/react';
+import { IoSearchOutline } from "react-icons/io5";
+
+
+
 
 const Search = () => {
   const [input, setInput] = useState("");
@@ -64,16 +70,18 @@ const Search = () => {
 
   return (
     <form onSubmit={handleFormSubmit} className="search-form"> 
-        <input
-          id="searchField"
-          type="text"
-          placeholder="What are you looking for?"
-          value={input || ""}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">
-          <FontAwesomeIcon icon={faSearch} />
-        </button>
+        <InputGroup>
+          <Input id="searchField"
+                  type="text"
+                  placeholder="Search Radar"
+                  value={input || ""}
+                  onChange={(e) => setInput(e.target.value)}/>
+        
+          <InputRightElement>
+            <IconButton type="submit" aria-label='Search database' icon={<IoSearchOutline />} variant="unstyled" />
+          </InputRightElement>
+        </InputGroup>
+        
       
       
 
