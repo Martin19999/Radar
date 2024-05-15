@@ -1,20 +1,21 @@
 /**
- * Home.js
+ * HomePage.js
  * 
  * Home page. 
  * 
  */
 
-import "../styles/home.css";
-import "../styles/common.css";
 import Banner from "../components/Banner/index.js";
 import Content from "../components/Content/index.js"
 import Blog from "../components/Blog/index.js";
 import Aside from "../components/Aside/index.js";
-import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/authContext.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
+import { Modal, ModalOverlay, ModalContent, ModalFooter, ModalBody, Link, IconButton, Button } from '@chakra-ui/react'
+import { FaArrowRight } from "react-icons/fa";
+
+import "../styles/common.css";
+import "../styles/home.css";
 
 
 
@@ -34,14 +35,27 @@ const HomePage = () => {
 
   return (
     <>
-      <div className={ fresh ? "fresh-user-popup": "do-not-display"}>
-        <h2>Welcome to our community, {userDetails.displayName}!</h2>
-        <div className="card-container">
-          <p>Set your own profile picture </p>
-          <a href="/settings/profile" ><FontAwesomeIcon icon={faArrowRight} /></a>
-        </div>
-        <button onClick={()=>navigate('/')}>Skip for now</button>
-      </div>     
+      <Modal isOpen={fresh}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalBody>
+            <h1>Welcome to our community, </h1>
+            <h1>{userDetails.displayName}!</h1>
+            <div className="welcome-content-container">
+              <p>Before you start, you can set your own profile picture here</p>
+              <Link as={RouterLink} to='/settings/profile'><IconButton icon={<FaArrowRight />} ></IconButton></Link>
+            </div>
+            
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={()=>{navigate('/')}}>
+              Skip for now
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+      
       <Banner />
       <Content>
         <Blog />

@@ -1,19 +1,32 @@
 .user-sidebar-container {
   display: flex;
   flex-direction: column;
-  margin-top: 2em;
+
   padding: 2em;
-  border: 1px black;
-  border-style: solid;
+  /* border: 1px black;
+  border-style: solid; */
 }
 
 
 .profile-pic {
-  width: 10em;
-  height: 10em;
+  width: clamp(8em, 90%, 10em);
+  aspect-ratio: 1/1;
   align-self: center;
+  border: 2px black;
+  border-style: solid;
 }
 
 .user-sidebar-container .profile-pic+p {
   font-weight: bold;
+}
+
+.siderbar-info-no-pic {
+  margin-top: 0.5em;
+  /* text-align: center; */
+}
+
+.siderbar-info-no-pic p:first-child {
+  font-weight: bold;
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
 }

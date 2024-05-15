@@ -1,3 +1,10 @@
+/**
+ * Blog component
+ * 
+ * On the home page. Acts like a container for all the posts.
+ * 
+ */
+
 import "../../styles/common.css";
 
 const Blog = () => {

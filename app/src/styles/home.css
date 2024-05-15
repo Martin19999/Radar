@@ -1,6 +1,22 @@
+/* Welcome pop up window */
+.welcome-content-container {
+	display: flex;
+	flex-direction: row;
+	margin: 2em 0;
+}
+
+/* content for home page */
 .content {
 	display: flex;
 	flex-direction: row;
+	margin-top: 4em;
+	height: calc(100vh - 4em);
+	overflow-y: scroll;
+	width: 100%;
+	/* border: 1px black;
+	border-style: solid; */
+	justify-content: center;
+	padding: 2em 2em 0 2em;
 }
 
 .blog-home {
@@ -10,20 +26,24 @@
 }
 
 aside {
-	width: 20%;
-	min-width: 20em;
+	width: clamp(15em, 20%, 20em);
 	border: 1px black;
 	border-style: solid;
 }
 
 
-
-@media (max-width: 950px) {
+@media (max-width: 850px) {
 	.blog-home {
 		width: 100%;
 	}
 
 	aside {
 		display: none;
+	}
+}
+
+@media (max-width: 540px) {
+	.content {
+		padding: 0.5em 0 0 0;
 	}
 }

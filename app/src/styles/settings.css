@@ -2,16 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 0 1em;
-}
-
-.setting-options button {
-  border: none;
-  background-color: transparent;
-}
-
-.setting-options .selected-button {
-  border-style: none none solid none;
+  height: auto;
+  padding: 2em;
+  border: 1px black;
+  border-style: solid;
+  overflow-y: scroll;
+  position: relative;
 }
 
 .settings-content {
@@ -20,24 +16,89 @@
   margin-top: 1em;
 }
 
-.setting-options-container {
-  border: 1px black;
-  border-style: solid;
-}
-
 .setting-card {
-  padding: 1em 1em;
+  padding: 2em;
   border: 1px black;
-  border-style: solid none;
+  border-style: none none solid none;
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* position: relative; */
+  position: relative;
 }
 
+/* for account setting arrows */
+.account-setting-options-container .setting-card button {
+  position: absolute;
+  left: 15em;
+}
+
+/* account settings */
+.popup header {
+  position: relative;
+}
+
+.popup-inner-content button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* profile settings */
+.profile-setting-options-container .setting-card img {
+  width: 150px;
+  height: 150px;
+  border: 2px black;
+  border-style: solid;
+}
+
+#magnified-pfp {
+  height: 350px;
+  width: 350px;
+  margin: 0;
+  border: 2px black;
+  border-style: solid;
+}
+
+.image-cropper-field {
+  min-width: 300px;
+  min-height: 340px;
+  position: relative;
+}
+
+.reactEasyCrop_Container {
+  width: 90%;
+  height: 80%;
+  align-self: center;
+  justify-self: center;
+}
+
+.crop-button {
+  position: absolute;
+  top: 25em;
+}
+
+/* profile settings, from the 2nd one on */
+.setting-card-content {
+  position: absolute;
+  left: 15em;
+  display: flex;
+  right: calc(10% + 50px);
+  max-width: 400px;
+}
+
+@media (max-width: 768px) {
+  .setting-card-content {
+    left: 10em;
+    right: calc(10% + 10px);
+  }
+
+  #upload-pfp-button {
+    left: 15em;
+  }
+}
 
 @media (max-width: 480px) {
-  .profile-setting-options-container .setting-card {
+  .setting-card {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -45,142 +106,12 @@
   .profile-setting-options-container .setting-card-content {
     position: relative;
     left: 0;
+    margin-top: 2em;
   }
 
-}
-
-/* account settings */
-
-
-.account-setting-options-container .setting-card button {
-  min-width: 2em;
-  max-height: 2em;
-  aspect-ratio: 1/1;
-  border: none;
-  border-radius: 15%;
-  position: absolute;
-  left: 15em;
-}
-
-.account-setting-options-container .setting-card button:hover {
-  background-color: aquamarine;
-}
-
-.popup {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
-
-.popup-inner {
-  position: relative;
-  width: 30%;
-  max-width: 500px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  min-width: 360px;
-  align-items: center;
-}
-
-.popup-inner .close-button {
-  width: 2em;
-  align-self: flex-end;
-}
-
-.popup-inner-content {
-  width: 70%;
-  padding-top: 2em;
-  padding-bottom: 4em;
-}
-
-.popup-inner-content form>* {
-  margin: 0.5em 0;
-}
-
-.popup-inner form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-}
-
-.popup-inner label {
-  margin-bottom: 0em;
-}
-
-.popup-inner form p {
-  margin: 0;
-  min-height: 1.3em;
-}
-
-/* profile settings */
-
-.profile-setting-options-container .setting-card img {
-  width: 150px;
-  height: 150px;
-}
-
-.pfp-magnifier {
-  background-color: rgba(0, 0, 0, 0.8);
-  position: absolute;
-  width: 480px;
-  height: 480px;
-  top: 10vh;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-
-}
-
-@media (max-width: 480px) {
-  .pfp-magnifier {
-    width: 360px;
-
+  #upload-pfp-button {
+    position: relative;
+    left: 0;
+    margin-top: 2em;
   }
-}
-
-.pfp-magnifier button {
-  align-self: flex-end;
-  width: 1.5em;
-}
-
-.setting-card .pfp-magnifier img {
-  height: 300px;
-  width: 300px;
-  align-self: center;
-  margin-top: 3em;
-}
-
-#update-photo-buttons {
-  margin-left: 4em;
-  margin-top: 1em;
-  align-self: flex-start;
-  display: flex;
-  flex-direction: column;
-  max-width: 200px;
-}
-
-#update-photo-buttons button {
-  margin-top: 0.5em;
-  width: 60%;
-}
-
-@media (max-width: 480px) {
-  #update-photo-buttons {
-    margin-left: 0em;
-  }
-}
-
-.setting-card-content {
-  position: absolute;
-  left: 15em;
 }

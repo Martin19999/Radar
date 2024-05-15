@@ -1,7 +1,7 @@
 /**
  * UserPage.js
  * 
- * Show a user's information
+ * Show a user's display information
  * 
  */
 
@@ -10,7 +10,7 @@ import Content from "../components/Content/index.js";
 import UserInfo from "../components/UserInfo/index.js";
 
 import "../styles/common.css";
-
+import "../styles/userinfo.css";
 
 const UserPage = () => {
 	return(

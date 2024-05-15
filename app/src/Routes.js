@@ -6,8 +6,6 @@ import UserPage from "./pages/UserPage";
 import SettingPage from "./pages/SettingPage";
 import React from "react";
 
-
-
 const MyRoutes = () => {
   return (
   <Router>
@@ -15,7 +13,7 @@ const MyRoutes = () => {
       <Route path="/" element={<Home/>} />   
       <Route path="/login" element={<LogIn/>} />   
       <Route path="/signup" element={<SignUp/>} />   
-      <Route path="/userdetail/:uid" element={<UserPage/>} /> 
+      <Route path="/userdetail/:uid/:requestedPage" element={<UserPage/>} /> 
       <Route path="/settings/:settingType" element={<SettingPage/>} />
     </Routes>
   </Router>

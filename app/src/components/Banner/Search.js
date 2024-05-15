@@ -1,22 +1,16 @@
 /**
  * Search component
  * 
- * Handles form submission. Initiates a POST requests
+ * In the banner. Handles form submission. Initiates a POST request
  * 
  */
 
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { Link, IconButton } from '@chakra-ui/react';
+import { Input, InputGroup, InputRightElement, IconButton } from '@chakra-ui/react';
 import { IoSearchOutline } from "react-icons/io5";
 
-
-
+import "../../styles/common.css";
 
 const Search = () => {
   const [input, setInput] = useState("");

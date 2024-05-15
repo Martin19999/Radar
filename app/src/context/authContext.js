@@ -1,3 +1,10 @@
+/**
+ * authContext.js
+ * 
+ * Manages the log in state of the system.
+ * 
+ */
+
 import { auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -12,7 +19,6 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [userDetails, setUserDetails] = useState({});
   const [loading, setLoading] = useState(true); // Initial loading state
-
  
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {

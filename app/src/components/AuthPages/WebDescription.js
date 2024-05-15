@@ -1,6 +1,14 @@
+/**
+ * WebDescription component
+ * 
+ * Shows promotional content about this app, when people are on the sign up page, convinces them to sign up.
+ * 
+ */
+
+import React from 'react';
+
 import "../../styles/common.css";
 import "../../styles/authpages.css";
-import React from 'react'
 
 const WebDescription = () => {
   return (

@@ -1,7 +1,7 @@
 /**
  * SettingPage.js
  * 
- * Change settings.
+ * User settings.
  * 
  */
 
@@ -11,7 +11,6 @@ import Settings from "../components/Settings/index.js";
 
 import "../styles/common.css";
 import "../styles/settings.css";
-
 
 const UserPage = () => {
 	return(

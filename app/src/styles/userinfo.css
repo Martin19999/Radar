@@ -1,33 +1,42 @@
 .userinfo-container {
-  width: 75%;
+  width: 80%;
   border: 1px black;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.userinfo-profile-pic {
+  width: 150px;
+  height: 150px;
+  aspect-ratio: 1/ 1;
+  border: 2px black;
   border-style: solid;
 }
 
 .basic-userinfo-container {
-
   display: flex;
   flex-direction: row;
-  padding: 2em 0;
-  min-height: 10em;
-  border: 1px black;
-  border-style: solid;
+  padding: 0 0 1em 0;
+  min-height: 150px;
 }
 
 .basic-nonpic-userinfo-container {
   padding: 0em 3em;
-  width: 100%;
+  width: calc(100% - 150px);
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-
-  border: 1px red;
-  border-style: solid;
 }
 
 .basic-nonpic-userinfo-container p:first-child {
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .basic-nonpic-userinfo-container p,
@@ -35,32 +44,58 @@
   margin: 1em;
 }
 
+@media (max-width: 1024px) {
+  .userinfo-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .userinfo-container {
+    width: 100%;
+  }
+
+  .basic-nonpic-userinfo-container p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 650px) {
+  .basic-nonpic-userinfo-container {
+    padding: 0em 1em;
+  }
+}
+
+@media (max-width: 600px) {
+  .userinfo-profile-pic {
+    width: 100px;
+    height: 100px;
+    aspect-ratio: 1/ 1;
+  }
+
+  .basic-userinfo-container {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    min-height: 100px;
+  }
+
+  .basic-nonpic-userinfo-container {
+    width: calc(100% - 100px);
+    padding: 0em 1em;
+    min-height: 100px;
+  }
+
+  .basic-nonpic-userinfo-container p {
+    margin: 0;
+  }
+
+}
 
 .more-userinfo-container {
   border: 1px black;
   border-style: solid;
-}
-
-.more-userinfo-banner-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  padding: 0 0em;
-
-  border: 1px red;
-  border-style: solid;
-}
-
-.more-userinfo-banner-container button {
-  /* flex: 0 1 auto; */
-  width: 10em;
-  height: 2.5em;
-  border-style: none;
-  background-color: transparent;
-}
-
-.more-userinfo-banner-container .selected-button {
-  border-style: none none solid none;
+  height: 100%;
 }
 
 .more-userinfo-content-container {

@@ -1,41 +1,29 @@
 /**
- * Authentication component
+ * Menu component
  * 
- * Displays clickable text that directs to sign up/ log in pages.
+ * When not logged in: displays clickable text that directs to sign up/ log in pages
+ * When logged in: 
+ * 		displays
+ * 				1. button1 that allows users to post
+ * 				2. button2 that contains: view profile, settings, log out
  * 
  */
-
-import { useNavigate, useLocation} from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { signOut } from 'firebase/auth';
 import { useAuth } from '../../context/authContext';
+import React from 'react';
+import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
-
-import { Link, IconButton, Button } from '@chakra-ui/react'
-import { ExternalLinkIcon } from '@chakra-ui/icons'
+import { Link, IconButton, Button, useMediaQuery, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
 import { BsThreeDots } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 
-import { useMediaQuery } from "@chakra-ui/react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-} from '@chakra-ui/react'
+import "../../styles/common.css";
 
-  
-
-const Auth = () => {
+const MyMenu = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const path = location.pathname;
 	const { currentUser, userDetails } = useAuth();
-
 	
 	const [isWideEnough] = useMediaQuery("(min-width: 768px)");
 
@@ -48,8 +36,6 @@ const Auth = () => {
 	}
 
 	return(
-		
-		
 		<div className={(path === '/signup' || path === '/login') ? 'do-not-display' : 'menu'}>
 			{ !currentUser &&
 				<>
@@ -61,14 +47,14 @@ const Auth = () => {
 												fontSize={["sm", "md"]}
 												variant="unstyled"/>
 							<MenuList>
-								<MenuItem as='a' href='/signup'>Sign Up</MenuItem>
-								<MenuItem as='a' href='/login'>Log In</MenuItem>
+								<MenuItem as={RouterLink} to='/signup'>Sign Up</MenuItem>
+								<MenuItem as={RouterLink} to='/login'>Log In</MenuItem>
 							</MenuList>									
 						</Menu> :					
 						
 						<div className='three-dots-dropdown-content'>
-							<Link href='/signup' className={(path === '/signup' || path === '/login') ? 'hidden' : 'signup-button'}>Sign Up</Link> 
-							<Link href='/login' className={(path === '/signup' || path === '/login') ? 'hidden' : 'login-button'}>Log In</Link> 							
+							<Link as={RouterLink} to='/signup' className={(path === '/signup' || path === '/login') ? 'hidden' : 'signup-button'}>Sign Up</Link> 
+							<Link as={RouterLink} to='/login' className={(path === '/signup' || path === '/login') ? 'hidden' : 'login-button'}>Log In</Link> 							
 						</div> 
 					}
 				</>
@@ -77,27 +63,27 @@ const Auth = () => {
 			{ currentUser && 
 				<div className='post-n-setting-buttons'>
 					{ isWideEnough ? <Button id='post-button' leftIcon={<MdAdd />} variant='solid' fontSize={["sm", "md"]}>Post</Button> : 
-													<Button id='post-button' as={IconButton} icon={<MdAdd />} fontSize={["sm", "md"]} variant='unstyled'/> }
-					<Menu>
-						<MenuButton className='setting-button' as={Button} backgroundImage={`url(${userDetails.photoURL || "/profile.jpg"})`} backgroundSize='cover'
+													 <Button id='post-button' as={IconButton} icon={<MdAdd />} fontSize={["sm", "md"]} variant='unstyled'/> }
+					<Menu>  
+						<MenuButton className='setting-button' as={Button} backgroundImage={`url(${userDetails.photoURL})`} backgroundSize='cover' 
 												_hover={{
-													filter: 'none', // Removes any filters that might be causing blur
+													filter: 'none', 
 												}}
 												_active={{
-													filter: 'none', // Removes any filters that might be causing blur
-												}}/>
+													filter: 'none', 
+											}}/>
 						<MenuList>
-							<MenuItem as='a' href={`/userdetail/${currentUser.uid}`}>User Profile</MenuItem>
-							<MenuItem as='a' href='/settings/account'>Settings</MenuItem>
+							<MenuItem as={RouterLink} to={`/userdetail/${currentUser.uid}/posts`}>User Profile</MenuItem>
+							<MenuItem as={RouterLink} to='/settings/account'>Settings</MenuItem>
 							<MenuItem onClick={() => logOut()}>Log Out</MenuItem>
-						</MenuList>
+						</MenuList> 
+							
 					</Menu>
 				</div>
 			}
 		</div>
 	)
-	
 };
 
-export default Auth;
+export default MyMenu;
   

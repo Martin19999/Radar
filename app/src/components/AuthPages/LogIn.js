@@ -1,52 +1,82 @@
+/**
+ * Login component
+ * 
+ * Manages the log in system.
+ * 
+ */
+
 import React, { useState } from 'react';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { FormControl, FormLabel, InputGroup, InputRightElement, Input, Button, IconButton, CloseButton, Link } from '@chakra-ui/react';
+import { useEasyToast } from '../toast';
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+
 import "../../styles/common.css";
 import "../../styles/authpages.css";
 
 const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassWordClick = () => setShowPassword(!showPassword);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { showSuccess, showError } = useEasyToast();
+
+  const navigate = useNavigate();
+  
+  const isFormValid = () => {
+    return (email?.replace(/\s/g, "") ?? "").length > 0 && (password?.replace(/\s/g, "") ?? "").length >= 6;
+  };
 
   const login = (e) => { 
     e.preventDefault();
+    setIsSubmitting(true);
     signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      navigate('/');
+    .then(() => { showSuccess("You're logged in!");
+                  navigate('/');
     }).catch((error) => {
-      setErrorMessage(error.message);
+      showError(error.message);
+    }).finally(() => {
+      setIsSubmitting(false); 
     });
-
   };
-
-  const isFormValid = () => {
-    return email.length > 0 && password.length >= 6;
-  };
-  
-  function clearError() {
-    setErrorMessage('');
-  }
-
 
   return (
     <div className='auth-container'>
-      <form onSubmit={login} className='login-form'>
-        <div className='form-container'>
-          <button onClick={() => navigate('/')}>x</button>
-          <h1>Log In</h1>
-          <input type='text' placeholder='email' value= {email || ''} onChange={(e) => {setEmail(e.target.value); clearError();}}></input>
-          <input type='password' placeholder='password' value= {password || ''} onChange={(e) => {setPassword(e.target.value); clearError();}}></input>
-          <p className={errorMessage.length===0 ? 'hidden' : 'error-msg'}>{errorMessage}</p>
-          <p onClick={() => navigate('/signup')}>Sign Up</p>
-          <button type="submit" disabled={!isFormValid()}>Log In</button>
-          
-        </div>
-        
-      </form>
+      <div className='form-container'>
+        <Link as={RouterLink} to='/'><CloseButton /></Link>
+        <h1>Log In</h1>
+        <form onSubmit={login}>
+          <FormControl isRequired mt={5}>
+            <FormLabel>Email</FormLabel>
+            <Input value= {email || ''} 
+                  onChange={(e) => {setEmail(e.target.value); }} />
+          </FormControl>
+          <FormControl isRequired mt={5} mb={5}>
+            <FormLabel>Password</FormLabel>
+            <InputGroup size='md'>
+              <Input pr='4.5rem'
+                    type={showPassword ? 'text' : 'password'}
+                    value= {password || ''} 
+                    onChange={(e) => {setPassword(e.target.value); }} />
+              <InputRightElement width='2.5rem'>
+                <Button as={IconButton} icon={showPassword ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' onClick={handleShowPassWordClick}/>
+              </InputRightElement>
+            </InputGroup>
+          </FormControl>
+          <Link as={RouterLink} to='/signup'>Do not have an account? Sign up here</Link>
+          <Button variant="outline"
+                  type="submit"
+                  width="full"
+                  mt={10}
+                  isLoading={isSubmitting}
+                  isDisabled={!isFormValid() || isSubmitting }>Log In</Button>       
+        </form>
+      </div> 
     </div>
   )
 }
