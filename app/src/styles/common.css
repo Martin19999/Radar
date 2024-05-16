@@ -149,11 +149,6 @@ body {
 	#searchField {
 		width: clamp(100px, 50vw, 400px);
 	}
-
-	.menu {
-		padding-left: 0em;
-		flex-wrap: nowrap;
-	}
 }
 
 @media (max-width: 540px) {

@@ -184,8 +184,8 @@ const PopUps = (props) => {
                   <Input placeholder='Current Password'
                           type={showPassword.showPassword1 ? 'text' : 'password'} 
                           onChange={(e) => {setUpdateEmailAddrField({...updateEmailAddrField, password: e.target.value})} } />
-                  <InputRightElement width='2.5rem'>
-                    <Button as={IconButton} icon={showPassword.showPassword1 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' 
+                  <InputRightElement>
+                    <Button as={IconButton} icon={showPassword.showPassword1 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword1: !showPassword.showPassword1})}}/>
                   </InputRightElement>
                 </InputGroup>    
@@ -214,8 +214,8 @@ const PopUps = (props) => {
                   <Input placeholder='Old Password'
                         type={showPassword.showPassword21 ? 'text' : 'password'} 
                         onChange={(e) => {setChangePasswordField({...changePasswordField, oldP: e.target.value})} } />
-                  <InputRightElement width='2.5rem'>
-                    <Button as={IconButton} icon={showPassword.showPassword21 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' 
+                  <InputRightElement>
+                    <Button as={IconButton} icon={showPassword.showPassword21 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword21: !showPassword.showPassword21})}}/>
                   </InputRightElement>
                 </InputGroup>
@@ -226,8 +226,8 @@ const PopUps = (props) => {
                   <Input placeholder='New Password'
                         type={showPassword.showPassword22 ? 'text' : 'password'} 
                         onChange={(e) => {setChangePasswordField({...changePasswordField, newP: e.target.value});} } />
-                  <InputRightElement width='2.5rem'>
-                    <Button as={IconButton} icon={showPassword.showPassword22 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' 
+                  <InputRightElement>
+                    <Button as={IconButton} icon={showPassword.showPassword22 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword22: !showPassword.showPassword22})}}/>
                   </InputRightElement>
                 </InputGroup>
@@ -238,8 +238,8 @@ const PopUps = (props) => {
                   <Input placeholder='Confirm New Password'
                         type={showPassword.showPassword23 ? 'text' : 'password'} 
                         onChange={(e) => {setChangePasswordField({...changePasswordField, confirmNewP: e.target.value})} } />
-                  <InputRightElement width='2.5rem'>
-                    <Button as={IconButton} icon={showPassword.showPassword23 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' 
+                  <InputRightElement>
+                    <Button as={IconButton} icon={showPassword.showPassword23 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword23: !showPassword.showPassword23})}}/>
                   </InputRightElement>
                 </InputGroup>
@@ -262,8 +262,8 @@ const PopUps = (props) => {
                   <Input placeholder='Enter Password'
                          type={showPassword.showPassword3 ? 'text' : 'password'} 
                          onChange={(e) => {setDeleteAccountField({...deleteAccountField, password: e.target.value})} } />
-                  <InputRightElement width='2.5rem'>
-                    <Button as={IconButton} icon={showPassword.showPassword3 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' 
+                  <InputRightElement>
+                    <Button as={IconButton} icon={showPassword.showPassword3 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword3: !showPassword.showPassword3})}}/>
                   </InputRightElement>
                 </InputGroup>
@@ -288,13 +288,14 @@ const PopUps = (props) => {
       <Modal isOpen={true} onClose={()=>{props.setTrigger(false); clearForm(); } }>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader sx={{position: 'relative'}}>{ props.type }</ModalHeader>
+          <ModalHeader position= 'relative'>{ props.type }</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             { openPopUp(props.type) }
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={()=>chooseButton(props.type)} isDisabled={!isFormValid() || isSubmitting } isLoading={isSubmitting}>
+            <Button onClick={()=>chooseButton(props.type)} isDisabled={!isFormValid() || isSubmitting } isLoading={isSubmitting}
+                    colorScheme='blue' mr={3} >
               Confirm
             </Button>
           </ModalFooter>

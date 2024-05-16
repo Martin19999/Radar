@@ -42,10 +42,10 @@ const MyMenu = () => {
 					{!isWideEnough ?
 						<Menu>
 							<MenuButton className={(path === '/signup' || path === '/login') ? 'hidden' : 'three-dots-button'} 
-												as={IconButton}
-												icon={<BsThreeDots />}
-												fontSize={["sm", "md"]}
-												variant="unstyled"/>
+													as={IconButton}
+													icon={<BsThreeDots />}
+													variant="unstyled"
+													display="flex"/>
 							<MenuList>
 								<MenuItem as={RouterLink} to='/signup'>Sign Up</MenuItem>
 								<MenuItem as={RouterLink} to='/login'>Log In</MenuItem>

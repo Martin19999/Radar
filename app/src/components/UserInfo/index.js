@@ -36,14 +36,14 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <div className='userinfo-container'>
-        <Link as={RouterLink} to='/'><CloseButton sx={{position:'absolute', right:'0', top: '0'}} /></Link>
+        <Link as={RouterLink} to='/'><CloseButton position='absolute' right='0' top='0' /></Link>
         <div className='basic-userinfo-container'>
           <img src={userDetails.photoURL} alt="pfp" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
           <Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)}>
             <ModalOverlay />
-            <ModalContent sx={{display: 'flex', justifyContent: 'center', height: '350', width: '350'}}>
+            <ModalContent display='flex' justifyContent='center' h='350' width='350'>
               <ModalCloseButton />
-              <ModalBody sx={{width: '350px', padding: '0'}}>
+              <ModalBody w='350' padding='0'>
                 <img id='magnified-pfp' src={userDetails.photoURL} alt="profile pic"></img>
               </ModalBody>
             </ModalContent>

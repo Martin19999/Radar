@@ -49,7 +49,7 @@ const HomePage = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={()=>{navigate('/')}}>
+            <Button onClick={()=>{navigate('/')}} colorScheme='blue' mr={3}>
               Skip for now
             </Button>
           </ModalFooter>

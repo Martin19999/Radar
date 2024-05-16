@@ -12,6 +12,7 @@ import ProfileMgmt from './ProfileMgmt';
 import PopUps from './PopUps';
 import { useEasyToast } from '../toast';
 import { updateProfile } from 'firebase/auth';
+import DOMPurify from 'dompurify';
 import { Button, IconButton, Input } from '@chakra-ui/react'
 import { FaArrowRight } from "react-icons/fa";
 
@@ -29,17 +30,25 @@ const SettingsContent = ({settingType}) => {
   const { showSuccess, showError } = useEasyToast();
 
   const isFormValid = () => {
-    return (myDisplayName?.replace(/\s/g, "") ?? "").length > 0;
+    if ((myDisplayName?.replace(/\s/g, "") ?? "").length > 0) {
+      if ((DOMPurify.sanitize(myDisplayName.replace(/\s/g, ""))) ?? "".length > 0) {
+        return true
+      }
+    }
+    return false;
   };
 
   function changeDisplayName (newName) {
     setIsSubmitting(true);
+    // console.log(DOMPurify.sanitize(newName.replace(/\s/g, "")))
+    // const sanitizedDisplayName = DOMPurify.sanitize(newName.replace(/\s/g, "")).replaceAll('&lt;', '<').replaceAll('&gt;', '>');
+
     updateProfile(currentUser, {
-      displayName: newName.replace(/\s/g, "")
+      displayName: newName
     }).then(() => {
       setUserDetails({
         ...userDetails,
-        displayName: newName.replace(/\s/g, "")
+        displayName: newName
       });
       showSuccess("Name updated!");
     }).catch((error) => {
@@ -78,12 +87,11 @@ const SettingsContent = ({settingType}) => {
           </div>
           <div className='setting-card'>
             <h4>Display Name</h4>
-            {console.log(currentUser.displayName)}
             <div className='setting-card-content'>
               <Input value={myDisplayName?.replace(/\s/g, "")} onChange={ (e)=>{setMyDisplayName(e.target.value)}} maxLength={25} ></Input>
               <Button onClick={ () => {changeDisplayName(myDisplayName)}} 
                       isLoading={isSubmitting}
-                      isDisabled={!isFormValid() || (myDisplayName?.replace(/\s/g, "") ?? "" )=== currentUser.displayName.replace(/\s/g, "") || isSubmitting}>Save</Button>
+                      isDisabled={!isFormValid() || (myDisplayName?.replace(/\s/g, "") ?? "" )=== (currentUser.displayName?.replace(/\s/g, "") ?? "") || isSubmitting}>Save</Button>
             </div>        
           </div>      
         </div>

@@ -58,23 +58,21 @@ const LogIn = () => {
           </FormControl>
           <FormControl isRequired mt={5} mb={5}>
             <FormLabel>Password</FormLabel>
-            <InputGroup size='md'>
-              <Input pr='4.5rem'
-                    type={showPassword ? 'text' : 'password'}
-                    value= {password || ''} 
-                    onChange={(e) => {setPassword(e.target.value); }} />
-              <InputRightElement width='2.5rem'>
-                <Button as={IconButton} icon={showPassword ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' onClick={handleShowPassWordClick}/>
+            <InputGroup>
+              <Input type={showPassword ? 'text' : 'password'}
+                     value= {password || ''} 
+                     onChange={(e) => {setPassword(e.target.value); }} />
+              <InputRightElement>
+                <Button as={IconButton} icon={showPassword ? <IoMdEye/> :<IoMdEyeOff/>} onClick={handleShowPassWordClick} variant="unstyled" />
               </InputRightElement>
             </InputGroup>
           </FormControl>
           <Link as={RouterLink} to='/signup'>Do not have an account? Sign up here</Link>
-          <Button variant="outline"
-                  type="submit"
-                  width="full"
-                  mt={10}
-                  isLoading={isSubmitting}
-                  isDisabled={!isFormValid() || isSubmitting }>Log In</Button>       
+          <Button isLoading={isSubmitting}
+                  isDisabled={!isFormValid() || isSubmitting }
+                  type="submit"            
+                  variant="outline"
+                  mt={10} >Log In</Button>       
         </form>
       </div> 
     </div>

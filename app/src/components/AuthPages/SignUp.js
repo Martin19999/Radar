@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import DOMPurify from 'dompurify';
 import { FormControl, FormLabel, InputGroup, InputRightElement, Input, Button, IconButton, CloseButton, Link } from '@chakra-ui/react';
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
@@ -40,6 +41,8 @@ const SignUp = () => {
   const signup = (e) => { 
     e.preventDefault();
     setIsSubmitting(true);
+
+    // const sanitizedDisplayName = DOMPurify.sanitize(name.replace(/\s/g, ""));
 
     createUserWithEmailAndPassword(auth, email.toLowerCase(), password)
     .then((userCredential) => {
@@ -89,25 +92,23 @@ const SignUp = () => {
           <FormControl isRequired mt={5} mb={5}>
             <FormLabel>Password</FormLabel>
             <InputGroup size='md'>
-              <Input
-                pr='4.5rem'
-                type={showPassword ? 'text' : 'password'}
-                placeholder='6-25 characters'
-                value= {password || ''} 
-                onChange={(e) => {setPassword(e.target.value); }} 
-                maxLength={25} />
-              <InputRightElement width='2.5rem'>
-                <Button as={IconButton} icon={showPassword ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" h='1.75rem' size='sm' onClick={handleShowPassWordClick}/>
+              <Input type={showPassword ? 'text' : 'password'}
+                     placeholder='6-25 characters'
+                     value= {password || ''} 
+                     onChange={(e) => {setPassword(e.target.value); }} 
+                     maxLength={25} />
+              <InputRightElement display="flex">
+                <Button as={IconButton} icon={showPassword ? <IoMdEye/> :<IoMdEyeOff/>} onClick={handleShowPassWordClick} variant="unstyled"/>
               </InputRightElement>
             </InputGroup>
           </FormControl>
           <Link as={RouterLink} to='/login'>Have an account? Log in here</Link>
-          <Button variant="outline"
-                  type="submit"
-                  width="full"
-                  mt={10}
+          <Button type="submit"
                   isLoading={isSubmitting}
-                  isDisabled={!isFormValid() || isSubmitting }>Sign Up</Button>       
+                  isDisabled={!isFormValid() || isSubmitting}
+                  variant="outline"
+                  mt={10}
+                  >Sign Up</Button>       
         </form>
       </div>
     </div>
