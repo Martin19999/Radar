@@ -1,23 +1,36 @@
 import { extendTheme } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
+
 
 const theme = extendTheme({
+  config: {
+    initialColorMode: 'light',
+    useSystemColorMode: false,
+  },
+
   styles: {
-    global: {
+    global: (props) => ({ 
       body: {
-        bg: "#f3dfc1",
+        bg: mode("gray.100", "gray.800")(props),
+        color: mode("black", "white")(props),
       },
-      html: {
-        bg: "#f3dfc1",
-      },
+      
       "p, a, span, div, input": {
-        fontSize: ["sm","md"], // Responsive font sizes
-      },
+        fontSize: ["sm","md"], 
+      }
+    }) 
+  },
+
+  components: {
+    Button: {
+      baseStyle: (props) => ({
+        bg: mode("gray.200", "gray.700")(props),
+        color: mode("black", "white")(props),
+      }),
     },
+    //  other components
   },
   
-  colors: {
-    black: "#000000", // Set black color
-  },
 });
 
 export default theme;

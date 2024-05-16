@@ -9,11 +9,11 @@
  * 
  */
 import { useAuth } from '../../context/authContext';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
-import { Link, IconButton, Button, useMediaQuery, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react';
+import { Link, IconButton, Button, useMediaQuery, Menu, MenuButton, MenuList, MenuItem, useColorMode, Switch } from '@chakra-ui/react';
 import { BsThreeDots } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
 
@@ -26,6 +26,7 @@ const MyMenu = () => {
 	const { currentUser, userDetails } = useAuth();
 	
 	const [isWideEnough] = useMediaQuery("(min-width: 768px)");
+  const { colorMode, toggleColorMode, setColorMode } = useColorMode();
 
 	const logOut = () => {
 		signOut(auth).then(() => {
@@ -34,6 +35,19 @@ const MyMenu = () => {
 			console.log(error);
 		})
 	}
+
+	const handleSwitchChange = () => {
+    const newColorMode = colorMode === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('chakra-ui-color-mode', newColorMode);
+    setColorMode(newColorMode);
+  };
+
+  useEffect(() => {
+    const savedColorMode = localStorage.getItem('chakra-ui-color-mode');
+    if (savedColorMode) {
+      setColorMode(savedColorMode);
+    }
+  }, [setColorMode]);
 
 	return(
 		<div className={(path === '/signup' || path === '/login') ? 'do-not-display' : 'menu'}>
@@ -64,7 +78,7 @@ const MyMenu = () => {
 				<div className='post-n-setting-buttons'>
 					{ isWideEnough ? <Button id='post-button' leftIcon={<MdAdd />} variant='solid' fontSize={["sm", "md"]}>Post</Button> : 
 													 <Button id='post-button' as={IconButton} icon={<MdAdd />} fontSize={["sm", "md"]} variant='unstyled'/> }
-					<Menu>  
+					<Menu closeOnSelect={false}>  
 						<MenuButton className='setting-button' as={Button} backgroundImage={`url(${userDetails.photoURL})`} backgroundSize='cover' 
 												_hover={{
 													filter: 'none', 
@@ -73,11 +87,13 @@ const MyMenu = () => {
 													filter: 'none', 
 											}}/>
 						<MenuList>
+							<MenuItem> Night Mode <Switch ml='5' 
+																						isChecked={colorMode==='dark'}
+																						onChange={()=> { handleSwitchChange(); }}/> </MenuItem>
 							<MenuItem as={RouterLink} to={`/userdetail/${currentUser.uid}/posts`}>User Profile</MenuItem>
 							<MenuItem as={RouterLink} to='/settings/account'>Settings</MenuItem>
 							<MenuItem onClick={() => logOut()}>Log Out</MenuItem>
-						</MenuList> 
-							
+						</MenuList> 		
 					</Menu>
 				</div>
 			}

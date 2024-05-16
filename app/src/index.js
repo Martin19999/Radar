@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/authContext';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript, localStorageManager } from '@chakra-ui/react';
 import theme from './theme';
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.StrictMode>
-    <ChakraProvider theme={theme}>
+  <React.StrictMode>  
+    <ChakraProvider theme={theme} colorModeManager={localStorageManager}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <AuthProvider>
         <App />
       </AuthProvider> 

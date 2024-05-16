@@ -34,6 +34,8 @@
 
 .basic-nonpic-userinfo-container p:first-child {
   font-weight: bold;
+  font-size: x-large;
+  width: calc(100% - 10px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -41,12 +43,17 @@
 
 .basic-nonpic-userinfo-container p,
 .basic-nonpic-userinfo-container button {
-  margin: 1em;
+  margin: 1em 0;
 }
 
 @media (max-width: 1024px) {
   .userinfo-container {
     width: 90%;
+  }
+
+  .basic-nonpic-userinfo-container p:first-child {
+    font-weight: bold;
+    font-size: large;
   }
 }
 
