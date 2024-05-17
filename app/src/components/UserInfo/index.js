@@ -36,14 +36,14 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <div className='userinfo-container'>
-        <Link as={RouterLink} to='/'><CloseButton position='absolute' right='0' top='0' /></Link>
+        <Link as={RouterLink} to='/'><CloseButton variant='userinfoPageCloseButton' /></Link>
         <div className='basic-userinfo-container'>
           <img src={userDetails.photoURL} alt="pfp" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
-          <Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)}>
+          <Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)} variant='displayPfp'>
             <ModalOverlay />
-            <ModalContent display='flex' justifyContent='center' h='350' width='350'>
+            <ModalContent>
               <ModalCloseButton />
-              <ModalBody w='350' padding='0'>
+              <ModalBody >
                 <img id='magnified-pfp' src={userDetails.photoURL} alt="profile pic"></img>
               </ModalBody>
             </ModalContent>
@@ -55,7 +55,7 @@ const UserInfo = () => {
           </div>
         </div>
         <div className='more-userinfo-container'>
-          <Tabs variant='enclosed' index={tabIndex} onChange={handleTabsChange}>
+          <Tabs index={tabIndex} onChange={handleTabsChange} >
             <TabList>
               <Tab>Posts</Tab>
               <Tab>Following</Tab>

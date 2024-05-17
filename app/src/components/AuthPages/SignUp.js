@@ -76,39 +76,37 @@ const SignUp = () => {
         <Link as={RouterLink} to='/'><CloseButton /></Link>
         <h1>Create an Account</h1>
         <form onSubmit={signup}>
-          <FormControl isRequired mt={5}>
+          <FormControl isRequired>
             <FormLabel>Email</FormLabel>
             <Input placeholder='Email'
                     value= {email || ''} 
                     onChange={(e) => {setEmail(e.target.value); }} />
           </FormControl>
-          <FormControl isRequired mt={5}>
+          <FormControl isRequired>
             <FormLabel>Display Name</FormLabel>
             <Input placeholder='1-25 characters'
                     value= {name || ''} 
                     onChange={(e) => {setName(e.target.value); }} 
                     maxLength={25} />
           </FormControl>
-          <FormControl isRequired mt={5} mb={5}>
+          <FormControl isRequired>
             <FormLabel>Password</FormLabel>
-            <InputGroup size='md'>
+            <InputGroup>
               <Input type={showPassword ? 'text' : 'password'}
                      placeholder='6-25 characters'
                      value= {password || ''} 
                      onChange={(e) => {setPassword(e.target.value); }} 
                      maxLength={25} />
-              <InputRightElement display="flex">
+              <InputRightElement>
                 <Button as={IconButton} icon={showPassword ? <IoMdEye/> :<IoMdEyeOff/>} onClick={handleShowPassWordClick} variant="unstyled"/>
               </InputRightElement>
             </InputGroup>
           </FormControl>
-          <Link as={RouterLink} to='/login'>Have an account? Log in here</Link>
+          <Link as={RouterLink} to='/login' variant='textLinkInForms'>Have an account? Log in here</Link>
           <Button type="submit"
                   isLoading={isSubmitting}
                   isDisabled={!isFormValid() || isSubmitting}
-                  variant="outline"
-                  mt={10}
-                  >Sign Up</Button>       
+                  variant="bigFormSubmitButton">Sign Up</Button>       
         </form>
       </div>
     </div>

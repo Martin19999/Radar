@@ -24,7 +24,7 @@ const Settings = () => {
 
   return (
     <div className='settings-container'>
-      <Link as={RouterLink} to='/'><CloseButton position='absolute' right='4' top='4' /></Link>
+      <Link as={RouterLink} to='/'><CloseButton variant='settingPageCloseButton'/></Link>
       <h1>Settings</h1>
       <div className='settings-content'>  
         <Tabs index={tabIndex} onChange={handleTabsChange}>
@@ -35,13 +35,13 @@ const Settings = () => {
           </TabList>
 
           <TabPanels>
-            <TabPanel p={0}>
+            <TabPanel >
               <SettingsContent settingType='account' />
             </TabPanel>
-            <TabPanel p={0}>
+            <TabPanel>
               <SettingsContent settingType='profile' />
             </TabPanel>
-            <TabPanel p={0}>
+            <TabPanel>
               <SettingsContent settingType='others' />
             </TabPanel>
           </TabPanels>

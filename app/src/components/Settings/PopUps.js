@@ -12,7 +12,7 @@ import { useAuth } from '../../context/authContext';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, updateEmail, updatePassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, FormControl, FormLabel, Input, VisuallyHidden, InputGroup, InputRightElement, IconButton, Tooltip } from '@chakra-ui/react';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, Button, FormControl, FormLabel, Input, VisuallyHidden, InputGroup, InputRightElement, IconButton, Tooltip, Center } from '@chakra-ui/react';
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { useEasyToast } from '../toast';
 
@@ -171,14 +171,11 @@ const PopUps = (props) => {
         return (
           <div className='popup-inner-content'>
             <Tooltip label={userDetails.email} aria-label="Full email">
-              <FormLabel whiteSpace="nowrap"
-                         overflow="hidden"
-                         textOverflow="ellipsis"
-                         display="block" // Ensure it behaves as a block element
-                         cursor="pointer">Current Email: {userDetails.email} </FormLabel>
+              <FormLabel variant='showLongTextLabel'
+              >Current Email: {userDetails.email} </FormLabel>
             </Tooltip>
             <form>
-              <FormControl isRequired mt={5}>
+              <FormControl isRequired>
                 <FormLabel>Password:</FormLabel>
                 <InputGroup>
                   <Input placeholder='Current Password'
@@ -190,7 +187,7 @@ const PopUps = (props) => {
                   </InputRightElement>
                 </InputGroup>    
               </FormControl>
-              <FormControl isRequired mt={5}>
+              <FormControl isRequired>
                 <FormLabel>New Email:</FormLabel>
                 <Input placeholder='New Email' 
                        onChange={(e) => {setUpdateEmailAddrField({...updateEmailAddrField, newEmail: e.target.value})} } />
@@ -208,7 +205,7 @@ const PopUps = (props) => {
           <div className='popup-inner-content'>
             <FormLabel>Password must be at least 6 characters long</FormLabel>
             <form>
-              <FormControl isRequired mt={5}>
+              <FormControl isRequired>
                 <FormLabel>Old Password:</FormLabel>
                 <InputGroup>
                   <Input placeholder='Old Password'
@@ -220,7 +217,7 @@ const PopUps = (props) => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <FormControl isRequired mt={5}>
+              <FormControl isRequired>
                 <FormLabel>New Password:</FormLabel>
                 <InputGroup>
                   <Input placeholder='New Password'
@@ -232,7 +229,7 @@ const PopUps = (props) => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <FormControl isRequired mt={5}>
+              <FormControl isRequired>
                 <FormLabel>Confirm New Password:</FormLabel>
                 <InputGroup>
                   <Input placeholder='Confirm New Password'
@@ -256,7 +253,7 @@ const PopUps = (props) => {
         return (
           <div className='popup-inner-content'>
             <form>
-              <FormControl isRequired mt={5}>
+              <FormControl isRequired>
                 <FormLabel>Password:</FormLabel>
                 <InputGroup>
                   <Input placeholder='Enter Password'
@@ -268,7 +265,7 @@ const PopUps = (props) => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <FormControl isRequired mt={5}>
+              <FormControl isRequired>
                 <FormLabel>Please enter "delete my account" to confirm:</FormLabel>
                 <Input onChange={(e) => {setDeleteAccountField({...deleteAccountField, typeConfirmDelete: e.target.value})} } />
               </FormControl>
@@ -288,14 +285,16 @@ const PopUps = (props) => {
       <Modal isOpen={true} onClose={()=>{props.setTrigger(false); clearForm(); } }>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader position= 'relative'>{ props.type }</ModalHeader>
+          <ModalHeader>{ props.type }</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             { openPopUp(props.type) }
           </ModalBody>
           <ModalFooter>
-            <Button onClick={()=>chooseButton(props.type)} isDisabled={!isFormValid() || isSubmitting } isLoading={isSubmitting}
-                    colorScheme='blue' mr={3} >
+            <Button onClick={()=>chooseButton(props.type)} 
+                    isDisabled={!isFormValid() || isSubmitting } 
+                    isLoading={isSubmitting} 
+                    variant='smallFormSubmitButton'>
               Confirm
             </Button>
           </ModalFooter>

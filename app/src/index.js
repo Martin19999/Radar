@@ -4,7 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/authContext';
 import { ChakraProvider, ColorModeScript, localStorageManager } from '@chakra-ui/react';
-import theme from './theme';
+import theme from './theme/index';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

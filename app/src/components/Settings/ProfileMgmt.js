@@ -81,11 +81,11 @@ const ProfileMgmt = () => {
 
   return (
     <>
-      <Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)}>
+      <Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)} variant='displayPfp'>
         <ModalOverlay />
-        <ModalContent display= 'flex' justifyContent='center' h='350' w='350'>
+        <ModalContent>
           <ModalCloseButton />
-          <ModalBody padding='0'>
+          <ModalBody>
             <img id='magnified-pfp' src={userDetails.photoURL} alt="profile pic"></img>
           </ModalBody>
         </ModalContent>
@@ -114,7 +114,7 @@ const ProfileMgmt = () => {
         <Modal isOpen={changePfpModalOpen} onClose={()=>{setChangePfpModalOpen(false)}}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader sx={{position: 'relative'}}>Crop Image</ModalHeader>
+            <ModalHeader>Crop Image</ModalHeader>
             <ModalCloseButton onClick={()=>{setCropped(false);}}/>
             <ModalBody>
               {imageSrc && <ImageCropper imageSrc={imageSrc} 
@@ -124,10 +124,11 @@ const ProfileMgmt = () => {
             </ModalBody>
             <ModalFooter>
               <Button onClick={() => {cropFunction && cropFunction(); setCropped(true)}} isDisabled={cropped} >Crop</Button>
-              <Button colorScheme='blue' mr={3} onClick={ ()=>{ setChangePfpModalOpen(false); 
-                                                                setCropped(false);
-                                                                handlePfpChange(); }}
-                      isDisabled={!cropped}> Save </Button>
+              <Button onClick={ ()=>{ setChangePfpModalOpen(false); 
+                                      setCropped(false);
+                                      handlePfpChange(); }}
+                      isDisabled={!cropped}
+                      variant='smallFormSubmitButton'> Save </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>

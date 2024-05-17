@@ -57,9 +57,7 @@ const MyMenu = () => {
 						<Menu>
 							<MenuButton className={(path === '/signup' || path === '/login') ? 'hidden' : 'three-dots-button'} 
 													as={IconButton}
-													icon={<BsThreeDots />}
-													variant="unstyled"
-													display="flex"/>
+													icon={<BsThreeDots />}/>
 							<MenuList>
 								<MenuItem as={RouterLink} to='/signup'>Sign Up</MenuItem>
 								<MenuItem as={RouterLink} to='/login'>Log In</MenuItem>
@@ -76,18 +74,12 @@ const MyMenu = () => {
 			
 			{ currentUser && 
 				<div className='post-n-setting-buttons'>
-					{ isWideEnough ? <Button id='post-button' leftIcon={<MdAdd />} variant='solid' fontSize={["sm", "md"]}>Post</Button> : 
-													 <Button id='post-button' as={IconButton} icon={<MdAdd />} fontSize={["sm", "md"]} variant='unstyled'/> }
+					{ isWideEnough ? <Button id='post-button' leftIcon={<MdAdd />} >Post</Button> : 
+													 <Button id='post-button' as={IconButton} icon={<MdAdd />} /> }
 					<Menu closeOnSelect={false}>  
-						<MenuButton className='setting-button' as={Button} backgroundImage={`url(${userDetails.photoURL})`} backgroundSize='cover' 
-												_hover={{
-													filter: 'none', 
-												}}
-												_active={{
-													filter: 'none', 
-											}}/>
+						<MenuButton className='setting-button' as={Button} backgroundImage={`url(${userDetails.photoURL})`} variant='menuButton'/>
 						<MenuList>
-							<MenuItem> Night Mode <Switch ml='5' 
+							<MenuItem> Night Mode <Switch 
 																						isChecked={colorMode==='dark'}
 																						onChange={()=> { handleSwitchChange(); }}/> </MenuItem>
 							<MenuItem as={RouterLink} to={`/userdetail/${currentUser.uid}/posts`}>User Profile</MenuItem>

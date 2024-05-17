@@ -78,6 +78,11 @@ body {
 	height: 100%;
 }
 
+.search-form button {
+	display: flex;
+}
+
+
 .menu {
 	flex-wrap: nowrap;
 	position: relative;
@@ -105,16 +110,7 @@ body {
 }
 
 #post-button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	margin-right: 1em;
-}
-
-.setting-button:hover {
-	border: 2px black;
-	border-style: solid;
-	filter: none;
 }
 
 @media (max-width: 1400px) {
@@ -149,6 +145,12 @@ body {
 	#searchField {
 		width: clamp(100px, 50vw, 400px);
 	}
+
+	#post-button {
+		padding: 0;
+	}
+
+
 }
 
 @media (max-width: 540px) {

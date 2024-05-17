@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Input, InputGroup, InputRightElement, IconButton } from '@chakra-ui/react';
+import { Input, InputGroup, InputRightElement, IconButton, Button } from '@chakra-ui/react';
 import { IoSearchOutline } from "react-icons/io5";
 
 import "../../styles/common.css";
@@ -72,7 +72,7 @@ const Search = () => {
                   onChange={(e) => setInput(e.target.value)}/>
         
           <InputRightElement>
-            <IconButton type="submit" aria-label='Search database' icon={<IoSearchOutline />} variant="unstyled" />
+            <Button type="submit" as={IconButton} aria-label='Search database' icon={<IoSearchOutline />} variant="unstyled" />
           </InputRightElement>
         </InputGroup>
         

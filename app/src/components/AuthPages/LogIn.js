@@ -51,12 +51,12 @@ const LogIn = () => {
         <Link as={RouterLink} to='/'><CloseButton /></Link>
         <h1>Log In</h1>
         <form onSubmit={login}>
-          <FormControl isRequired mt={5}>
+          <FormControl isRequired>
             <FormLabel>Email</FormLabel>
             <Input value= {email || ''} 
                   onChange={(e) => {setEmail(e.target.value); }} />
           </FormControl>
-          <FormControl isRequired mt={5} mb={5}>
+          <FormControl isRequired>
             <FormLabel>Password</FormLabel>
             <InputGroup>
               <Input type={showPassword ? 'text' : 'password'}
@@ -67,12 +67,11 @@ const LogIn = () => {
               </InputRightElement>
             </InputGroup>
           </FormControl>
-          <Link as={RouterLink} to='/signup'>Do not have an account? Sign up here</Link>
+          <Link as={RouterLink} to='/signup' variant='textLinkInForms'>Do not have an account? Sign up here</Link>
           <Button isLoading={isSubmitting}
                   isDisabled={!isFormValid() || isSubmitting }
                   type="submit"            
-                  variant="outline"
-                  mt={10} >Log In</Button>       
+                  variant='bigFormSubmitButton' >Log In</Button>       
         </form>
       </div> 
     </div>
