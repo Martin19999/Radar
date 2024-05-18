@@ -1,31 +1,28 @@
 .userinfo-container {
-  width: 80%;
-  border: 1px black;
-  border-style: solid;
+  width: 90%;
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 2em;
 }
 
 .userinfo-profile-pic {
-  width: 150px;
-  height: 150px;
+  width: 120px;
+  height: 120px;
   aspect-ratio: 1/ 1;
-  border: 2px black;
-  border-style: solid;
 }
 
 .basic-userinfo-container {
   display: flex;
   flex-direction: row;
-  padding: 0 0 1em 0;
-  min-height: 150px;
+  /* padding: 0 0 1em 0; */
+  min-height: 120px;
 }
 
 .basic-nonpic-userinfo-container {
   padding: 0em 3em;
-  width: calc(100% - 150px);
-  min-height: 150px;
+  width: calc(100% - 120px);
+  min-height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,11 +36,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  position: relative;
+  min-height: 1.5em;
 }
 
 .basic-nonpic-userinfo-container p,
 .basic-nonpic-userinfo-container button {
-  margin: 1em 0;
+  margin: 0 0 0.5em 0;
 }
 
 @media (max-width: 1024px) {
@@ -53,7 +52,6 @@
 
   .basic-nonpic-userinfo-container p:first-child {
     font-weight: bold;
-    font-size: large;
   }
 }
 
@@ -68,12 +66,6 @@
 }
 
 @media (max-width: 650px) {
-  .basic-nonpic-userinfo-container {
-    padding: 0em 1em;
-  }
-}
-
-@media (max-width: 600px) {
   .userinfo-profile-pic {
     width: 100px;
     height: 100px;
@@ -81,9 +73,6 @@
   }
 
   .basic-userinfo-container {
-    display: flex;
-    flex-direction: row;
-    padding: 0;
     min-height: 100px;
   }
 
@@ -93,19 +82,55 @@
     min-height: 100px;
   }
 
-  .basic-nonpic-userinfo-container p {
+  .basic-nonpic-userinfo-container p:first-child {
+    margin: 0;
+    margin-bottom: 0.5em;
+    /* font-size: large; */
+  }
+
+  .basic-nonpic-userinfo-container :not(p:first-child) {
+    /* font-size: small; */
     margin: 0;
   }
 
 }
 
-.more-userinfo-container {
-  border: 1px black;
-  border-style: solid;
-  height: 100%;
+@media (max-width: 480px) {
+  .userinfo-container {
+    padding: 0;
+  }
+
+  .basic-userinfo-container {
+    justify-content: center;
+    margin-top: 2.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .userinfo-profile-pic {
+    width: 60px;
+    height: 60px;
+    align-self: center;
+    margin-left: 2em;
+  }
+
+  .basic-userinfo-container {
+    min-height: 60px;
+  }
+
+  .basic-nonpic-userinfo-container {
+    width: calc(100% - 60px);
+    padding: 0 0 0 1em;
+    min-height: 60px;
+  }
+
+  .basic-nonpic-userinfo-container p:first-child {
+    margin: 0;
+    width: calc(100% - 45px);
+  }
+
 }
 
-.more-userinfo-content-container {
-  border: 1px black;
-  border-style: solid;
+.more-userinfo-container {
+  height: 100%;
+  margin-top: 0.5em;
 }

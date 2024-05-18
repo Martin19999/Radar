@@ -28,8 +28,6 @@
 
 .auth-container .description-container {
   width: 50%;
-  border: 1px black;
-  border-style: solid;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -45,8 +43,6 @@
   width: 50%;
   display: flex;
   flex-direction: column;
-  border: 1px black;
-  border-style: solid;
   align-items: center;
   justify-content: center;
   padding: 0 2em;
@@ -87,7 +83,6 @@
 
   .auth-container .description-container {
     display: none;
-
   }
 
   .auth-container form {

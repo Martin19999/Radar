@@ -21,16 +21,20 @@ const Aside = (e) => {
 		<aside className="userinfo">
 			{ currentUser ?
 				<div className="user-sidebar-container"> 
-					<img src={userDetails.photoURL} alt="pfp" className="profile-pic" onClick={() => navigate(`/userdetail/${currentUser.uid}/posts`)}/>
+					<img src={userDetails.photoURL} className="profile-pic" onClick={() => navigate(`/userdetail/${currentUser.uid}/posts`)}/>
 					<div className="siderbar-info-no-pic">
 						<p>{userDetails.displayName}</p>
-						<p>Joined: {userDetails.creationTime}</p>
-						<p>Posts: [int]</p>
-						<p>Follow: [user Obj]</p>
-						<p>Followers: [user Obj]</p>
+						<p><strong>Joined: </strong>{userDetails.creationTime}</p>
+						<p><strong>Posts: </strong> [int]</p>
+						<p><strong>Follow: </strong> [int]</p>
+						<p><strong>Followers: </strong> [int]</p>
 					</div>		
-				</div>
-				:<h2>Please Log In</h2>
+				</div>:
+				<>
+					<h2>Please Log In</h2>
+					<p>Wanna switch to night mode? Log in now</p>
+				</>
+				
 			}       		
 		</aside>
 	)

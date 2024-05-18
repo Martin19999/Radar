@@ -86,7 +86,7 @@ const ProfileMgmt = () => {
         <ModalContent>
           <ModalCloseButton />
           <ModalBody>
-            <img id='magnified-pfp' src={userDetails.photoURL} alt="profile pic"></img>
+            <img id='magnified-pfp' src={userDetails.photoURL} alt="profile picture"></img>
           </ModalBody>
         </ModalContent>
       </Modal>

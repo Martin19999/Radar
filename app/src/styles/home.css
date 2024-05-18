@@ -21,14 +21,12 @@
 
 .blog-home {
 	width: 80%;
-	/* border: 1px black;
-	border-style: solid; */
+	margin-top: 2em;
 }
 
 aside {
 	width: clamp(15em, 20%, 20em);
-	/* border: 1px black;
-	border-style: solid; */
+	margin-top: 2em;
 }
 
 

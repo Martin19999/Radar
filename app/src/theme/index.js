@@ -2,20 +2,23 @@ import { extendTheme } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 
 import styles from "./styles";
-import Button from "./components/buttons/button";
-import CloseButton from "./components/buttons/closeButton";
-import Form from "./components/form/form";
-import FormLabel from "./components/form/formLabel";
+import Button from "./components/button";
+import CloseButton from "./components/closeButton";
+import Form from "./components/form";
+import FormLabel from "./components/formLabel";
 import Switch from "./components/switch";
 import Link from "./components/link";
 import Tabs from "./components/Tabs";
 import Modal from "./components/modal";
+import Input from "./components/input";
+import Menu from "./components/menu";
+
 
 
 const theme = {
   config: {
     initialColorMode: 'light',
-    useSystemColorMode: false,
+    useSystemColorMode: true,
   },
 
   styles,
@@ -28,7 +31,9 @@ const theme = {
     Switch,
     Link,
     Tabs,
-    Modal
+    Modal,
+    Input,
+    Menu
   },
   
 };

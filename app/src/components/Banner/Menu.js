@@ -9,13 +9,14 @@
  * 
  */
 import { useAuth } from '../../context/authContext';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { Link, IconButton, Button, useMediaQuery, Menu, MenuButton, MenuList, MenuItem, useColorMode, Switch } from '@chakra-ui/react';
 import { BsThreeDots } from "react-icons/bs";
 import { MdAdd } from "react-icons/md";
+import { IoSettingsOutline } from "react-icons/io5";
 
 import "../../styles/common.css";
 
@@ -26,7 +27,8 @@ const MyMenu = () => {
 	const { currentUser, userDetails } = useAuth();
 	
 	const [isWideEnough] = useMediaQuery("(min-width: 768px)");
-  const { colorMode, toggleColorMode, setColorMode } = useColorMode();
+	const [pfpAsBackground] = useMediaQuery("(max-width: 850px)");
+  const { colorMode, setColorMode } = useColorMode();
 
 	const logOut = () => {
 		signOut(auth).then(() => {
@@ -76,11 +78,14 @@ const MyMenu = () => {
 				<div className='post-n-setting-buttons'>
 					{ isWideEnough ? <Button id='post-button' leftIcon={<MdAdd />} >Post</Button> : 
 													 <Button id='post-button' as={IconButton} icon={<MdAdd />} /> }
-					<Menu closeOnSelect={false}>  
-						<MenuButton className='setting-button' as={Button} backgroundImage={`url(${userDetails.photoURL})`} variant='menuButton'/>
+					<Menu closeOnSelect={false}>
+						{pfpAsBackground ? 
+						<MenuButton as={Button} backgroundImage={`url(${userDetails.photoURL})`} alt="profile picture" variant='menuButton'/> :
+						<MenuButton as={IconButton} icon={<IoSettingsOutline />} />
+						}
+						
 						<MenuList>
-							<MenuItem> Night Mode <Switch 
-																						isChecked={colorMode==='dark'}
+							<MenuItem> Night Mode <Switch isChecked={colorMode==='dark'}
 																						onChange={()=> { handleSwitchChange(); }}/> </MenuItem>
 							<MenuItem as={RouterLink} to={`/userdetail/${currentUser.uid}/posts`}>User Profile</MenuItem>
 							<MenuItem as={RouterLink} to='/settings/account'>Settings</MenuItem>

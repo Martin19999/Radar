@@ -36,9 +36,9 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <div className='userinfo-container'>
-        <Link as={RouterLink} to='/'><CloseButton variant='userinfoPageCloseButton' /></Link>
+        <Link as={RouterLink} to='/'><CloseButton variant='userinfoCloseButton'/></Link>
         <div className='basic-userinfo-container'>
-          <img src={userDetails.photoURL} alt="pfp" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
+          <img src={userDetails.photoURL} alt="profile picture" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
           <Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)} variant='displayPfp'>
             <ModalOverlay />
             <ModalContent>
@@ -50,7 +50,7 @@ const UserInfo = () => {
           </Modal>
           <div className='basic-nonpic-userinfo-container'>
             <p>{userDetails.displayName}</p>
-            <p>Date joined: {userDetails.creationTime}</p>
+            <p><strong>Member since: </strong> {userDetails.creationTime}</p>
             <button className={ uid===currentUser.uid ? 'do-not-display' : '' }>Follow</button>
           </div>
         </div>

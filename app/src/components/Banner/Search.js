@@ -69,7 +69,8 @@ const Search = () => {
                   type="text"
                   placeholder="Search Radar"
                   value={input || ""}
-                  onChange={(e) => setInput(e.target.value)}/>
+                  onChange={(e) => setInput(e.target.value)}
+                  variant='searchBar'/>
         
           <InputRightElement>
             <Button type="submit" as={IconButton} aria-label='Search database' icon={<IoSearchOutline />} variant="unstyled" />

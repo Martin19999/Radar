@@ -24,7 +24,7 @@ const Settings = () => {
 
   return (
     <div className='settings-container'>
-      <Link as={RouterLink} to='/'><CloseButton variant='settingPageCloseButton'/></Link>
+      <Link as={RouterLink} to='/'><CloseButton/></Link>
       <h1>Settings</h1>
       <div className='settings-content'>  
         <Tabs index={tabIndex} onChange={handleTabsChange}>
