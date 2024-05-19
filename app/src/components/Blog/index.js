@@ -10,8 +10,11 @@ import "../../styles/common.css";
 const Blog = () => {
 	return(
 		<section className="blog-home">
-			<h1>Blog Title</h1>
-			<p>This is the blog section where blog posts will be displayed...</p>
+			
+			<p>Explore button</p> 
+			<p>For you button</p> 
+			<p>----------------------</p> 
+			<p>display user posts in cards</p>
 		</section>
 	)
 };

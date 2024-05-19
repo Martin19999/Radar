@@ -12,7 +12,7 @@ import { useAuth } from "../../context/authContext";
 import UserinfoContent from "./UserinfoContent";
 import React, { useState } from 'react';
 import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, CloseButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, CloseButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery } from '@chakra-ui/react'
 
 import "../../styles/common.css";
 import "../../styles/userinfo.css";
@@ -29,9 +29,11 @@ const UserInfo = () => {
   const tabIndex = tabNames.indexOf(location.pathname.split("/").pop()) || 0;
   const handleTabsChange = index => {
     navigate(`/${location.pathname.split("/").slice(1, 3).join('/')}/${tabNames[index]}`);
-  };
+  }; 
 
   const [pfpMagnified, setPfpMagnified] = useState(false);
+  const [isWideEnough] = useMediaQuery("(min-width: 1040px)");
+
 
   if (currentUser) {
     return (
@@ -48,8 +50,10 @@ const UserInfo = () => {
               </ModalBody>
             </ModalContent>
           </Modal>
-          <div className='basic-nonpic-userinfo-container'>
-            <p>{userDetails.displayName}</p>
+          <div className='basic-nonpic-userinfo-container'>   
+            <Tooltip label={userDetails.displayName} aria-label="Full displayName" isDisabled={isWideEnough} closeDelay={500}>
+              <p>{userDetails.displayName}</p>
+            </Tooltip>
             <p><strong>Member since: </strong> {userDetails.creationTime}</p>
             <button className={ uid===currentUser.uid ? 'do-not-display' : '' }>Follow</button>
           </div>

@@ -15,24 +15,25 @@ const UserinfoContent = ({req}) => {
   if (req === "posts") {
     return (
       <>
-        <p>Posts</p>
+        <p>display user posts in cards</p>
+        <p>the same card in the blog content??</p>
       </>
     )
   } else if (req === "following") {
     return (
       <>
-        <p>Following</p>
+        <p>display user pfps in grid, same as followers</p>
       </>
-    );
+    )
   } else {
     return (
       <>
-        <p>Followers</p>
+        <p>display user pfps in grid, same as following</p>
       </>
-    );
+    )
   }
   
-}
+};
 
 
 export default UserinfoContent;

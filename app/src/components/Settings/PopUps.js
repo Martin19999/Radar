@@ -170,9 +170,8 @@ const PopUps = (props) => {
       case "Change Email":
         return (
           <div className='popup-inner-content'>
-            <Tooltip label={userDetails.email} aria-label="Full email">
-              <FormLabel variant='showLongTextLabel'
-              >Current Email: {userDetails.email} </FormLabel>
+            <Tooltip label={userDetails.email} aria-label="Full email" closeDelay={500}>
+              <FormLabel variant='showLongTextLabel'>Current Email: {userDetails.email} </FormLabel>
             </Tooltip>
             <form>
               <FormControl isRequired>

@@ -12,6 +12,7 @@ import Tabs from "./components/Tabs";
 import Modal from "./components/modal";
 import Input from "./components/input";
 import Menu from "./components/menu";
+import Tooltip from "./components/tooltip";
 
 
 
@@ -33,7 +34,8 @@ const theme = {
     Tabs,
     Modal,
     Input,
-    Menu
+    Menu,
+    Tooltip
   },
   
 };
