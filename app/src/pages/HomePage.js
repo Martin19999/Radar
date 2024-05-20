@@ -5,9 +5,8 @@
  * 
  */
 
-import Banner from "../components/Banner/index.js";
 import Aside from "../components/aside";
-import Page from "../components/page";
+import Page from "../components/page.js";
 import { useAuth } from "../context/authContext.js";
 import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
 import { Modal, ModalOverlay, ModalContent, ModalFooter, ModalBody, Link, IconButton, Button } from '@chakra-ui/react'
@@ -15,8 +14,6 @@ import { FaArrowRight } from "react-icons/fa";
 
 import "../styles/common.css";
 import "../styles/home.css";
-
-
 
 const HomePage = () => {
 
@@ -29,8 +26,6 @@ const HomePage = () => {
   const fresh = location.state?.fresh;
   const {userDetails} = useAuth();
   const navigate = useNavigate();
-
-
 
   return (
     <>
@@ -58,14 +53,14 @@ const HomePage = () => {
       <Page>
         <section className="blog-home">
           
-          <p>Explore button</p> 
-          <p>For you button</p> 
+          <p>Explore button (only when logged in)</p> 
+          <p>For you button (only when logged in)</p> 
           <p>----------------------</p> 
           <p>display user posts in cards</p>
         </section>
-
         <Aside />
       </Page>
+      
     </>
   );
 };
