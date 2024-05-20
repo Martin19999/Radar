@@ -4,12 +4,13 @@
  * Acts like a huge container for everything except the banner on any page.
  * 
  */
-
-import "../../styles/common.css";
+import Banner from "./Banner";
+// import "../styles/";
 
 const Content = ({ children }) => {
   return (
     <div className='content'>
+      <Banner />
       {children}
     </div>
   );

@@ -6,7 +6,10 @@ const Button = {
   baseStyle: (props) => ({
     bg: mode("gray.200", "gray.700")(props),
     color: mode("black", "white")(props),
-    size: { base: "sm", md: "md" }, 
+    '&&': {
+      fontSize: { base: '0.875rem', sm: '0.875rem', md: '1rem' },
+    },
+    
   }),
   variants: {
     unstyled: (props) => ({ 

@@ -6,6 +6,7 @@ const Input = {
   baseStyle: (props) => ({
     
     field: {
+      fontSize: { base: '0.875rem', sm: '0.875rem', md: '1rem' },
       _focusVisible: {
         '&&': {     
           borderColor: mode('#F56565', 'blue.300')(props),

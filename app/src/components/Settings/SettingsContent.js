@@ -91,7 +91,8 @@ const SettingsContent = ({settingType}) => {
               <Input value={myDisplayName?.replace(/\s/g, "")} onChange={ (e)=>{setMyDisplayName(e.target.value)}} maxLength={25} ></Input>
               <Button onClick={ () => {changeDisplayName(myDisplayName)}} 
                       isLoading={isSubmitting}
-                      isDisabled={!isFormValid() || (myDisplayName?.replace(/\s/g, "") ?? "" )=== (currentUser.displayName?.replace(/\s/g, "") ?? "") || isSubmitting}>Save</Button>
+                      isDisabled={!isFormValid() || (myDisplayName?.replace(/\s/g, "") ?? "" )=== (currentUser.displayName?.replace(/\s/g, "") ?? "") || isSubmitting}
+                      ml={10}>Save</Button>
             </div>        
           </div>      
         </div>

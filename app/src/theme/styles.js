@@ -7,8 +7,16 @@ const styles = {
       color: mode('black', 'white')(props),
     },
     
-    'p, a, span, div, input': {
+    'p, a, span, div, input, button, label': {
       fontSize: ['sm', 'md'], 
+    },
+
+    'h2, h3, h4': {
+      fontSize: ['md', 'lg'], 
+    },
+
+    'h1': {
+      fontSize: ['lg', 'xl'],
     },
 
     '.profile-setting-options-container .setting-card img, .profile-pic, .userinfo-profile-pic': {

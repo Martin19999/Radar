@@ -6,8 +6,9 @@ const Tabs = {
   baseStyle: (props) => ({
     tab: {
       minW: '100px',
-      fontSize: ["sm","md"],
+      
       '&&': {
+        fontSize: { base: '0.9rem', sm: '0.9rem', md: '1rem' },
         color: 'gray',
         marginBottom: 0,
       },

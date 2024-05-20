@@ -4,6 +4,12 @@
   padding: 1.5em;
 }
 
+/* not logged in */
+.user-sidebar-container h2 {
+  margin: 0.5em 0;
+}
+
+/* when logged in */
 .profile-pic {
   width: clamp(8em, 90%, 10em);
   aspect-ratio: 1/1;
@@ -14,21 +20,6 @@
   filter: brightness(1.1);
 }
 
-.user-sidebar-container .profile-pic+p {
-  font-weight: bold;
-}
-
 .siderbar-info-no-pic {
   margin-top: 0.5em;
-}
-
-.siderbar-info-no-pic p:first-child {
-  font-weight: bold;
-  font-size: large;
-  margin-top: 0.5em;
-  margin-bottom: 0.7em;
-}
-
-.siderbar-info-no-pic :not(:first-child) {
-  font-size: small;
 }

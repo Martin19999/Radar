@@ -67,10 +67,11 @@ const MyMenu = () => {
 						</Menu> :					
 						
 						<div className='three-dots-dropdown-content'>
-							<Link as={RouterLink} to='/signup' className={(path === '/signup' || path === '/login') ? 'hidden' : 'signup-button'}>Sign Up</Link> 
+							<Link as={RouterLink} to='/signup' className={(path === '/signup' || path === '/login') ? 'hidden' : 'signup-button'}
+										data-cy='signupbutton-explicit'>Sign Up</Link> 
 							<Link as={RouterLink} to='/login' className={(path === '/signup' || path === '/login') ? 'hidden' : 'login-button'}>Log In</Link> 							
 						</div> 
-					}
+					} 
 				</>
 			}
 			

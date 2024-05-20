@@ -6,9 +6,8 @@
  */
 
 import Banner from "../components/Banner/index.js";
-import Content from "../components/Content/index.js"
-import Blog from "../components/Blog/index.js";
-import Aside from "../components/Aside/index.js";
+import Aside from "../components/aside";
+import Page from "../components/page";
 import { useAuth } from "../context/authContext.js";
 import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
 import { Modal, ModalOverlay, ModalContent, ModalFooter, ModalBody, Link, IconButton, Button } from '@chakra-ui/react'
@@ -56,11 +55,17 @@ const HomePage = () => {
         </ModalContent>
       </Modal>
       
-      <Banner />
-      <Content>
-        <Blog />
+      <Page>
+        <section className="blog-home">
+          
+          <p>Explore button</p> 
+          <p>For you button</p> 
+          <p>----------------------</p> 
+          <p>display user posts in cards</p>
+        </section>
+
         <Aside />
-      </Content>
+      </Page>
     </>
   );
 };
