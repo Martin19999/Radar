@@ -1,8 +1,8 @@
 describe('Sign up page initialisation', () => {
   it('you can find the sign up page, submit button is disabled', () => {
     cy.visit('http://localhost:3000');
-    cy.get("[data-cy='signupbutton-explicit']").should('exist');
-    cy.get("[data-cy='signupbutton-explicit']").click();
+    cy.get("[data-cy='singup-button']").should('exist');
+    cy.get("[data-cy='singup-button']").click();
     cy.get("[data-cy='signup-submit']").should('exist');
     cy.get("[data-cy='signup-submit']").should('be.disabled');
   });
@@ -12,7 +12,7 @@ describe('Sign up page initialisation', () => {
 describe('Sign up page', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000');
-    cy.get("[data-cy='signupbutton-explicit']").click();
+    cy.get("[data-cy='singup-button']").click();
   });
 
   it('field 1 empty, submit button should be disabled', () => {
@@ -65,9 +65,8 @@ describe('Sign up page', () => {
     cy.get("[data-cy='signup-displayName']").type('username');
     cy.get("[data-cy='signup-password']").type('password123');
     cy.get("[data-cy='signup-submit']").click();
-    // cy.get('.chakra-toast', {timeout: 10000}).should('contain', 'success');
-    cy.url().should('include', '/');
-    cy.get('#chakra-modal-modal-freshuser', { timeout: 10000 }).should('be.visible');
+    cy.location('pathname').should('eq', '/');
+    cy.get('[data-testid="welcom-guide"]', { timeout: 10000 }).should('be.visible');
   });
 
 })

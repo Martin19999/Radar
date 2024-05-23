@@ -58,14 +58,16 @@ const LoginPage = () => {
 							<FormControl isRequired>
 								<FormLabel>Email</FormLabel>
 								<Input value= {email || ''} 
-											onChange={(e) => {setEmail(e.target.value); }} />
+											onChange={(e) => {setEmail(e.target.value); }} 
+											data-cy='login-email'/>
 							</FormControl>
 							<FormControl isRequired>
 								<FormLabel>Password</FormLabel>
 								<InputGroup>
 									<Input type={showPassword ? 'text' : 'password'}
 												value= {password || ''} 
-												onChange={(e) => {setPassword(e.target.value); }} />
+												onChange={(e) => {setPassword(e.target.value); }} 
+												data-cy='login-password'/>
 									<InputRightElement>
 										<Button as={IconButton} icon={showPassword ? <IoMdEye/> :<IoMdEyeOff/>} onClick={handleShowPassWordClick} variant="unstyled" />
 									</InputRightElement>
@@ -75,7 +77,8 @@ const LoginPage = () => {
 							<Button isLoading={isSubmitting}
 											isDisabled={!isFormValid() || isSubmitting }
 											type="submit"            
-											variant='bigFormSubmitButton' >Log In</Button>       
+											variant='bigFormSubmitButton'
+											data-cy='login-submit' >Log In</Button>       
 						</form>
 					</div> 
 				</div>

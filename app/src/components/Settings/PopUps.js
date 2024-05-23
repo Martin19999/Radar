@@ -52,7 +52,7 @@ const PopUps = (props) => {
   const isFormValid = () => {
     return(
       ((updateEmailAddrField.password?.replace(/\s/g, "") ?? "").length >= 6 && (updateEmailAddrField.newEmail?.replace(/\s/g, "") ?? "").length > 0 && (updateEmailAddrField.newEmail?.replace(/\s/g, "") ?? "") !== userDetails.email) ||
-      ((changePasswordField.oldP?.replace(/\s/g, "")?? "").length >= 6 && (changePasswordField.newP?.replace(/\s/g, "")?? "").length >=6 && changePasswordField.newP === changePasswordField.confirmNewP) ||
+    ((changePasswordField.oldP?.replace(/\s/g, "")?? "").length >= 6 && (changePasswordField.newP?.replace(/\s/g, "")?? "").length >=6 && changePasswordField.newP === changePasswordField.confirmNewP && changePasswordField.newP !== changePasswordField.oldP)||
       ((deleteAccountField.password?.replace(/\s/g, "")?? "").length >=6 && (deleteAccountField.typeConfirmDelete ?? "") === "delete my account")
     )
   }
@@ -90,14 +90,14 @@ const PopUps = (props) => {
             showSuccess("Email updated!");
           }).catch((error) => {
             showError(error.message);
+          }).finally(() => {
+            setIsSubmitting(false); 
           });
         }).catch((error) => {
           showError(error.message);
         });
       }
-    }).finally(() => {
-      setIsSubmitting(false); 
-    });
+    })
   }
 
   function changePassword (oldP, newP) {
@@ -109,14 +109,15 @@ const PopUps = (props) => {
             showSuccess("Password updated!");
           }).catch((error) => {
             showError(error.message);
+          }).finally(() => {
+            clearForm(); 
+            setIsSubmitting(false); 
           });
         }).catch((error) => {
           showError(error.message);
         });
       }
-    }).finally(() => {
-      setIsSubmitting(false); 
-    });
+    })
   }
 
   function deleteAccount (password) {
@@ -135,14 +136,14 @@ const PopUps = (props) => {
             navigate('/');
           }).catch((error) => {
             showError(error.message);
+          }).finally(() => {
+            setIsSubmitting(false); 
           });
         }).catch((error) => {
           showError(error.message);
         });
       }
-    }).finally(() => {
-      setIsSubmitting(false); 
-    });
+    })
   }
 
   const changeEmailButtonRef = useRef(null);
@@ -171,7 +172,7 @@ const PopUps = (props) => {
         return (
           <div className='popup-inner-content'>
             <Tooltip label={userDetails.email} aria-label="Full email">
-              <FormLabel variant='showLongTextLabel'>Current Email: {userDetails.email} </FormLabel>
+              <FormLabel variant='showLongTextLabel' data-cy='email-label'>Current Email: {userDetails.email}</FormLabel>
             </Tooltip>
             <form>
               <FormControl isRequired>
@@ -179,7 +180,8 @@ const PopUps = (props) => {
                 <InputGroup>
                   <Input placeholder='Current Password'
                           type={showPassword.showPassword1 ? 'text' : 'password'} 
-                          onChange={(e) => {setUpdateEmailAddrField({...updateEmailAddrField, password: e.target.value})} } />
+                          onChange={(e) => {setUpdateEmailAddrField({...updateEmailAddrField, password: e.target.value})} } 
+                          data-cy='changeemail-password'/>
                   <InputRightElement>
                     <Button as={IconButton} icon={showPassword.showPassword1 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword1: !showPassword.showPassword1})}}/>
@@ -189,7 +191,8 @@ const PopUps = (props) => {
               <FormControl isRequired>
                 <FormLabel>New Email:</FormLabel>
                 <Input placeholder='New Email' 
-                       onChange={(e) => {setUpdateEmailAddrField({...updateEmailAddrField, newEmail: e.target.value})} } />
+                       onChange={(e) => {setUpdateEmailAddrField({...updateEmailAddrField, newEmail: e.target.value})} } 
+                       data-cy='changeemail-newemail'/>
               </FormControl>
               <VisuallyHidden>
                 <button onClick={ (e) => { e.preventDefault();
@@ -209,7 +212,9 @@ const PopUps = (props) => {
                 <InputGroup>
                   <Input placeholder='Old Password'
                         type={showPassword.showPassword21 ? 'text' : 'password'} 
-                        onChange={(e) => {setChangePasswordField({...changePasswordField, oldP: e.target.value})} } />
+                        onChange={(e) => {setChangePasswordField({...changePasswordField, oldP: e.target.value})} }
+                        value={changePasswordField.oldP}
+                        data-cy='changepassword-oldpassword' />
                   <InputRightElement>
                     <Button as={IconButton} icon={showPassword.showPassword21 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword21: !showPassword.showPassword21})}}/>
@@ -221,7 +226,9 @@ const PopUps = (props) => {
                 <InputGroup>
                   <Input placeholder='New Password'
                         type={showPassword.showPassword22 ? 'text' : 'password'} 
-                        onChange={(e) => {setChangePasswordField({...changePasswordField, newP: e.target.value});} } />
+                        onChange={(e) => {setChangePasswordField({...changePasswordField, newP: e.target.value});} } 
+                        value={changePasswordField.newP}
+                        data-cy='changepassword-newpassword'/>
                   <InputRightElement>
                     <Button as={IconButton} icon={showPassword.showPassword22 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword22: !showPassword.showPassword22})}}/>
@@ -233,7 +240,9 @@ const PopUps = (props) => {
                 <InputGroup>
                   <Input placeholder='Confirm New Password'
                         type={showPassword.showPassword23 ? 'text' : 'password'} 
-                        onChange={(e) => {setChangePasswordField({...changePasswordField, confirmNewP: e.target.value})} } />
+                        onChange={(e) => {setChangePasswordField({...changePasswordField, confirmNewP: e.target.value})} } 
+                        value={changePasswordField.confirmNewP}
+                        data-cy='changepassword-confirmnewpassword'/>
                   <InputRightElement>
                     <Button as={IconButton} icon={showPassword.showPassword23 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword23: !showPassword.showPassword23})}}/>
@@ -257,7 +266,8 @@ const PopUps = (props) => {
                 <InputGroup>
                   <Input placeholder='Enter Password'
                          type={showPassword.showPassword3 ? 'text' : 'password'} 
-                         onChange={(e) => {setDeleteAccountField({...deleteAccountField, password: e.target.value})} } />
+                         onChange={(e) => {setDeleteAccountField({...deleteAccountField, password: e.target.value})} } 
+                         data-cy='deleteaccount-password'/>
                   <InputRightElement>
                     <Button as={IconButton} icon={showPassword.showPassword3 ? <IoMdEye/> :<IoMdEyeOff/>} variant="unstyled" 
                             onClick={()=>{ setShowPassword({...showPassword, showPassword3: !showPassword.showPassword3})}}/>
@@ -266,7 +276,8 @@ const PopUps = (props) => {
               </FormControl>
               <FormControl isRequired>
                 <FormLabel>Please enter "delete my account" to confirm:</FormLabel>
-                <Input onChange={(e) => {setDeleteAccountField({...deleteAccountField, typeConfirmDelete: e.target.value})} } />
+                <Input onChange={(e) => {setDeleteAccountField({...deleteAccountField, typeConfirmDelete: e.target.value})} } 
+                       data-cy='deleteaccount-confirmphrase'/>
               </FormControl>
               <VisuallyHidden>
                 <button onClick={ (e) => { e.preventDefault();
@@ -285,7 +296,7 @@ const PopUps = (props) => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{ props.type }</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton data-cy='accountsettings-popupclose'/>
           <ModalBody>
             { openPopUp(props.type) }
           </ModalBody>
@@ -293,7 +304,8 @@ const PopUps = (props) => {
             <Button onClick={()=>chooseButton(props.type)} 
                     isDisabled={!isFormValid() || isSubmitting } 
                     isLoading={isSubmitting} 
-                    variant='smallFormSubmitButton'>
+                    variant='smallFormSubmitButton'
+                    data-cy='accountsettings-submit'>
               Confirm
             </Button>
           </ModalFooter>

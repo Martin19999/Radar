@@ -32,8 +32,8 @@ const SettingPage = () => {
 					<Tabs index={tabIndex} onChange={handleTabsChange}>
 						<TabList>
 							<Tab>Account</Tab>
-							<Tab>Profile</Tab>
-							<Tab>Others</Tab>
+							<Tab data-cy='profilesettings-profiletab'> Profile</Tab>
+							<Tab data-cy='profilesettings-otherstab'>Others</Tab>
 						</TabList>
 
 						<TabPanels>

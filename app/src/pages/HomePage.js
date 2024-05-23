@@ -31,7 +31,7 @@ const HomePage = () => {
     <>
       <Modal isOpen={fresh}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent data-testid="welcom-guide">
           <ModalBody>
             <h1>Welcome to our community, </h1>
             <h1>{userDetails.displayName}!</h1>

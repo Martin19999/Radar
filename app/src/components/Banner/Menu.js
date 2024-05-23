@@ -61,15 +61,16 @@ const MyMenu = () => {
 													as={IconButton}
 													icon={<BsThreeDots />}/>
 							<MenuList>
-								<MenuItem as={RouterLink} to='/signup'>Sign Up</MenuItem>
-								<MenuItem as={RouterLink} to='/login'>Log In</MenuItem>
+								<MenuItem as={RouterLink} to='/signup' data-cy='signup-button'>Sign Up</MenuItem>
+								<MenuItem as={RouterLink} to='/login' data-cy='login-button'>Log In</MenuItem>
 							</MenuList>									
 						</Menu> :					
 						
 						<div className='three-dots-dropdown-content'>
 							<Link as={RouterLink} to='/signup' className={(path === '/signup' || path === '/login') ? 'hidden' : 'signup-button'}
-										data-cy='signupbutton-explicit'>Sign Up</Link> 
-							<Link as={RouterLink} to='/login' className={(path === '/signup' || path === '/login') ? 'hidden' : 'login-button'}>Log In</Link> 							
+										data-cy='signup-button'>Sign Up</Link> 
+							<Link as={RouterLink} to='/login' className={(path === '/signup' || path === '/login') ? 'hidden' : 'login-button'}
+										data-cy='login-button'>Log In</Link> 							
 						</div> 
 					} 
 				</>
@@ -81,16 +82,17 @@ const MyMenu = () => {
 													 <Button id='post-button' as={IconButton} icon={<MdAdd />} /> }
 					<Menu closeOnSelect={false}>
 						{pfpAsBackground ? 
-						<MenuButton as={Button} backgroundImage={`url(${userDetails.photoURL})`} alt="profile picture" variant='menuButton'/> :
-						<MenuButton as={IconButton} icon={<IoSettingsOutline />} />
+						<MenuButton as={Button} backgroundImage={`url(${userDetails.photoURL})`} alt="profile picture" variant='menuButton' data-cy='setting-button'/> :
+						<MenuButton as={IconButton} icon={<IoSettingsOutline />} data-cy='setting-button'/>
 						}
 						
 						<MenuList>
 							<MenuItem> Night Mode <Switch isChecked={colorMode==='dark'}
-																						onChange={()=> { handleSwitchChange(); }}/> </MenuItem>
-							<MenuItem as={RouterLink} to={`/userdetail/${currentUser.uid}/posts`}>User Profile</MenuItem>
-							<MenuItem as={RouterLink} to='/settings/account'>Settings</MenuItem>
-							<MenuItem onClick={() => logOut()}>Log Out</MenuItem>
+																						onChange={()=> { handleSwitchChange(); }}
+																						data-cy='mode-menuitem'/> </MenuItem>
+							<MenuItem as={RouterLink} to={`/userdetail/${currentUser.uid}/posts`} data-cy='userprofile-menuitem'>User Profile</MenuItem>
+							<MenuItem as={RouterLink} to='/settings/account' data-cy='settings-menuitem'>Settings</MenuItem>
+							<MenuItem onClick={() => logOut()} data-cy='logout-menuitem'>Log Out</MenuItem>
 						</MenuList> 		
 					</Menu>
 				</div>

@@ -66,15 +66,15 @@ const SettingsContent = ({settingType}) => {
           <div className='account-setting-options-container'>
             <div className='setting-card'>
               <h4>Change Email</h4>
-              <IconButton onClick={ () => { setPopUp(true); setPopUpType("Change Email"); }} icon={<FaArrowRight />} />
+              <IconButton onClick={ () => { setPopUp(true); setPopUpType("Change Email"); }} icon={<FaArrowRight />} data-cy='settings-changeemail'/>
             </div>
             <div className='setting-card'> 
               <h4>Change Password</h4>
-              <IconButton onClick={ () => { setPopUp(true); setPopUpType("Change Password"); }} icon={<FaArrowRight />} />
+              <IconButton onClick={ () => { setPopUp(true); setPopUpType("Change Password"); }} icon={<FaArrowRight />} data-cy='settings-changepassword'/>
             </div>
             <div className='setting-card'>
               <h4>Delete Account</h4>
-              <IconButton onClick={ () => { setPopUp(true); setPopUpType("Delete Account"); }} icon={<FaArrowRight />} />
+              <IconButton onClick={ () => { setPopUp(true); setPopUpType("Delete Account"); }} icon={<FaArrowRight />} data-cy='settings-deleteaccount'/>
             </div>
           </div>
         </>
@@ -88,11 +88,13 @@ const SettingsContent = ({settingType}) => {
           <div className='setting-card'>
             <h4>Display Name</h4>
             <div className='setting-card-content'>
-              <Input value={myDisplayName?.replace(/\s/g, "")} onChange={ (e)=>{setMyDisplayName(e.target.value)}} maxLength={25} ></Input>
+              <Input value={myDisplayName?.replace(/\s/g, "")} onChange={ (e)=>{setMyDisplayName(e.target.value)}} maxLength={25}
+                     data-cy='profilesettings-changedisplayname-name' ></Input>
               <Button onClick={ () => {changeDisplayName(myDisplayName)}} 
                       isLoading={isSubmitting}
                       isDisabled={!isFormValid() || (myDisplayName?.replace(/\s/g, "") ?? "" )=== (currentUser.displayName?.replace(/\s/g, "") ?? "") || isSubmitting}
-                      ml={10}>Save</Button>
+                      ml={10}
+                      data-cy='profilesettings-changedisplayname-button'>Save</Button>
             </div>        
           </div>      
         </div>

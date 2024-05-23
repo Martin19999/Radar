@@ -107,10 +107,12 @@ const ProfileMgmt = () => {
                                 } 
                                 e.target.value = null;
                         }}
-                ref={fileInputRef} />                            
+                ref={fileInputRef} 
+                data-cy="profilesettings-changepfp-input" />                            
         <Button leftIcon={<FaCamera />}
                 aria-label="Upload file"
-                onClick={handleFileInputClick}> Edit </Button>
+                onClick={handleFileInputClick}
+                data-cy='profilesettings-changepfp-edit'> Edit </Button>
         <Modal isOpen={changePfpModalOpen} onClose={()=>{setChangePfpModalOpen(false)}}>
           <ModalOverlay />
           <ModalContent>
@@ -123,12 +125,14 @@ const ProfileMgmt = () => {
                                         setCropped={setCropped}/>}
             </ModalBody>
             <ModalFooter>
-              <Button onClick={() => {cropFunction && cropFunction(); setCropped(true)}} isDisabled={cropped} >Crop</Button>
+              <Button onClick={() => {cropFunction && cropFunction(); setCropped(true)}} isDisabled={cropped} 
+                      data-cy='profilesettings-changepfp-crop'>Crop</Button>
               <Button onClick={ ()=>{ setChangePfpModalOpen(false); 
                                       setCropped(false);
                                       handlePfpChange(); }}
                       isDisabled={!cropped}
-                      variant='smallFormSubmitButton'> Save </Button>
+                      variant='smallFormSubmitButton'
+                      data-cy='profilesettings-changepfp-save'> Save </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
