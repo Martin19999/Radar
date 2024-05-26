@@ -28,5 +28,7 @@ export const syncUserData = (user: FirebaseUser): void => {
     return response.json();
   })
   .then(data => console.log('User data synced:', data))
-  .catch(error => console.log('Error syncing user data:', error.message));
+  .catch(error => { console.log('Error syncing user data:', error.message);
+                    setTimeout(() => syncUserData(user), 3000); // Retry after 3 seconds
+  });
 };
