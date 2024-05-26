@@ -26,6 +26,7 @@ const UserPage = () => {
   const tabIndex = tabNames.indexOf(location.pathname.split("/").pop()!) || 0;
   const handleTabsChange = (index: number) => {
     navigate(`/${location.pathname.split("/").slice(1, 3).join('/')}/${tabNames[index]}`);
+		console.log(currentUser?.uid, currentUser?.displayName, currentUser?.photoURL, currentUser?.metadata.creationTime);
   }; 
 
   const [pfpMagnified, setPfpMagnified] = useState(false);

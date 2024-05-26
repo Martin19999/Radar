@@ -10,6 +10,7 @@
 
 import { AuthContextType, useAuth } from '../../context/authContext';
 import { useEasyToast } from '../toast';
+import { syncUserData } from '../../utils/syncUserData';
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, updateEmail, updatePassword, deleteUser, reauthenticateWithCredential, EmailAuthProvider } from "firebase/auth";
@@ -136,6 +137,14 @@ const PopUps: React.FC<PopUpsProps> = (props) => {
       try {
         const credential = EmailAuthProvider.credential(currentUser!.email!, password);
         await reauthenticateWithCredential(currentUser!, credential);
+
+        await syncUserData({
+          uid: currentUser!.uid,
+          displayName: userDetails.displayName!,
+          photoURL: userDetails.photoURL!,
+          isActive: false
+        });
+
         await deleteUser(currentUser!);
         showSuccess("User deleted.");
         setUserDetails({

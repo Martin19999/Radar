@@ -8,6 +8,7 @@
 
 import { useAuth } from '../../context/authContext';
 import ProfileMgmt from './ProfileMgmt';
+import { syncUserData } from '../../utils/syncUserData';
 import PopUps from './PopUps';
 import { useEasyToast } from '../toast';
 import React, { useState } from 'react';
@@ -55,6 +56,12 @@ const SettingsContent: React.FC<SettingsContentProps> = ({settingType}) => {
         displayName: newName
       });
       showSuccess("Name updated!");
+      syncUserData({
+        uid: currentUser!.uid,
+        displayName: newName,
+				photoURL: userDetails.photoURL!,
+        isActive: true
+			});
     }).catch((error) => {
       showError(error.message);
     }).finally(() => {

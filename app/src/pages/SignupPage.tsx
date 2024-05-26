@@ -7,6 +7,7 @@
 
 import Page from "../components/page";
 import { useAuth } from '../context/authContext';
+import { syncUserData } from "../utils/syncUserData";
 import { useEasyToast } from '../components/toast';
 import React, { useState } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
@@ -18,6 +19,7 @@ import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 import "../styles/common.css";
 import "../styles/authpages.css";
+
 
 const SignupPage = () => {
 	const [email, setEmail] = useState('');
@@ -37,36 +39,40 @@ const SignupPage = () => {
     return (email?.replace(/\s/g, "") ?? "").length > 0 && (name?.replace(/\s/g, "") ?? "").length > 0 && (password?.replace(/\s/g, "") ?? "").length >= 6;
   };
 
-	const signup = (e: React.FormEvent<HTMLFormElement>) => { 
+	const signup = async (e: React.FormEvent<HTMLFormElement>) => { 
     e.preventDefault();
     setIsSubmitting(true);
 
     // const sanitizedDisplayName = DOMPurify.sanitize(name.replace(/\s/g, ""));
 
-    createUserWithEmailAndPassword(auth, email.toLowerCase(), password)
-    .then((userCredential) => {
-      updateProfile(userCredential.user, {
-        displayName: name.replace(/\s/g, ""),
-        photoURL: "/profile.jpg"
-      }).then(() => {
-        setUserDetails({
-          ...userDetails,
-          displayName: name.replace(/\s/g, ""),
-          photoURL: "/profile.jpg",
-          creationTime: userCredential.user.metadata.creationTime!.match(/\d{2} \w{3} \d{4}/)![0],
-          email: email.toLowerCase()
-        });
-        showSuccess('Account created!');
-        navigate('/', { state:{ fresh: true } });
-      }).catch((error) => {
-        showError(error.message);
-      });
-    }).catch((error) => {
-      showError(error.message);
-    }).finally(() => {
-      setIsSubmitting(false); 
-    });
-  };
+		try {
+			const userCredential = await createUserWithEmailAndPassword(auth, email.toLowerCase(), password);
+			await updateProfile(userCredential.user, {
+				displayName: name.replace(/\s/g, ""),
+				photoURL: "/profile.jpg"
+			});
+			const newUserDetails = {
+				...userDetails,
+				displayName: name.replace(/\s/g, ""),
+				photoURL: "/profile.jpg",
+				creationTime: userCredential.user.metadata.creationTime!.match(/\d{2} \w{3} \d{4}/)![0],
+				email: email.toLowerCase() };
+			setUserDetails(newUserDetails);
+			showSuccess('Account created!');
+			await syncUserData({
+				uid: userCredential.user.uid,
+				displayName: newUserDetails.displayName,
+				photoURL: newUserDetails.photoURL,
+				isActive: true
+			});
+			navigate('/', { state: { fresh: true } });
+		} catch (error) {
+			showError((error as Error).message); // what if it's not firebase error?
+		} finally {
+			setIsSubmitting(false);
+		}
+	}
+      
 
 	return(
 		<>

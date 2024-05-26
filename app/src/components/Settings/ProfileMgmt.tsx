@@ -10,6 +10,7 @@
 import { useAuth } from '../../context/authContext';
 import { useEasyToast } from '../toast';
 import React, { useState, useRef } from 'react';
+import { syncUserData } from '../../utils/syncUserData';
 import { updateProfile } from 'firebase/auth';
 import { storage } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
@@ -32,7 +33,6 @@ const ProfileMgmt = () => {
   let cropFunction: (() => Promise<void>) | null = null;
   const [cropped, setCropped] = useState(false);
   const [pfp, setPfp] = useState<Blob | null>(null); // the final cropped image file
-  const [url, setUrl] = useState<string | null>(null); // the final cropped image file URL
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const handleFileInputClick = () => {
@@ -50,7 +50,6 @@ const ProfileMgmt = () => {
       uploadBytes(imageRef, pfp).then(()=>{
         getDownloadURL(imageRef)
         .then((url)=>{
-          setUrl(url);
           // First, update the profile in Firebase Authentication
           updateProfile(currentUser!, {
             photoURL: url
@@ -61,6 +60,12 @@ const ProfileMgmt = () => {
               ...userDetails,
               photoURL: url
             });
+            syncUserData({
+              uid: currentUser!.uid,
+              displayName: userDetails.displayName!,
+              photoURL: url,
+              isActive: true
+            });
             showSuccess('Profile picture updated!');
           })
           .catch((error)=>{
@@ -68,7 +73,6 @@ const ProfileMgmt = () => {
           });
           setPfp(null);  // remember to sycn with the webpage!!!! state???
           setImageSrc(null);
-          setUrl(null);
         }).catch((error) => {
           showErrorNonFirebase("Failed to retrieve download URL: " + error.message);
         });
