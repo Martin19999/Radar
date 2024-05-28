@@ -7,7 +7,7 @@
 
 
 import Logo from "./Logo";
-import Search from "./Search";
+import Search from "./SearchBox";
 import Menu from "./Menu";
 import React from "react";
 import "../../styles/common.css";

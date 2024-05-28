@@ -1,7 +1,10 @@
 import express from 'express';
-import userRoutes from './routes/userRoutes';
 import path from 'path';
 const cors = require('cors');
+
+import userUpdateRoutes from './routes/userUpdateRoutes';
+import searchRoutes from './routes/searchRoutes';
+import showUserInfoRoutes from './routes/showUserInfoRoutes';
 
 const app = express();
 app.use(express.json());
@@ -13,7 +16,9 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, '../app/public')));
 
 // Use routes
-app.use('/api/users', userRoutes);
+app.use('/api/users', userUpdateRoutes);
+app.use('/api', searchRoutes);
+app.use('/api', showUserInfoRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

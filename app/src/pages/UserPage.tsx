@@ -7,7 +7,10 @@
 
 import Page from "../components/page";
 import { useAuth } from "../context/authContext";
-import React, { useState } from 'react';
+import { UserInfo } from "../types";
+import { getUserInfo } from "../utils/getUserInfo";
+import { formatDate } from "../utils/formatDate";
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, CloseButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery } from '@chakra-ui/react'
 
@@ -26,35 +29,56 @@ const UserPage = () => {
   const tabIndex = tabNames.indexOf(location.pathname.split("/").pop()!) || 0;
   const handleTabsChange = (index: number) => {
     navigate(`/${location.pathname.split("/").slice(1, 3).join('/')}/${tabNames[index]}`);
-		console.log(currentUser?.uid, currentUser?.displayName, currentUser?.photoURL, currentUser?.metadata.creationTime);
+		console.log(uid, currentUser?.uid, userDetails.displayName)
   }; 
 
   const [pfpMagnified, setPfpMagnified] = useState(false);
   const [isWideEnough] = useMediaQuery("(min-width: 1040px)");
 
+	const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+	
+	useEffect( () => {
+		// Check if userData is already passed through location.state
+		if (location.state?.userinfo) {
+			setUserInfo(location.state.userinfo);
+		} else {
+			// No userData passed, fetch from the server
+			try {
+				const fetchData = async () => {
+					setUserInfo((await getUserInfo(location.pathname.split("/").slice(-2, -1)[0]))[0]);
+				}	
+				fetchData();
+			} catch (error) {
+				console.log((error as Error).message)
+			}
+		}
+	}, [location.pathname, location.state]);
 
-	if (currentUser) {
-    return (
+	if (!userInfo) {
+		return <div>Loading...</div>;
+	}	else {
+	
+		return (
 			<Page>
 				<div className='userinfo-container'>
-					<Link as={RouterLink} to='/'><CloseButton variant='userinfoCloseButton'/></Link>
+					<Link as={RouterLink} onClick={() => navigate(-1)}><CloseButton variant='userinfoCloseButton'/></Link>
 					<div className='basic-userinfo-container'>
-						<img src={userDetails.photoURL!} alt="profile picture" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
+						<img src={userInfo.photo_url} alt="profile picture" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
 						<Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)} variant='displayPfp'>
 							<ModalOverlay />
 							<ModalContent>
 								<ModalCloseButton />
 								<ModalBody >
-									<img id='magnified-pfp' src={userDetails.photoURL!} alt="profile pic"></img>
+									<img id='magnified-pfp' src={userInfo?.photo_url} alt="profile pic"></img>
 								</ModalBody>
 							</ModalContent>
 						</Modal>
 						<div className='basic-nonpic-userinfo-container'>   
-							<Tooltip label={userDetails.displayName} aria-label="Full displayName" isDisabled={isWideEnough}>
-								<p>{userDetails.displayName}</p>
+							<Tooltip label={userInfo.display_name} aria-label="Full displayName" isDisabled={isWideEnough}>
+								<p>{userInfo.display_name}</p>
 							</Tooltip>
-							<p><strong>Member since: </strong> {userDetails.creationTime}</p>
-							<button className={ uid===currentUser.uid ? 'do-not-display' : '' }>Follow</button>
+							<p><strong>Member since: {formatDate(userInfo.created_at.toString())}</strong> </p>
+							<button className={ uid===currentUser?.uid ? 'do-not-display' : '' }>Follow</button>
 						</div>
 					</div>
 					<div className='more-userinfo-container'>
@@ -87,9 +111,10 @@ const UserPage = () => {
 					</div>        
 				</div>
 			</Page>
-      
-    )
-  }
+			
+		)
+	}	
+  
 }
 
 export default UserPage;
