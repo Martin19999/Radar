@@ -26,8 +26,7 @@ const SettingPage = () => {
 	return(
 		<Page>
 			<div className='settings-container'>
-				<Link as={RouterLink} to='/'><CloseButton/></Link>
-				<h1>Settings</h1>
+				<h1><strong>Settings</strong></h1>
 				<div className='settings-content'>  
 					<Tabs index={tabIndex} onChange={handleTabsChange}>
 						<TabList>

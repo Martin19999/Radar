@@ -15,7 +15,7 @@ import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, CloseButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery } from '@chakra-ui/react'
 import { Card, CardHeader, CardBody, CardFooter, Stack } from '@chakra-ui/react'
 import "../styles/common.css";
-// import "../styles/userinfo.css";
+import "../styles/searchResult.css";
 
 
 
@@ -45,7 +45,7 @@ const SearchResultPage: React.FC = () => {
 	return (
 		<Page>
 			<div className='userinfo-container'>
-				<Link as={RouterLink} onClick={() => navigate(-1)}><CloseButton variant='userinfoCloseButton'/></Link>
+				{/* <Link as={RouterLink} onClick={() => navigate(-1)}><CloseButton variant='userinfoCloseButton'/></Link> */}
 				
 				<div className='more-userinfo-container'>
 					<Tabs index={tabIndex} onChange={handleTabsChange} >
@@ -68,11 +68,9 @@ const SearchResultPage: React.FC = () => {
                     
                       searchResult.map((user, index) => (
                         <Card key={index}
-                              direction={{ base: 'column', sm: 'row' }}
-                              overflow='hidden'
-                              variant='outline'
-                              onClick={()=>navigate(`/userdetail/${user.uid}/posts`, {state: {userinfo: user}})}>
-                          <img src={user.photo_url} width={100}/>
+                              onClick={()=>navigate(`/userdetail/${user.uid}/posts`, {state: {userinfo: user}})}
+                              variant='outline'>
+                          <img src={user.photo_url} className='pfp-in-cards'/>
                           <Stack>
                             <CardBody>
                               <strong><h2>{user.display_name}</h2></strong>

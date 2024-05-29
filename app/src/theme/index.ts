@@ -13,6 +13,7 @@ import Modal from "./components/modal";
 import Input from "./components/input";
 import Menu from "./components/menu";
 import Tooltip from "./components/tooltip";
+import Card from "./components/card";
 
 const theme = {
   config: {
@@ -33,7 +34,8 @@ const theme = {
     Modal,
     Input,
     Menu,
-    Tooltip
+    Tooltip,
+    Card
   },
   
 };

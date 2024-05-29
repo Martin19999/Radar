@@ -25,6 +25,10 @@ const styles: Styles = {
       borderRadius: '0.5em'
     },
 
+    '.setting-card': {
+      borderColor: mode('gray.200', 'gray.700')(props)
+    },
+
     '.form-container, aside, .userinfo-container, .settings-container': {
       bg: mode('white', 'gray.900')(props),
       border: '1px transparent',

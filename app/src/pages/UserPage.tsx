@@ -61,7 +61,6 @@ const UserPage = () => {
 		return (
 			<Page>
 				<div className='userinfo-container'>
-					<Link as={RouterLink} onClick={() => navigate(-1)}><CloseButton variant='userinfoCloseButton'/></Link>
 					<div className='basic-userinfo-container'>
 						<img src={userInfo.photo_url} alt="profile picture" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
 						<Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)} variant='displayPfp'>

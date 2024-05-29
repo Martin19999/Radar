@@ -6,12 +6,13 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import DOMPurify from 'dompurify';
 import { useEasyToast } from "../toast";
 
-import { Input, InputGroup, InputRightElement, IconButton, Button } from '@chakra-ui/react';
+import { Input, InputGroup, InputRightElement, IconButton, Button, InputLeftElement, Link, useMediaQuery } from '@chakra-ui/react';
 import { IoSearchOutline } from "react-icons/io5";
+import { AiOutlineHome } from "react-icons/ai";
 import "../../styles/common.css";
 
 const Search = () => {
@@ -43,9 +44,16 @@ const Search = () => {
     setInput(localStorage.getItem("input")?? "");
   }, []);
 
+  const [logoIsHidden] = useMediaQuery("(max-width: 540px)");
+
   return (
     <form onSubmit={handleFormSubmit} className="search-form"> 
         <InputGroup>
+          {logoIsHidden &&
+            <InputLeftElement>
+              <Link as={RouterLink} to='/'><Button as={IconButton} aria-label='Back home' icon={<AiOutlineHome />} variant="unstyled" /></Link>
+            </InputLeftElement>
+          }
           <Input id="searchField"
                   type="text"
                   placeholder="Search Radar"
