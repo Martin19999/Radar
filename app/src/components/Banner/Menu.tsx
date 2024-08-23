@@ -79,8 +79,11 @@ const MyMenu = () => {
 			
 			{ currentUser && 
 				<div className='post-n-setting-buttons'>
-					{ isWideEnough ? <Button id='post-button' leftIcon={<MdAdd />} >Post</Button> : 
-													 <Button id='post-button' as={IconButton} icon={<MdAdd />} /> }
+					{ isWideEnough ? <Button id='post-button' as={RouterLink} to={'/submit'} leftIcon={<MdAdd />} >Post</Button> : 
+													 <Link as={RouterLink} to='/submit'>
+															<Button id='post-button' as={IconButton} icon={<MdAdd />} /> 
+													 </Link>}
+													 
 					<Menu closeOnSelect={false}>
 						{pfpAsBackground ? 
 						<MenuButton as={Button} backgroundImage={`url(${userDetails.photoURL})`} variant='menuButton' data-cy='setting-button'/> :

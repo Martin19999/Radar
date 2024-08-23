@@ -55,10 +55,10 @@ const HomePage = () => {
       <Page>
         <section className="blog-home">
           
-          <p>Explore button (only when logged in)</p> 
+          {/* <p>Explore button (only when logged in)</p> 
           <p>For you button (only when logged in)</p> 
           <p>----------------------</p> 
-          <p>display user posts in cards</p>
+          <p>display user posts in cards</p> */}
         </section>
         <Aside />
       </Page>

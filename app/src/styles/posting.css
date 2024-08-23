@@ -1,0 +1,9 @@
+.posting-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: auto;
+  padding: 2em;
+  overflow-y: scroll;
+  position: relative;
+}

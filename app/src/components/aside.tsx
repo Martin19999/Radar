@@ -27,11 +27,11 @@ const Aside: React.FC = (e) => {
 						<div className="siderbar-info-no-pic">
 							<h2><strong>{userDetails.displayName}</strong></h2>
 							<p><strong>Joined: </strong>{userDetails.creationTime}</p>
-							<p><strong>Posts: </strong> [int]</p>
-							<p><strong>Follow: </strong> [int]</p>
-							<p>[2x5] recent follow</p>
-							<p><strong>Followers: </strong> [int]</p>
-							<p>[2x5] recent followers</p>
+							<p><strong>Posts: </strong> </p>
+							<p><strong>Follow: </strong> </p>
+							{/* <p> recent follow</p> */}
+							<p><strong>Followers: </strong> </p>
+							{/* <p>recent followers</p> */}
 						</div>
 					</>	:
 					<>

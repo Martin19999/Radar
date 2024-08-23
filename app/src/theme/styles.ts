@@ -29,7 +29,7 @@ const styles: Styles = {
       borderColor: mode('gray.200', 'gray.700')(props)
     },
 
-    '.form-container, aside, .userinfo-container, .settings-container': {
+    '.form-container, aside, .userinfo-container, .settings-container, .posting-container': {
       bg: mode('white', 'gray.900')(props),
       border: '1px transparent',
       borderStyle: 'solid',
