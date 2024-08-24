@@ -4,6 +4,7 @@
   flex-direction: column;
   position: relative;
   padding: 2em;
+  overflow-y: scroll;
 }
 
 .userinfo-profile-pic {

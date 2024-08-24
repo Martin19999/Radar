@@ -5,7 +5,7 @@ import { SearchRequest, UserInfo } from '../types';  // Assuming you define your
  * perform search request
  * @param req - type + input query
  */
-export const search = (req: SearchRequest): Promise<UserInfo[]> => {
+export const search = <T>(req: SearchRequest): Promise<T[]> => {
   const url = new URL('http://localhost:3001/api/search');  // Adjust as necessary
   url.searchParams.append('searchType', req.searchType);
   url.searchParams.append('inputQuery', req.inputQuery);
@@ -21,7 +21,7 @@ export const search = (req: SearchRequest): Promise<UserInfo[]> => {
       throw new Error(`Server responded with an error: ${response.status}`);
     }
     // console.log(response.json());
-    return response.json();
+    return response.json() as Promise<T[]>;
   })
   // .then(data => console.log('Search result:', data))
   .catch(error => { return Promise.reject(error.message);

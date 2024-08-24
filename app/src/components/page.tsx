@@ -12,7 +12,7 @@ interface ContentProps {
   children?: React.ReactNode; 
 }
 
-const Content: React.FC<ContentProps> = ({ children }) => {
+const Page: React.FC<ContentProps> = ({ children }) => {
   return (
     <div className='content'>
       <Banner />
@@ -21,4 +21,4 @@ const Content: React.FC<ContentProps> = ({ children }) => {
   );
 }
 
-export default Content;
+export default Page;

@@ -1,0 +1,35 @@
+
+/**
+ * Send a comment to the back-end.
+ * @param comment - comment 
+ */
+export const makeComments = async(comment: string, uid: string, post_id: string): Promise<void> => {
+  const url = 'http://localhost:3001/api/submit-comment';  // Adjust!!!
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      uid: uid,
+      content: {
+        type: "text",
+        content: comment
+      },
+      post_id: post_id
+    }),
+  })
+  .then(response => {
+    if (!response.ok) {
+      // This throws an Error which will be caught by the catch block below
+      throw new Error(`Server responded with an error: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(data => console.log('Posted!!:', data))
+  .catch(error => { console.log('Error with posting this comment:', error.message);
+                    // setTimeout(() => makePosts(post, uid), 3000); // Retry after 3 seconds
+  });
+
+};

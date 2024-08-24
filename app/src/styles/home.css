@@ -22,6 +22,27 @@
 .blog-home {
 	width: 80%;
 	margin-top: 2em;
+	overflow-y: scroll;
+}
+
+.mini-profile-pic {
+	width: 25px;
+	border-radius: 5px;
+}
+
+.post-preview-title {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.post-preview-content {
+	max-height: 7.5rem;  /* Set maximum height for the content */
+  overflow: hidden;    /* Hide overflowed content */
+  text-overflow: ellipsis;  /* Add '...' when content overflows */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;  /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  white-space: normal;    /* Allow wrapping of text */
 }
 
 aside {

@@ -7,6 +7,7 @@
 
 import Aside from "../components/aside";
 import Page from "../components/page";
+import PostsPreview from "../components/postsPreView";
 import { useAuth } from "../context/authContext";
 import React from "react";
 import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
@@ -59,6 +60,8 @@ const HomePage = () => {
           <p>For you button (only when logged in)</p> 
           <p>----------------------</p> 
           <p>display user posts in cards</p> */}
+
+          <PostsPreview searchCondition="all" searchQuery=""/>
         </section>
         <Aside />
       </Page>

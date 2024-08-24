@@ -16,7 +16,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, CloseButton, Modal, Moda
 import { Card, CardHeader, CardBody, CardFooter, Stack } from '@chakra-ui/react'
 import "../styles/common.css";
 import "../styles/searchResult.css";
-
+ 
 
 
 const SearchResultPage: React.FC = () => {
@@ -37,7 +37,7 @@ const SearchResultPage: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setSearchResult(await search({searchType: 'users', inputQuery: location.state.input}));
+      setSearchResult(await search<UserInfo>({searchType: 'users', inputQuery: location.state.input}));
     }
     if(location.state) fetchData();
   },[location.state?.input]);
@@ -64,7 +64,7 @@ const SearchResultPage: React.FC = () => {
                   ) : typeof searchResult === 'string' ? (
                     <p>Error: {searchResult}</p>  // Render error message
                   ) : (
-                      // Render search results if searchResult is of type SearchResults
+                      // Render search results if searchResult is of type UserInfo
                     
                       searchResult.map((user, index) => (
                         <Card key={index}

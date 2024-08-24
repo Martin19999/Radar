@@ -35,8 +35,8 @@ const Aside: React.FC = (e) => {
 						</div>
 					</>	:
 					<>
-						<h2><strong>You might like</strong></h2>
-						<p>dislay user in cards, add a follow button to each</p>
+						<h2><strong>Hi </strong></h2>
+						<p>Log in or sign up to engage with users!</p>
 					</>
 				
 				} 

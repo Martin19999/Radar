@@ -16,6 +16,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, CloseButton, Modal, Moda
 
 import "../styles/common.css";
 import "../styles/userinfo.css";
+import PostsPreview from "../components/postsPreView";
 
 const UserPage = () => {
 	const { currentUser, userDetails } = useAuth();
@@ -85,14 +86,13 @@ const UserPage = () => {
 							<TabList>
 								<Tab>Posts</Tab>
 								<Tab>Following</Tab>
-								<Tab>Follwers</Tab>
+								<Tab>Follwers</Tab> 
 							</TabList>
 
 							<TabPanels>
 								<TabPanel>
 									<>
-										<p>display user posts in cards</p>
-										<p>the same card in the blog content??</p>
+										<PostsPreview searchCondition="by-user" searchQuery={userInfo.uid}/>
 									</>
 								</TabPanel>
 								<TabPanel>

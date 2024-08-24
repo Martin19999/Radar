@@ -81,7 +81,7 @@ const PostingPage = () => {
                   variant='smallFormSubmitButton'
                   data-cy='s-submit'>
              Submit
-            </Button>
+          </Button>
         </form>
       </div>
     </Page>

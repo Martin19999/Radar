@@ -5,7 +5,8 @@ const cors = require('cors');
 import userUpdateRoutes from './routes/userUpdateRoutes';
 import searchRoutes from './routes/searchRoutes';
 import showUserInfoRoutes from './routes/showUserInfoRoutes';
-import makePostRoutes from './routes/makePostsRoutes';
+import makePostsRoutes from './routes/makePostsRoutes';
+import makeCommentsRoutes from './routes/makeCommentsRoutes';
 
 const app = express();
 app.use(express.json());
@@ -20,7 +21,8 @@ app.use(express.static(path.join(__dirname, '../app/public')));
 app.use('/api/users', userUpdateRoutes);
 app.use('/api', searchRoutes);
 app.use('/api', showUserInfoRoutes);
-app.use('/api', makePostRoutes);
+app.use('/api', makePostsRoutes);
+app.use('/api', makeCommentsRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
