@@ -14,6 +14,7 @@ import Input from "./components/input";
 import Menu from "./components/menu";
 import Tooltip from "./components/tooltip";
 import Card from "./components/card";
+import TextArea from "./components/textArea";
 
 const theme = {
   config: {
@@ -35,7 +36,8 @@ const theme = {
     Input,
     Menu,
     Tooltip,
-    Card
+    Card,
+    TextArea
   },
   
 };

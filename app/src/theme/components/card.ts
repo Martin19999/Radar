@@ -8,6 +8,7 @@ const Card: ComponentMultiStyleConfig = {
     outline: (props) => ({ 
       container: {
         borderWidth: '0 0 1px 0',
+        borderRadius: '0',
         px: '5',  
         py: '3',
         flexDirection:'row',  

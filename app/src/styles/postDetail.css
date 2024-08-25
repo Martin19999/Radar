@@ -12,3 +12,27 @@
   -webkit-box-orient: vertical;
   white-space: normal;    /* Allow wrapping of text */
 }
+
+.comment-form-container {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+	flex-direction: column;
+}
+
+.comment-form-container h1 {
+  margin-bottom: 20px;
+}
+
+.comment-form-container form {
+  width: 92%;
+  align-self: center;
+  display: flex;
+	flex-direction: column;
+}
+
+.comment-form-container form button {
+  max-width: 15%;
+  min-width: 20px;
+  align-self: flex-end;
+}

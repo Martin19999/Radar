@@ -68,6 +68,7 @@ const PostingPage = () => {
             <Textarea value={content} 
                     onChange={ (e)=>{setContent(e.target.value)}} 
                     maxLength={10000}
+                    id='posting-textarea'
                     data-cy=''/>
           </FormControl>
           <Button onClick={()=>post()} 

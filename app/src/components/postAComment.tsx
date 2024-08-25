@@ -7,7 +7,7 @@
 
 import { useAuth } from '../context/authContext';
 import React, { useState } from 'react';
-import { HStack, Input, Button, Textarea } from '@chakra-ui/react';
+import { HStack, Input, Button, Textarea, Stack } from '@chakra-ui/react';
 import { useEasyToast } from './toast';
 import DOMPurify from 'dompurify';
 import { makeComments } from '../utils/makeComments';
@@ -50,32 +50,37 @@ const PostAComment: React.FC<PostACommentProps> = ({post_id}) => {
   }
 
   return(
-    currentUser ?
-    <form>
-      <HStack>
-        <Textarea placeholder='Post a comment here' 
-                value={comment} 
-                onChange={ (e)=>{setComment(e.target.value)}} 
-                maxLength={10000}
-                data-cy=''/>
-        <Button onClick={()=>post()} 
-                isDisabled={!isFormValid() || isSubmitting } 
-                isLoading={isSubmitting} 
-                variant='smallFormSubmitButton'
-                data-cy='s-submit'>
-          Submit
-        </Button>
-      </HStack>
-    </form> :
-    <form>
-      <HStack>
-        <Input placeholder='Log in to comment' />
-        <Button isDisabled={true} 
-                variant='smallFormSubmitButton'>
-          Submit
-        </Button>
-      </HStack>
-    </form>
+    <div className='comment-form-container'>
+      <form>
+        <h1>Reply to this post</h1>
+        {currentUser ?
+      
+        <Stack>
+          <Textarea placeholder='Post a comment here' 
+                  value={comment} 
+                  onChange={ (e)=>{setComment(e.target.value)}} 
+                  maxLength={10000}
+                  id='comment-textarea'
+                  data-cy=''/>
+          <Button onClick={()=>post()} 
+                  isDisabled={!isFormValid() || isSubmitting } 
+                  isLoading={isSubmitting} 
+                  variant='smallFormSubmitButton'
+                  data-cy='s-submit'>
+            Submit
+          </Button>
+        </Stack>
+      :
+      
+        <Stack>
+          <Input placeholder='Log in to comment' />
+          <Button isDisabled={true} 
+                  variant='smallFormSubmitButton'>
+            Submit
+          </Button>
+        </Stack>}
+      </form>
+    </div>
 
 
     

@@ -38,6 +38,25 @@ const styles: Styles = {
 
     'aside': {
       bg: mode('gray.100', 'gray.900')(props),
+    },
+
+    '#posting-textarea': {
+      _focusVisible: {
+        '&&': {     
+          borderColor: mode('#F56565', 'blue.300')(props),
+          boxShadow: mode('0 0 0 1px #F56565', '0 0 0 1px blue.300')(props),
+        }
+      }
+    },
+
+    '#comment-textarea': {
+      minHeight: '10',
+      _focusVisible: {
+        '&&': {     
+          borderColor: mode('#F56565', 'blue.300')(props),
+          boxShadow: mode('0 0 0 1px #F56565', '0 0 0 1px blue.300')(props),
+        }
+      }
     }
   }) 
 }
