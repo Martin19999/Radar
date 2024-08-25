@@ -14,6 +14,7 @@ export const search = async (req: Request, res: Response) => {
         const searchResult = await query(searchQuery, [inputQuery]);
         res.json(searchResult.rows);
         break;
+        
       case 'posts-all': 
         const searchQuery21 = ` SELECT p.uid, p.title, p.content, u.display_name, u.photo_url, p.created_at, p.post_id
                             FROM posts AS p JOIN users AS u
@@ -32,23 +33,35 @@ export const search = async (req: Request, res: Response) => {
         const searchResult22 = await query(searchQuery22, [inputQuery]);
         res.json(searchResult22.rows);
         break;
-      case 'posts-by-keyword':
+      case 'posts-by-id':
         const searchQuery23 = ` SELECT p.uid, p.title, p.content, u.display_name, u.photo_url, p.created_at, p.post_id
                             FROM posts AS p JOIN users AS u
                             ON p.uid = u.uid
-                            WHERE p.is_available = true AND p.uid = $1
-                            ORDER BY p.created_at DESC;`;
+                            WHERE p.is_available = true AND p.post_id = $1`;      
         const searchResult23 = await query(searchQuery23, [inputQuery]);
         res.json(searchResult23.rows);
         break;
-      case 'posts-by-id':
-        const searchQuery24 = ` SELECT p.uid, p.title, p.content, u.display_name, u.photo_url, p.created_at, p.post_id
-                            FROM posts AS p JOIN users AS u
-                            ON p.uid = u.uid
-                            WHERE p.is_available = true AND p.post_id = $1`;      
+      case 'posts-by-keyword':
+        const searchQuery24 = `
+                              SELECT p.post_id, p.title, p.content, u.display_name, u.uid, u.photo_url,     
+                                  ts_rank_cd(
+                                      setweight(to_tsvector('english', p.title), 'A') || 
+                                      setweight(to_tsvector('english', p.content->>'content'), 'C'),
+                                      to_tsquery($1)
+                                  ) AS rank
+                                FROM posts p JOIN users u 
+                                ON p.uid = u.uid 
+                                WHERE 
+                                    to_tsvector('english', p.title) @@ to_tsquery($1) 
+                                    OR
+                                    to_tsvector('english', p.content->>'content') @@ to_tsquery($1)
+                                ORDER BY 
+                                    rank DESC
+                              `;
         const searchResult24 = await query(searchQuery24, [inputQuery]);
         res.json(searchResult24.rows);
         break;
+      
       case 'comments-by-post':
         const searchQuery31 = ` SELECT u.display_name, u.photo_url, u.uid, c.content, c.created_at
                             FROM comments AS c JOIN users AS u
@@ -66,4 +79,3 @@ export const search = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: 'Server error', error });
   }
 }
-

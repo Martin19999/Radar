@@ -29,7 +29,7 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
       setSearchResult(await search<PostsPreviewType>({searchType: 'posts'+'-'+searchCondition, inputQuery: searchQuery}));
     }
     fetchData();
-  },[]);
+  },[searchQuery]);
   
   return (
     (searchResult === null || searchResult === undefined) ? (
@@ -47,7 +47,7 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
                   (<HStack>
                   <img src={post.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${post.uid}/posts`)}/>
                   <p onClick={() => navigate(`/userdetail/${post.uid}/posts`)}>{post.display_name}</p>
-                  <p>&#x2022; {timeCalculator(post.created_at.toString())}</p>
+                  {/* <p>&#x2022; {timeCalculator(post.created_at.toString())}</p> */}
                   </HStack>)
                 :  null}
                 
@@ -55,7 +55,8 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
                   <HStack>
                     <strong><h1 className="post-preview-title">{post.title}</h1></strong>
                     {searchCondition === 'by-user' ?
-                    <p>&#x2022; {timeCalculator(post.created_at.toString())}</p> : null}
+                    <p>&#x2022; {timeCalculator(post.created_at.toString())}</p> 
+                    : null}
                   </HStack>
                   
                   

@@ -76,7 +76,7 @@ const PostingPage = () => {
                     data-cy=''/>
           </FormControl>
           <Button onClick={()=>post()} 
-                  isDisabled={!isFormValid() || isSubmitting } 
+                  isDisabled={!isFormValid() || isSubmitting || !currentUser } 
                   isLoading={isSubmitting} 
                   variant='smallFormSubmitButton'
                   data-cy='s-submit'>

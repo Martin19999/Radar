@@ -35,7 +35,8 @@ const Search = () => {
     e.preventDefault();
 
     if (isFormValid(input)) {
-      navigate('/result/users', {state:{input: input}})
+      const encodedInput = encodeURIComponent(input);
+      navigate(`/result/users?query=${encodedInput}`);
     }
   };
 
