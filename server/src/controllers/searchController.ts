@@ -52,14 +52,23 @@ export const search = async (req: Request, res: Response) => {
                                 FROM posts p JOIN users u 
                                 ON p.uid = u.uid 
                                 WHERE 
-                                    to_tsvector('english', p.title) @@ to_tsquery($1) 
+                                    p.is_available = true AND
+                                    (to_tsvector('english', p.title) @@ to_tsquery($1) 
                                     OR
-                                    to_tsvector('english', p.content->>'content') @@ to_tsquery($1)
+                                    to_tsvector('english', p.content->>'content') @@ to_tsquery($1))
                                 ORDER BY 
                                     rank DESC
                               `;
         const searchResult24 = await query(searchQuery24, [inputQuery]);
         res.json(searchResult24.rows);
+        break;
+      case 'posts-quantity-by-user':
+        const searchQuery25 = ` SELECT COUNT(posts.post_id)
+                            FROM posts
+                            WHERE posts.is_available = true AND posts.uid = $1
+                            `;
+        const searchResult25 = await query(searchQuery25, [inputQuery]);
+        res.json(searchResult25.rows);
         break;
       
       case 'comments-by-post':
@@ -76,7 +85,7 @@ export const search = async (req: Request, res: Response) => {
                               SELECT c.comment_id, c.content, c.created_at, c.post_id, u.display_name, u.uid, u.photo_url     
                               FROM comments c JOIN users u 
                               ON c.uid = u.uid 
-                              WHERE to_tsvector('english', c.content->>'content') @@ to_tsquery($1)
+                              WHERE c.is_available = true AND to_tsvector('english', c.content->>'content') @@ to_tsquery($1)
                               `;
         const searchResult32 = await query(searchQuery32, [inputQuery]);
         res.json(searchResult32.rows);

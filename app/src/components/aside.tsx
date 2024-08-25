@@ -7,16 +7,28 @@
  */
 
 import { useAuth } from '../context/authContext';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import "../styles/common.css";
 import "../styles/aside.css";
+import { getNumofPosts } from '../utils/getNumofPosts';
 
 
 const Aside: React.FC = (e) => {
 	
 	const navigate = useNavigate();
 	const { currentUser, userDetails } = useAuth();
+	const [numofPosts, setNumofPosts] = useState(0);
+
+	useEffect(() => {
+		if(currentUser){
+			const fetchData = async () => {
+				setNumofPosts(await getNumofPosts(currentUser.uid));
+			}
+			fetchData();
+		}
+		
+	},[]);
 
 	return(
 		<aside className="userinfo">
@@ -27,10 +39,11 @@ const Aside: React.FC = (e) => {
 						<div className="siderbar-info-no-pic">
 							<h2><strong>{userDetails.displayName}</strong></h2>
 							<p><strong>Joined: </strong>{userDetails.creationTime}</p>
-							<p><strong>Posts: </strong> </p>
-							<p><strong>Follow: </strong> </p>
+							<p><strong>Posts: </strong>{numofPosts} </p>
+							
+							<p><strong>Following: </strong> 0</p>
 							{/* <p> recent follow</p> */}
-							<p><strong>Followers: </strong> </p>
+							<p><strong>Followers: </strong> 0</p>
 							{/* <p>recent followers</p> */}
 						</div>
 					</>	:
