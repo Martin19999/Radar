@@ -7,32 +7,29 @@
 import React, { useEffect, useState } from "react";
 import { CommentsPreview } from "../types";
 import { search } from "../utils/searchAction";
-import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import { timeCalculator } from "../utils/timeCalulator";
-import { Card, CardHeader, CardBody, CardFooter, HStack, Stack } from '@chakra-ui/react';
-import Page from "../components/page";
+import { Card, CardBody, HStack, Stack } from '@chakra-ui/react';
 
 import "../styles/postDetail.css";
 import "../styles/common.css";
 
 interface searchConditionType{
+  searchType: string;
   searchQuery: string;
 }
 
-const CommentsView: React.FC<searchConditionType> = ({searchQuery}) => {
+const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery}) => {
   const [searchResult, setSearchResult] = useState<CommentsPreview[] | string | null >(null);
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-
 
   useEffect(() => {
     const fetchData = async () => {
-      setSearchResult(await search<CommentsPreview>({searchType: 'comments-by-post', inputQuery: searchQuery}));
+      setSearchResult(await search<CommentsPreview>({searchType: 'comments-'+searchType, inputQuery: searchQuery}));
     }
     fetchData();
-  },[]);
+  },[searchQuery]);
 
   return (
     searchResult === null || searchResult === undefined 
@@ -51,7 +48,12 @@ const CommentsView: React.FC<searchConditionType> = ({searchQuery}) => {
                     <p onClick={() => navigate(`/userdetail/${comment.uid}/posts`)}>{comment.display_name}</p>
                     <p>&#x2022; {timeCalculator(comment.created_at.toString())}</p>
                   </HStack>
-                    <p className="comment-view">{comment.content.content}</p>                              
+                    {searchType === "by-post" ?
+                    <p className="comment-view">{comment.content.content}</p> :
+                    <p className="comment-preview"
+                       onClick={() => navigate(`/post/${comment.post_id}`)}>
+                        {comment.content.content}
+                    </p>}
                 </CardBody>
               </Stack>   
               

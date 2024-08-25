@@ -7,11 +7,10 @@
 import React, { useEffect, useState } from "react";
 import { PostsPreview as PostsPreviewType } from "../types";
 import { search } from "../utils/searchAction";
-import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import { timeCalculator } from "../utils/timeCalulator";
-import { Card, CardHeader, CardBody, CardFooter, HStack } from '@chakra-ui/react';
-import Page from "../components/page";
+import { Card, CardBody, HStack } from '@chakra-ui/react';
 
 import "../styles/common.css";
 
@@ -21,10 +20,7 @@ interface searchConditionType{
 
 const PostFullView: React.FC<searchConditionType> = ({searchQuery}) => {
   const [searchResult, setSearchResult] = useState<PostsPreviewType[] | string | null >(null);
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
-
 
   useEffect(() => {
     const fetchData = async () => {

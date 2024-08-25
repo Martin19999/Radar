@@ -7,7 +7,6 @@
 
 import { useAuth } from '../context/authContext';
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
 import { HStack, Input, Button, Textarea } from '@chakra-ui/react';
 import { useEasyToast } from './toast';
 import DOMPurify from 'dompurify';

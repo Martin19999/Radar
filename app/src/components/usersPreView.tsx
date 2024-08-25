@@ -7,10 +7,9 @@
 import React, { useEffect, useState } from "react";
 import { UserInfo } from "../types";
 import { search } from "../utils/searchAction";
-import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
-import { timeCalculator } from "../utils/timeCalulator";
-import { Card, CardHeader, CardBody, CardFooter, Stack } from '@chakra-ui/react';
+import { Card, CardBody, Stack } from '@chakra-ui/react';
 import { formatDate } from "../utils/formatDate";
 
 import "../styles/common.css";
@@ -21,7 +20,6 @@ interface searchConditionType{
 
 const UsersPreview: React.FC<searchConditionType> = ({searchQuery}) => {
   const [searchResult, setSearchResult] = useState<UserInfo[] | string | null >(null);
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {

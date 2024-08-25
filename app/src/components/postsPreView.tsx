@@ -7,10 +7,10 @@
 import React, { useEffect, useState } from "react";
 import { PostsPreview as PostsPreviewType } from "../types";
 import { search } from "../utils/searchAction";
-import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import { timeCalculator } from "../utils/timeCalulator";
-import { Card, CardHeader, CardBody, CardFooter, HStack } from '@chakra-ui/react';
+import { Card, CardBody, HStack } from '@chakra-ui/react';
 
 import "../styles/common.css";
 
@@ -21,7 +21,6 @@ interface searchConditionType{
 
 const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQuery}) => {
   const [searchResult, setSearchResult] = useState<PostsPreviewType[] | string | null >(null);
-  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,7 +46,7 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
                   (<HStack>
                   <img src={post.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${post.uid}/posts`)}/>
                   <p onClick={() => navigate(`/userdetail/${post.uid}/posts`)}>{post.display_name}</p>
-                  {/* <p>&#x2022; {timeCalculator(post.created_at.toString())}</p> */}
+                  <p>&#x2022; {timeCalculator(post.created_at.toString())}</p>
                   </HStack>)
                 :  null}
                 

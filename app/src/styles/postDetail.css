@@ -1,3 +1,14 @@
 .comment-view {
   margin-top: 10px;
 }
+
+.comment-preview{
+  margin-top: 10px;
+  max-height: 7.5rem;  /* Set maximum height for the content */
+  overflow: hidden;    /* Hide overflowed content */
+  text-overflow: ellipsis;  /* Add '...' when content overflows */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;  /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  white-space: normal;    /* Allow wrapping of text */
+}

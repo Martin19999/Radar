@@ -7,9 +7,8 @@
 
 import Page from "../components/page";
 import SettingsContent from "../components/Settings/SettingsContent";
-import React from 'react';
-import { useNavigate, useLocation, Link as RouterLink } from 'react-router-dom';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, CloseButton, Link } from '@chakra-ui/react'
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import "../styles/common.css";
 import "../styles/settings.css";

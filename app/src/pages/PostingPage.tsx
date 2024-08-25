@@ -13,7 +13,6 @@ import { useEasyToast } from "../components/toast";
 import { makePosts } from "../utils/makePosts";
 import DOMPurify from 'dompurify';
 
-
 import "../styles/common.css";
 import "../styles/posting.css";
 
@@ -24,7 +23,6 @@ const PostingPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { showSuccess, showErrorNonFirebase } = useEasyToast();
   const { currentUser } = useAuth();
-
 
   const isFormValid = () => {
     if ((title?.replace(/^\s+|\s+$/g, "") ?? "").length > 0 && (content?.replace(/^\s+|\s+$/g, "") ?? "").length > 0) {
@@ -38,8 +36,6 @@ const PostingPage = () => {
 
   function post () {
     setIsSubmitting(true);
-    // console.log(DOMPurify.sanitize(newName.replace(/\s/g, "")))
-    // const sanitizedDisplayName = DOMPurify.sanitize(newName.replace(/\s/g, "")).replaceAll('&lt;', '<').replaceAll('&gt;', '>');
 
     try {
       makePosts({
@@ -52,8 +48,7 @@ const PostingPage = () => {
     } finally {
       setIsSubmitting(false);
       showSuccess('Post submitted!');
-    }
-    
+    }   
   }
 
   return(

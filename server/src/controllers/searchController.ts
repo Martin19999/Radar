@@ -43,7 +43,7 @@ export const search = async (req: Request, res: Response) => {
         break;
       case 'posts-by-keyword':
         const searchQuery24 = `
-                              SELECT p.post_id, p.title, p.content, u.display_name, u.uid, u.photo_url,     
+                              SELECT p.post_id, p.title, p.content, p.created_at, u.display_name, u.uid, u.photo_url,     
                                   ts_rank_cd(
                                       setweight(to_tsvector('english', p.title), 'A') || 
                                       setweight(to_tsvector('english', p.content->>'content'), 'C'),
@@ -71,6 +71,16 @@ export const search = async (req: Request, res: Response) => {
         const searchResult31 = await query(searchQuery31, [inputQuery]);
         res.json(searchResult31.rows);
         break;
+      case 'comments-by-keyword':
+        const searchQuery32 = `
+                              SELECT c.comment_id, c.content, c.created_at, c.post_id, u.display_name, u.uid, u.photo_url     
+                              FROM comments c JOIN users u 
+                              ON c.uid = u.uid 
+                              WHERE to_tsvector('english', c.content->>'content') @@ to_tsquery($1)
+                              `;
+        const searchResult32 = await query(searchQuery32, [inputQuery]);
+        res.json(searchResult32.rows);
+        break;
       default:
         return res.status(400).send('Invalid search type');
     }
@@ -79,3 +89,7 @@ export const search = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, message: 'Server error', error });
   }
 }
+
+
+
+                              
