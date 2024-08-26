@@ -1,13 +1,16 @@
-// src/utils/getUserInfo.ts
-import { UserInfo } from '../types';  // Assuming you define your types somewhere
+// src/utils/getRelations.ts
+// import { UserInfo } from '../types';  // Assuming you define your types somewhere
 
 /**
- * display basic user info
+ * display the relation between users - all followers/ followings, number of followers/ followings, 
+ *                                      if following / being followed
  * @param req - uid
  */
-export async function getUserInfo(userId: string): Promise<UserInfo[]> {
-  const url = new URL('http://localhost:3001/api/userinfo');
-  url.searchParams.append('uid', userId);
+export async function getRelations<T>(uid: string, other_uid: string, request_type: string): Promise<T> {
+  const url = new URL('http://localhost:3001/api/show-relation');
+  url.searchParams.append('uid', uid);
+  url.searchParams.append('other_uid', other_uid);
+  url.searchParams.append('request_type', request_type);
 
   try {
     const response = await fetch(url.toString(), {

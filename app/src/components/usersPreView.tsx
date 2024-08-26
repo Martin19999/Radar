@@ -11,27 +11,44 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import { Card, CardBody, Stack } from '@chakra-ui/react';
 import { formatDate } from "../utils/formatDate";
+import { getRelations } from "../utils/getRelations";
 
 import "../styles/common.css";
 
 interface searchConditionType{
+  searchType: string;
   searchQuery: string;
+  triggerFetch: number
 }
 
-const UsersPreview: React.FC<searchConditionType> = ({searchQuery}) => {
+const UsersPreview: React.FC<searchConditionType> = ({searchType, searchQuery, triggerFetch}) => {
   const [searchResult, setSearchResult] = useState<UserInfo[] | string | null >(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
-      setSearchResult(await search<UserInfo>({searchType: 'users', inputQuery: searchQuery}));
+      if(searchType === 'users') setSearchResult(await search<UserInfo>({searchType: 'users', inputQuery: searchQuery}));
     }
     fetchData();
   },[searchQuery]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (searchType === 'find-followers') {
+        const result = await getRelations<UserInfo[]>(searchQuery, '', searchType);
+        setSearchResult(result); 
+      } else if (searchType === 'find-following') {
+        const result = await getRelations<UserInfo[]>(searchQuery, '', searchType);
+        setSearchResult(result);  // Update the state
+      }
+    }
+    fetchData();
+    
+  },[triggerFetch]);
   
   return (
     searchResult === null || searchResult === undefined ? 
-      <p>No results found or still loading...</p>
+      <p>Uh oh! It's Empty :)</p>
      : typeof searchResult === 'string' ? 
       <p>Error: {searchResult}</p>  // Render error message
      : 

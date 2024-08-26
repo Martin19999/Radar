@@ -1,5 +1,5 @@
 // src/utils/syncUserData.ts
-import { FirebaseUser } from '../types';  // Assuming you define your types somewhere
+import { FirebaseUser } from '../types';  
 
 /**
  * Syncs user data with the backend server.

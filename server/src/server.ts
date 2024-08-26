@@ -7,6 +7,8 @@ import searchRoutes from './routes/searchRoutes';
 import showUserInfoRoutes from './routes/showUserInfoRoutes';
 import makePostsRoutes from './routes/makePostsRoutes';
 import makeCommentsRoutes from './routes/makeCommentsRoutes';
+import updateRelationRoutes from './routes/updateRelationRoutes';
+import showRelationRoutes from './routes/showRelationRoutes';
 
 const app = express();
 app.use(express.json());
@@ -23,6 +25,9 @@ app.use('/api', searchRoutes);
 app.use('/api', showUserInfoRoutes);
 app.use('/api', makePostsRoutes);
 app.use('/api', makeCommentsRoutes);
+app.use('/api', updateRelationRoutes);
+app.use('/api', showRelationRoutes);
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

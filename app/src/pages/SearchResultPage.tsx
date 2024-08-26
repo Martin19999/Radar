@@ -46,7 +46,7 @@ const SearchResultPage: React.FC = () => {
 
 						<TabPanels>
 							<TabPanel>
-								<UsersPreview searchQuery={query ? query : ''}/>
+								<UsersPreview searchType="users" searchQuery={query ? query : ''} triggerFetch={0}/>
 							</TabPanel>
 							<TabPanel>
 								<PostsPreview searchCondition = "by-keyword" searchQuery={query ? query : ''}/>

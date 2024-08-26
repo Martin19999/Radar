@@ -12,11 +12,15 @@ import { getUserInfo } from "../utils/getUserInfo";
 import { formatDate } from "../utils/formatDate";
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, CloseButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, Button, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery } from '@chakra-ui/react'
+import PostsPreview from "../components/postsPreView";
+import UsersPreview from "../components/usersPreView";
+import { getRelations } from "../utils/getRelations";
+import { changeRelation } from "../utils/changeRelation";
+import { useEasyToast } from "../components/toast";
 
 import "../styles/common.css";
 import "../styles/userinfo.css";
-import PostsPreview from "../components/postsPreView";
 
 const UserPage = () => {
 	const { currentUser, userDetails } = useAuth();
@@ -28,15 +32,22 @@ const UserPage = () => {
   const location = useLocation();
   const tabNames = ['posts', 'following', 'followers'];
   const tabIndex = tabNames.indexOf(location.pathname.split("/").pop()!) || 0;
+
+	const [triggerFetch, setTriggerFetch] = useState(0);
+
   const handleTabsChange = (index: number) => {
+		setTriggerFetch(prev => prev + 1);
     navigate(`/${location.pathname.split("/").slice(1, 3).join('/')}/${tabNames[index]}`);
-		console.log(uid, currentUser?.uid, userDetails.displayName)
+		// console.log(uid, currentUser?.uid, userDetails.displayName)
   }; 
 
   const [pfpMagnified, setPfpMagnified] = useState(false);
   const [isWideEnough] = useMediaQuery("(min-width: 1040px)");
 
 	const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+	const [isFollowing, setIsFollowing] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const {showSuccess, showErrorNonFirebase} = useEasyToast();
 	
 	useEffect( () => {
 		// Check if userData is already passed through location.state
@@ -54,6 +65,39 @@ const UserPage = () => {
 			}
 		}
 	}, [location.pathname, location.state]);
+
+	useEffect( () => {
+		const fetchData = async () => {
+			setIsFollowing((await getRelations<{boolean5: boolean}>(currentUser!.uid, uid ?? '', 'find-if-following')).boolean5);
+		}
+		if(currentUser) fetchData();
+	},[location])
+
+	async function follow() {
+		try {
+			setIsSubmitting(true);
+			await changeRelation(currentUser!.uid, uid ?? '', 'follow');
+			setIsFollowing((await getRelations<{boolean5: boolean}>(currentUser!.uid, uid ?? '', 'find-if-following')).boolean5);
+		} catch (error) {
+      showErrorNonFirebase((error as Error).message);
+    } finally {
+      showSuccess('Followed!');
+			setIsSubmitting(false);
+    }   
+	}
+
+	async function unfollow() {
+		try {
+			setIsSubmitting(true);
+			await changeRelation(currentUser!.uid, uid ?? '', 'unfollow');
+			setIsFollowing((await getRelations<{boolean5: boolean}>(currentUser!.uid, uid ?? '', 'find-if-following')).boolean5);
+		} catch (error) {
+      showErrorNonFirebase((error as Error).message);
+    } finally {
+      showSuccess('Unfollowed!');
+			setIsSubmitting(false);
+    }   
+	}
 
 	if (!userInfo) {
 		return <div>Loading...</div>;
@@ -78,7 +122,18 @@ const UserPage = () => {
 								<p>{userInfo.display_name}</p>
 							</Tooltip>
 							<p><strong>Member since: {formatDate(userInfo.created_at.toString())}</strong> </p>
-							<button className={ uid===currentUser?.uid ? 'do-not-display' : '' }>Follow</button>
+							{isFollowing ? 
+								<Button className={ uid===currentUser?.uid ? 'do-not-display' : '' }
+												onClick={()=> unfollow()}
+												isDisabled={isSubmitting}
+												isLoading={isSubmitting}>Following</Button>
+							:
+								<Button className={ uid===currentUser?.uid ? 'do-not-display' : '' }
+												onClick={()=> follow()}
+												isDisabled={isSubmitting}
+												isLoading={isSubmitting}>Follow</Button>
+							}
+							
 						</div>
 					</div>
 					<div className='more-userinfo-container'>
@@ -97,12 +152,14 @@ const UserPage = () => {
 								</TabPanel>
 								<TabPanel>
 									<>
-										<p>display user pfps in grid, same as followers</p>
+										<UsersPreview triggerFetch={triggerFetch}
+										searchType="find-following" searchQuery={ uid ?? '' } />
 									</>
 								</TabPanel>
 								<TabPanel>
 									<>
-										<p>display user pfps in grid, same as following</p>
+										<UsersPreview triggerFetch={triggerFetch}
+										searchType="find-followers" searchQuery={ uid ?? '' } />
 									</>
 								</TabPanel>
 							</TabPanels>
@@ -117,3 +174,5 @@ const UserPage = () => {
 }
 
 export default UserPage;
+
+

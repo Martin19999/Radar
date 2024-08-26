@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/common.css";
 import "../styles/aside.css";
 import { getNumofPosts } from '../utils/getNumofPosts';
+import { getRelations } from '../utils/getRelations';
 
 
 const Aside: React.FC = (e) => {
@@ -19,11 +20,15 @@ const Aside: React.FC = (e) => {
 	const navigate = useNavigate();
 	const { currentUser, userDetails } = useAuth();
 	const [numofPosts, setNumofPosts] = useState(0);
+	const [numofFollowings, setNumofFollowings] = useState(0);
+	const [numofFollowers, setNumofFollowers] = useState(0);
 
 	useEffect(() => {
 		if(currentUser){
 			const fetchData = async () => {
 				setNumofPosts(await getNumofPosts(currentUser.uid));
+				setNumofFollowings((await getRelations<{count3: number}>(currentUser.uid, '', 'find-num-following')).count3);
+				setNumofFollowers((await getRelations<{count4: number}>(currentUser.uid, '', 'find-num-followers')).count4);
 			}
 			fetchData();
 		}
@@ -41,9 +46,9 @@ const Aside: React.FC = (e) => {
 							<p><strong>Joined: </strong>{userDetails.creationTime}</p>
 							<p><strong>Posts: </strong>{numofPosts} </p>
 							
-							<p><strong>Following: </strong> 0</p>
+							<p><strong>Following: </strong> {numofFollowings}</p>
 							{/* <p> recent follow</p> */}
-							<p><strong>Followers: </strong> 0</p>
+							<p><strong>Followers: </strong> {numofFollowers}</p>
 							{/* <p>recent followers</p> */}
 						</div>
 					</>	:

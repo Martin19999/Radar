@@ -1,3 +1,6 @@
+// the search of user, posts, comments
+// 
+
 import { Request, Response } from 'express';
 import { query } from '../utils/db';
 

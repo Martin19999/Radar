@@ -113,7 +113,7 @@ const SettingsContent: React.FC<SettingsContentProps> = ({settingType}) => {
     default:
       return (
         <div className='other-setting-options-container'>
-          <div className='setting-card'>Others?</div>
+          <div className='setting-card'>:)</div>
         </div>
       )
   } 

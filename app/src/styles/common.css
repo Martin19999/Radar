@@ -171,6 +171,10 @@ body {
 	display: none;
 }
 
+.chakra-button.do-not-display {
+  display: none !important;
+}
+
 h1 {
 	font-size: x-large;
 }
