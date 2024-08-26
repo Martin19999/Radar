@@ -12,6 +12,7 @@ import { useAuth } from "../context/authContext";
 import { useEasyToast } from "../components/toast";
 import { makePosts } from "../utils/makePosts";
 import DOMPurify from 'dompurify';
+import { useNavigate } from "react-router-dom";
 
 import "../styles/common.css";
 import "../styles/posting.css";
@@ -23,6 +24,7 @@ const PostingPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { showSuccess, showErrorNonFirebase } = useEasyToast();
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const isFormValid = () => {
     if ((title?.replace(/^\s+|\s+$/g, "") ?? "").length > 0 && (content?.replace(/^\s+|\s+$/g, "") ?? "").length > 0) {
@@ -34,11 +36,13 @@ const PostingPage = () => {
     return false;
   };
 
-  function post () {
+  async function post () {
     setIsSubmitting(true);
 
+    let post_id: string | null = '';
+
     try {
-      makePosts({
+      post_id = await makePosts({
         title: title,
         content: content,
       }, 
@@ -46,6 +50,7 @@ const PostingPage = () => {
     } catch (error) {
       showErrorNonFirebase((error as Error).message);
     } finally {
+      navigate(`/post/${post_id}`);
       setIsSubmitting(false);
       showSuccess('Post submitted!');
     }   

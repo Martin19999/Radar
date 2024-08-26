@@ -52,7 +52,7 @@ const SearchResultPage: React.FC = () => {
 								<PostsPreview searchCondition = "by-keyword" searchQuery={query ? query : ''}/>
 							</TabPanel>
 							<TabPanel>
-                <CommentsView searchType="by-keyword" searchQuery={query ? query : ''}/>
+                <CommentsView searchType="by-keyword" searchQuery={query ? query : ''} refresh={true}/>
 							</TabPanel>
 						</TabPanels>
 					</Tabs>

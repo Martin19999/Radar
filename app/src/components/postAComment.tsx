@@ -11,6 +11,7 @@ import { HStack, Input, Button, Textarea, Stack } from '@chakra-ui/react';
 import { useEasyToast } from './toast';
 import DOMPurify from 'dompurify';
 import { makeComments } from '../utils/makeComments';
+import { useNavigate } from 'react-router-dom';
 
 
 import "../styles/common.css";
@@ -18,13 +19,16 @@ import "../styles/aside.css";
 
 interface PostACommentProps {
   post_id: string;
+  onCommentAdded: () => void;
 }
 
-const PostAComment: React.FC<PostACommentProps> = ({post_id}) => {
+const PostAComment: React.FC<PostACommentProps> = ({post_id, onCommentAdded}) => {
   const [comment, setComment] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { showSuccess, showErrorNonFirebase } = useEasyToast();
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
 
   const isFormValid = () => {
     if ((comment?.replace(/^\s+|\s+$/g, "") ?? "").length > 0 ) {
@@ -37,12 +41,13 @@ const PostAComment: React.FC<PostACommentProps> = ({post_id}) => {
 
   function post () {
     setIsSubmitting(true);
-
+    onCommentAdded();
     try {
       makeComments(comment, currentUser!.uid, post_id);
     } catch (error) {
       showErrorNonFirebase((error as Error).message);
     } finally {
+      setComment('');
       setIsSubmitting(false);
       showSuccess('Comment submitted!');
     }

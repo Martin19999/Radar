@@ -18,9 +18,10 @@ import "../styles/common.css";
 interface searchConditionType{
   searchType: string;
   searchQuery: string;
+  refresh: boolean;
 }
 
-const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery}) => {
+const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery, refresh}) => {
   const [searchResult, setSearchResult] = useState<CommentsPreview[] | string | null >(null);
   const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery}) 
       setSearchResult(await search<CommentsPreview>({searchType: 'comments-'+searchType, inputQuery: searchQuery}));
     }
     fetchData();
-  },[searchQuery]);
+  },[searchQuery, refresh]);
 
   return (
     searchResult === null || searchResult === undefined 

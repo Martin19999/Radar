@@ -125,12 +125,12 @@ const UserPage = () => {
 							{isFollowing ? 
 								<Button className={ uid===currentUser?.uid ? 'do-not-display' : '' }
 												onClick={()=> unfollow()}
-												isDisabled={isSubmitting}
+												isDisabled={isSubmitting || !currentUser }
 												isLoading={isSubmitting}>Following</Button>
 							:
 								<Button className={ uid===currentUser?.uid ? 'do-not-display' : '' }
 												onClick={()=> follow()}
-												isDisabled={isSubmitting}
+												isDisabled={isSubmitting || !currentUser }
 												isLoading={isSubmitting}>Follow</Button>
 							}
 							

@@ -7,11 +7,16 @@ export const makePosts = async (req: Request, res: Response) => {
   try {
     // assume user exists
 
-    const insertQuery = 'INSERT INTO posts (uid, title, content) VALUES ($1, $2, $3)';
-    await query(insertQuery, [uid, title, content]);
-    console.log('New post is made.');
-    
-    res.json({ message: 'Post made successfully' });
+    const insertQuery = 'INSERT INTO posts (uid, title, content) VALUES ($1, $2, $3) RETURNING post_id;';
+    const result = await query(insertQuery, [uid, title, content]);
+    if (result.rows.length > 0) {
+      const newPostId = result.rows[0].post_id;
+      console.log('New post is made with post_id:', newPostId);
+      
+      res.json({ message: 'Post made successfully', post_id: newPostId });
+    } else {
+      res.status(500).json({ error: 'Failed to create post' });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error occurred while making a post.' });
