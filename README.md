@@ -1,5 +1,10 @@
 # Radar
 
+## Screensh
+<img width="1199" alt="Screenshot 2024-08-27 at 16 26 37" src="https://github.com/user-attachments/assets/722edc0f-3b15-455f-b93e-ae4eafb52896">
+<img width="1152" alt="Screenshot 2024-08-27 at 16 28 08" src="https://github.com/user-attachments/assets/de43c9fb-39d7-4416-a888-620a04f660b0">
+
+
 
 
 ## Getting Started (running on localhost)
