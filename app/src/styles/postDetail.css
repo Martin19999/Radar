@@ -1,5 +1,5 @@
-.comment-view {
-  margin-top: 10px;
+.comment-post-fullview {
+  margin-top: 20px;
 }
 
 .comment-preview{
@@ -12,6 +12,17 @@
   -webkit-box-orient: vertical;
   white-space: normal;    /* Allow wrapping of text */
 }
+
+.comment-posts-card-stack{
+  width: 100%;
+}
+
+.comments-posts-footer{
+  margin-top: 7px;
+  text-align: right;
+  font-size: smaller;
+}
+
 
 .comment-form-container {
   width: 100%;
@@ -32,7 +43,7 @@
 }
 
 .comment-form-container form button {
-  max-width: 15%;
+  /* max-width: 15%; */
   min-width: 20px;
   align-self: flex-end;
 }

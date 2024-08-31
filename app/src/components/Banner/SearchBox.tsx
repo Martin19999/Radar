@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { useNavigate, Link as RouterLink, useLocation } from "react-router-dom";
 import DOMPurify from 'dompurify';
 import { useEasyToast } from "../toast";
 
@@ -18,6 +18,7 @@ import "../../styles/common.css";
 const Search = () => {
   const [input, setInput] = useState<string>("");
   const navigate = useNavigate();
+  const location = useLocation();
   const { showErrorNonFirebase } = useEasyToast();
 
   const isFormValid = (userInput: string) => {
@@ -44,6 +45,15 @@ const Search = () => {
     // persistence in the search box
     setInput(localStorage.getItem("input")?? "");
   }, []);
+
+  useEffect(() => {
+    // Clear the input when navigating away from the search page
+    if (location.pathname.split('/')[1] !== "result") {
+      localStorage.removeItem("input");
+      setInput('');
+    
+  };
+  }, [location.pathname]);
 
   const [logoIsHidden] = useMediaQuery("(max-width: 540px)");
 

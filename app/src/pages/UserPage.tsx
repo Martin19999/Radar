@@ -12,12 +12,14 @@ import { getUserInfo } from "../utils/getUserInfo";
 import { formatDate } from "../utils/formatDate";
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, Link, Button, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery } from '@chakra-ui/react'
+import { Tabs, TabList, TabPanels, Tab, TabPanel, IconButton, Button, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery, HStack } from '@chakra-ui/react'
 import PostsPreview from "../components/postsPreView";
 import UsersPreview from "../components/usersPreView";
 import { getRelations } from "../utils/getRelations";
 import { changeRelation } from "../utils/changeRelation";
 import { useEasyToast } from "../components/toast";
+import { SlUserFollow, SlUserFollowing } from "react-icons/sl";
+
 
 import "../styles/common.css";
 import "../styles/userinfo.css";
@@ -119,20 +121,27 @@ const UserPage = () => {
 						</Modal>
 						<div className='basic-nonpic-userinfo-container'>   
 							<Tooltip label={userInfo.display_name} aria-label="Full displayName" isDisabled={isWideEnough}>
-								<p>{userInfo.display_name}</p>
+								<h1><strong>{userInfo.display_name}</strong></h1>
 							</Tooltip>
-							<p><strong>Member since: {formatDate(userInfo.created_at.toString())}</strong> </p>
-							{isFollowing ? 
-								<Button className={ uid===currentUser?.uid ? 'do-not-display' : '' }
-												onClick={()=> unfollow()}
-												isDisabled={isSubmitting || !currentUser }
-												isLoading={isSubmitting}>Following</Button>
-							:
-								<Button className={ uid===currentUser?.uid ? 'do-not-display' : '' }
-												onClick={()=> follow()}
-												isDisabled={isSubmitting || !currentUser }
-												isLoading={isSubmitting}>Follow</Button>
-							}
+							<HStack>
+								<p>Member since: {formatDate(userInfo.created_at.toString())} </p>
+									{isFollowing ? 
+										<IconButton className={ uid===currentUser?.uid ? 'do-not-display' : 'follow-button' }
+														onClick={()=> unfollow()}
+														isDisabled={isSubmitting || !currentUser }
+														isLoading={isSubmitting}
+														icon={<SlUserFollowing strokeWidth={30} />} 
+														aria-label="following-icon"></IconButton>
+									:
+										<IconButton className={uid === currentUser?.uid ? 'do-not-display' : 'follow-button'}
+																onClick={() => follow()}
+																isDisabled={isSubmitting || !currentUser}
+																isLoading={isSubmitting}
+																icon={<SlUserFollow strokeWidth={30} />} 
+																aria-label="follow-icon"></IconButton>
+									}
+							</HStack>
+							
 							
 						</div>
 					</div>

@@ -34,7 +34,6 @@ export const makePosts = async (post: Posts, uid: string): Promise<string | null
     }
 
     const data: PostResponse = await response.json(); // Cast response to PostResponse type
-    console.log('Posted!!:', data);
 
     return data.post_id; 
   } catch (error) {

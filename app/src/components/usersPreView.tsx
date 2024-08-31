@@ -12,6 +12,7 @@ import { useAuth } from '../context/authContext';
 import { Card, CardBody, Stack } from '@chakra-ui/react';
 import { formatDate } from "../utils/formatDate";
 import { getRelations } from "../utils/getRelations";
+import EmptyResult from "./emptyResult";
 
 import "../styles/common.css";
 
@@ -48,7 +49,7 @@ const UsersPreview: React.FC<searchConditionType> = ({searchType, searchQuery, t
   
   return (
     searchResult === null || searchResult === undefined ? 
-      <p>Uh oh! It's Empty :)</p>
+      <EmptyResult />
      : typeof searchResult === 'string' ? 
       <p>Error: {searchResult}</p>  // Render error message
      : 

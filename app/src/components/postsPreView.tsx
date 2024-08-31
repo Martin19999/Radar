@@ -54,7 +54,7 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
                   <HStack>
                     <strong><h1 className="post-preview-title">{post.title}</h1></strong>
                     {searchCondition === 'by-user' ?
-                    <p>&#x2022; {timeCalculator(post.created_at.toString())}</p> 
+                    <p className="post-preview-time">&#x2022; {timeCalculator(post.created_at.toString())}</p> 
                     : null}
                   </HStack>
                   

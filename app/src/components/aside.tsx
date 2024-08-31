@@ -53,8 +53,9 @@ const Aside: React.FC = (e) => {
 						</div>
 					</>	:
 					<>
-						<h2><strong>Hi </strong></h2>
-						<p>Log in or sign up to engage with users!</p>
+						<h2><strong>Hi! Join Radar today to share your ideas with millions of users! </strong></h2>
+						
+						
 					</>
 				
 				} 

@@ -3,12 +3,13 @@ import { theme as baseTheme, ComponentStyleConfig, ComponentMultiStyleConfig } f
 
 
 const Card: ComponentMultiStyleConfig = {
-  parts: ['container'],
+  parts: ['container', 'body'],
   variants: {
     outline: (props) => ({ 
       container: {
-        borderWidth: '0 0 1px 0',
-        borderRadius: '0',
+        marginTop: '0px',
+        borderWidth: '0',
+        // borderRadius: '0',
         px: '5',  
         py: '3',
         flexDirection:'row',  
@@ -16,6 +17,20 @@ const Card: ComponentMultiStyleConfig = {
         bg: 'none'
       },   
     }),
+    postView: (props) => ({ 
+     
+      container: {  
+        
+        borderWidth: '0',
+        borderRadius: '0',
+        borderColor: mode('gray.100', 'gray.700')(props),
+        px: '5',  
+        py: '3',
+        flexDirection:'row',  
+        overflow: 'hidden',
+        bg: 'none'
+      }
+    })
   },
 }
 

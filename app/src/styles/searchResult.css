@@ -4,3 +4,7 @@
   align-self: center;
   border-radius: 10px;
 }
+
+.post-preview-time {
+  white-space: nowrap;
+}

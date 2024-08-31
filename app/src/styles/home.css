@@ -22,8 +22,12 @@
 .blog-home {
 	width: 80%;
 	margin-top: 2em;
-	padding: 0 2em;
+	padding: 0 1em;
 	overflow-y: scroll;
+}
+
+.blog-home::-webkit-scrollbar {
+	display: none;
 }
 
 .mini-profile-pic {
@@ -63,7 +67,16 @@ aside {
 }
 
 @media (max-width: 540px) {
+	.blog-home {
+		padding: 0 1em;
+	}
 	.content {
 		padding: 0.5em 0 0 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.blog-home {
+		padding: 0;
 	}
 }

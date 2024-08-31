@@ -23,6 +23,7 @@ const PostDetailPage = () => {
   const [commentAdded, setCommentAdded] = useState(false);
 
   const handleCommentAdded = () => {
+    console.log(commentAdded)
     setCommentAdded(prev => !prev); 
   };
 
@@ -39,3 +40,5 @@ const PostDetailPage = () => {
 }
 
 export default PostDetailPage;
+
+
