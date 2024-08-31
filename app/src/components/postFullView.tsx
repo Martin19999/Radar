@@ -31,8 +31,8 @@ const PostFullView: React.FC<searchConditionType> = ({searchQuery}) => {
   },[]);
 
   return (
-    
-    searchResult === null || searchResult === undefined 
+    <>
+    {searchResult === null || searchResult === undefined 
       ? <p>Loading...</p>
       : typeof searchResult === 'string' 
         ? <p>Error: {searchResult}</p>  // Render error message
@@ -51,9 +51,10 @@ const PostFullView: React.FC<searchConditionType> = ({searchQuery}) => {
                   <p className="comments-posts-footer"><strong>#1 &#x2022; {formatDateMore(post.created_at.toString())}</strong></p>               
                 </CardBody>
             </Card>
-          ))
-
+          ))}
   
+    </>
+    
   );
 }
 

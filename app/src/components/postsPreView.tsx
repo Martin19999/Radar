@@ -31,7 +31,8 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
   },[searchQuery]);
   
   return (
-    (searchResult === null || searchResult === undefined) ? (
+    <>
+    {(searchResult === null || searchResult === undefined) ? (
       <p>No results found or still loading...</p>
     ) : typeof searchResult === 'string' ? (
       <p>Error: {searchResult}</p>  // Render error message
@@ -65,7 +66,8 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
               </CardBody>
           </Card>
         ))
-    )
+    )}
+    </>
   );
 }
 

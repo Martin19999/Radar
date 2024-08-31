@@ -12,6 +12,7 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 
 import "../styles/common.css";
 import "../styles/settings.css";
+import React from "react";
 
 const SettingPage = () => {
 	const navigate = useNavigate();

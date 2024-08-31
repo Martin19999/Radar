@@ -15,6 +15,7 @@ import { useState } from 'react';
 
 
 import "../styles/common.css";
+import React from 'react';
 
 const PostDetailPage = () => {
   const location = useLocation();

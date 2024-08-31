@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 import "../styles/common.css";
 import "../styles/posting.css";
+import React from "react";
 
 const PostingPage = () => {
 

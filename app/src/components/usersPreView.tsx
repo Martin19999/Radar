@@ -12,7 +12,6 @@ import { useAuth } from '../context/authContext';
 import { Card, CardBody, Stack } from '@chakra-ui/react';
 import { formatDate } from "../utils/formatDate";
 import { getRelations } from "../utils/getRelations";
-import EmptyResult from "./emptyResult";
 
 import "../styles/common.css";
 
@@ -48,8 +47,9 @@ const UsersPreview: React.FC<searchConditionType> = ({searchType, searchQuery, t
   },[triggerFetch]);
   
   return (
-    searchResult === null || searchResult === undefined ? 
-      <EmptyResult />
+    <>
+    {searchResult === null || searchResult === undefined ? 
+      <p>Loading</p>
      : typeof searchResult === 'string' ? 
       <p>Error: {searchResult}</p>  // Render error message
      : 
@@ -68,8 +68,8 @@ const UsersPreview: React.FC<searchConditionType> = ({searchType, searchQuery, t
             </Stack>
             
           </Card>
-        ))
-    
+        ))}
+    </>
   );
 }
 

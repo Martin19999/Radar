@@ -11,7 +11,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import { timeCalculator } from "../utils/timeCalulator";
 import { Card, CardBody, CardFooter, HStack, Stack } from '@chakra-ui/react';
-import  EmptyResult from "./emptyResult";
 
 import "../styles/postDetail.css";
 import "../styles/common.css";
@@ -35,7 +34,8 @@ const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery, r
   },[searchQuery, refresh]);
 
   return (
-    searchResult === null || searchResult === undefined 
+    <>
+    {searchResult === null || searchResult === undefined 
     ? <p>Loading</p>
     : typeof searchResult === 'string' 
       ? <p>Error: {searchResult}</p>  // Render error message
@@ -65,7 +65,9 @@ const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery, r
               </Stack>   
               
           </Card>
-        ))
+        ))}
+    </>
+    
     
   );
 }

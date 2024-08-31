@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
     "outDir": "./build",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -13,7 +17,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*.ts",

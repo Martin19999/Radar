@@ -307,7 +307,9 @@ const PopUps: React.FC<PopUpsProps> = (props) => {
     }
   }
 
-  return (props.trigger) ? (   
+  return( 
+    <>
+    {props.trigger ?  
       <Modal isOpen={true} onClose={()=>{props.setTrigger(false); clearForm(); } }>
         <ModalOverlay />
         <ModalContent>
@@ -327,7 +329,9 @@ const PopUps: React.FC<PopUpsProps> = (props) => {
           </ModalFooter>
         </ModalContent>
       </Modal>  
-  ) : "";
+   : ""}
+   </>
+  );
 }
 
 export default PopUps;
