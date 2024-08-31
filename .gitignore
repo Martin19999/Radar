@@ -15,7 +15,6 @@ Thumbs.db
 
 *.log
 
-app/src/firebase.tsx
 server/src/config/firebase-admin-sdk.json
 
 
