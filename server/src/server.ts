@@ -25,8 +25,6 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); 
 
-app.use(express.json());
-
 app.use(function(req, res, next) {
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Origin', '*');
@@ -37,6 +35,8 @@ app.use(function(req, res, next) {
     next();
   }
 });
+
+app.use(express.json());
 
 
 // Serve static files from the public directory in the app folder
