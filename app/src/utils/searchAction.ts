@@ -15,7 +15,8 @@ export const search = <T>(req: SearchRequest): Promise<T[]> => {
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
     },
   })
   .then(response => {
