@@ -25,17 +25,17 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); 
 
-// app.use(function(req, res, next) {
-//   console.log(req.method);
-//   if (req.method === 'OPTIONS') {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     res.send(200); // Send OK status for OPTIONS requests
-//   } else {
-//     next();
-//   }
-// });
+app.use(function(req, res, next) {
+  console.log(req.method);
+  
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+
+  next();
+  
+});
 
 app.use(express.json());
 
