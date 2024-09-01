@@ -17,16 +17,7 @@ app.use(express.json());
 
 var whitelist = [process.env.REACT_APP_FRONTEND_URL, 'http://localhost:3000']
 var corsOptions = {
-  origin: function (origin: string, callback: (arg0: Error | null, arg1: boolean | undefined) => void) {
-    const isVercelAppDomain = (origin: string) => /\.vercel\.app$/.test(origin);
-    
-    if (whitelist.indexOf(origin) !== -1 || isVercelAppDomain(origin)) {
-      // console.log("yay")
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'), false)
-    }
-  }
+  origin: true
 }
 
 app.use(cors(corsOptions));
