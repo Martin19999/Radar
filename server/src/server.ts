@@ -30,6 +30,12 @@ app.use('/api', showRelationRoutes);
 
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+// Delay starting the server to handle DNS resolution delay
+setTimeout(() => {
+  app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+  });
+}, 1000);  // Delay for 1 second
+
+
