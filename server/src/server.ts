@@ -21,7 +21,7 @@ var corsOptions = {
     const isVercelAppDomain = (origin: string) => /\.vercel\.app$/.test(origin);
     
     if (whitelist.indexOf(origin) !== -1 || isVercelAppDomain(origin)) {
-     
+      console.log("yay")
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'), false)
