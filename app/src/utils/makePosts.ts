@@ -11,7 +11,7 @@ interface PostResponse {
 }
 
 export const makePosts = async (post: Posts, uid: string): Promise<string | null> => {
-  const url = 'http://localhost:3001/api/submit-post';
+  const url = `${process.env.REACT_APP_BACKEND_URL}/api/submit-post`;
 
   try {
     const response = await fetch(url, {

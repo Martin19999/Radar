@@ -26,7 +26,7 @@ const MyMenu = () => {
 	const path = location.pathname;
 	const { currentUser, userDetails } = useAuth() as AuthContextType;
 	
-	const [isWideEnough] = useMediaQuery("(min-width: 768px)");
+	const [isWideEnough] = useMediaQuery("(min-width: 769px)");
 	const [pfpAsBackground] = useMediaQuery("(max-width: 850px)");
   const { colorMode, setColorMode } = useColorMode();
 

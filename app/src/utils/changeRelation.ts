@@ -5,7 +5,7 @@
  * @param user - The user data to sync.
  */
 export const changeRelation = (actor_uid: string, acceptor_uid: string, request_type: string): void => {
-  const url = 'http://localhost:3001/api/update-relation';  // Adjust as necessary
+  const url = `${process.env.REACT_APP_BACKEND_URL}/api/update-relation`;  // Adjust as necessary
 
   fetch(url, {
     method: 'POST',

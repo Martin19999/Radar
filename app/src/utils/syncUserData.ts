@@ -6,7 +6,7 @@ import { FirebaseUser } from '../types';
  * @param user - The user data to sync.
  */
 export const syncUserData = (user: FirebaseUser): void => {
-  const url = 'http://localhost:3001/api/users/sync-user';  // Adjust as necessary
+  const url = `${process.env.REACT_APP_BACKEND_URL}/api/users/sync-user`;  // Adjust as necessary
 
   fetch(url, {
     method: 'POST',

@@ -7,7 +7,7 @@
  * @param req - uid
  */
 export async function getRelations<T>(uid: string, other_uid: string, request_type: string): Promise<T> {
-  const url = new URL('http://localhost:3001/api/show-relation');
+  const url = new URL(`${process.env.REACT_APP_BACKEND_URL}/api/show-relation`);
   url.searchParams.append('uid', uid);
   url.searchParams.append('other_uid', other_uid);
   url.searchParams.append('request_type', request_type);

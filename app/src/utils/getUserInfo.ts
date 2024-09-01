@@ -6,7 +6,7 @@ import { UserInfo } from '../types';  // Assuming you define your types somewher
  * @param req - uid
  */
 export async function getUserInfo(userId: string): Promise<UserInfo[]> {
-  const url = new URL('http://localhost:3001/api/userinfo');
+  const url = new URL(`${process.env.REACT_APP_BACKEND_URL}/api/userinfo`);
   url.searchParams.append('uid', userId);
 
   try {

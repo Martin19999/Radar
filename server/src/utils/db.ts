@@ -12,4 +12,6 @@ const pool = new Pool({
   database: process.env.PGDATABASE
 });
 
+console.log(pool);
+
 export const query = (text: string, params?: any[]) => pool.query(text, params);

@@ -6,7 +6,7 @@ import { SearchRequest, UserInfo } from '../types';  // Assuming you define your
  * @param req - type + input query
  */
 export const search = <T>(req: SearchRequest): Promise<T[]> => {
-  const url = new URL('http://localhost:3001/api/search');  // Adjust as necessary
+  const url = new URL(`${process.env.REACT_APP_BACKEND_URL}/api/search`);  // Adjust as necessary
   url.searchParams.append('searchType', req.searchType);
   url.searchParams.append('inputQuery', req.inputQuery);
 

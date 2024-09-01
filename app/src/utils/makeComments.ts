@@ -4,7 +4,7 @@
  * @param comment - comment 
  */
 export const makeComments = async(comment: string, uid: string, post_id: string): Promise<void> => {
-  const url = 'http://localhost:3001/api/submit-comment';  // Adjust!!!
+  const url = `${process.env.REACT_APP_BACKEND_URL}/api/submit-comment`;  // Adjust!!!
 
   fetch(url, {
     method: 'POST',

@@ -13,7 +13,7 @@ import showRelationRoutes from './routes/showRelationRoutes';
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000'  // Allow only this origin to access
+  origin: process.env.REACT_APP_FRONTEND_URL  // Allow only this origin to access
 }));
 
 // Serve static files from the public directory in the app folder
