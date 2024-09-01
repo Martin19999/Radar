@@ -1,7 +1,3 @@
-import express from 'express';
-import path from 'path';
-const cors = require('cors');
-
 import userUpdateRoutes from './routes/userUpdateRoutes';
 import searchRoutes from './routes/searchRoutes';
 import showUserInfoRoutes from './routes/showUserInfoRoutes';
@@ -10,11 +6,28 @@ import makeCommentsRoutes from './routes/makeCommentsRoutes';
 import updateRelationRoutes from './routes/updateRelationRoutes';
 import showRelationRoutes from './routes/showRelationRoutes';
 
+import express from 'express';
+import path from 'path';
+const cors = require('cors');
+
+
+
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: process.env.REACT_APP_FRONTEND_URL  // Allow only this origin to access
-}));
+
+var whitelist = [process.env.REACT_APP_FRONTEND_URL, 'http://localhost:3000']
+var corsOptions = {
+  origin: function (origin: string, callback: (arg0: Error | null, arg1: boolean | undefined) => void) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'), false)
+    }
+  }
+}
+
+app.use(cors(corsOptions));
+
 
 // Serve static files from the public directory in the app folder
 app.use(express.static(path.join(__dirname, '../app/public')));
