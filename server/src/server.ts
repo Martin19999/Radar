@@ -15,7 +15,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-var whitelist = [process.env.REACT_APP_FRONTEND_URL, 'http://localhost:3000']
+var whitelist = ['https://social-media-9yfnv4d00-martins-projects-23589147.vercel.app', 'http://localhost:3000']
 var corsOptions = {
   origin: function (origin: string, callback: (arg0: Error | null, arg1: boolean | undefined) => void) {
     if (whitelist.indexOf(origin) !== -1) {
