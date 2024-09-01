@@ -26,13 +26,10 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); 
 
 app.use(function(req, res, next) {
-  console.log(req.method);
-  
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,DELETE,PUT');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  
-
+  const origin = req.header('Origin');
+  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
   
 });
