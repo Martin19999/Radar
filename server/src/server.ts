@@ -17,10 +17,14 @@ app.use(express.json());
 
 var whitelist = [process.env.REACT_APP_FRONTEND_URL, 'http://localhost:3000']
 var corsOptions = {
-  origin: true
+  origin: true,
+  optionsSuccessStatus: 200,
+  methods: "GET,POST,OPTIONS,DELETE,PUT",
+  allowedHeaders: ["Content-Type", "Authorization"]
 }
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); 
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
