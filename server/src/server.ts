@@ -25,14 +25,14 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); 
 
-// app.use(function(req, res, next) {
-//   const origin = req.header('Origin');
-//   res.header("Access-Control-Allow-Origin", origin);
-//   res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
+app.use(function(req, res, next) {
+  const origin = req.header('Origin');
+  res.setHeader("Access-Control-Allow-Origin", origin!);
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
   
-// });
+});
 
 app.use(express.json());
 
