@@ -11,7 +11,6 @@ export const makePosts = async (req: Request, res: Response) => {
     const result = await query(insertQuery, [uid, title, content]);
     if (result.rows.length > 0) {
       const newPostId = result.rows[0].post_id;
-      console.log('New post is made with post_id:', newPostId);
       
       res.json({ message: 'Post made successfully', post_id: newPostId });
     } else {
