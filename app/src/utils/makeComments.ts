@@ -25,13 +25,9 @@ export const makeComments = async(comment: string, uid: string, post_id: string)
     if (!response.ok) {
       throw new Error(`Server responded with an error: ${response.status}`);
     }
-
-    // Optional: You might want to process the response here
     const data = await response.json();
-    console.log('Comment submitted successfully:', data);
     
   } catch (error) {
     console.log('Error with posting this comment:', (error as Error).message);
-    // You can handle retries or further error handling here if necessary
   }
 };

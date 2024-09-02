@@ -25,7 +25,6 @@ export const changeRelation = (actor_uid: string, acceptor_uid: string, request_
     }
     return response.json();
   })
-  .then(data => console.log('Follows data synced:', data))
   .catch(error => { console.log('Error syncing follows data:', error.message);
                     console.log(actor_uid, acceptor_uid, request_type);
                     // setTimeout(() => changeRelation(actor_uid, acceptor_uid, request_type), 3000); // Retry after 3 seconds
