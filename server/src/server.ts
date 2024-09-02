@@ -10,11 +10,7 @@ import express from 'express';
 import path from 'path';
 const cors = require('cors');
 
-
-
 const app = express();
-
-// var whitelist = [process.env.REACT_APP_FRONTEND_URL, 'http://localhost:3000']
 
 app.use(function(req, res, next) {
   const origin = req.header('Origin');
@@ -29,7 +25,6 @@ var corsOptions = {
   origin: true,
   optionsSuccessStatus: 200,
   methods: "GET,POST,OPTIONS,DELETE,PUT",
-  // allowedHeaders: ["Content-Type", "Authorization"]
 }
 
 app.use(cors(corsOptions));
@@ -41,10 +36,7 @@ app.options("*", (req, res) => {
   res.sendStatus(200);
 });
 
-
-
 app.use(express.json());
-
 
 // Serve static files from the public directory in the app folder
 app.use(express.static(path.join(__dirname, '../app/public')));
