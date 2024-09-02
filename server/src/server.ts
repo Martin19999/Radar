@@ -1,7 +1,3 @@
-import express from 'express';
-import path from 'path';
-const cors = require('cors');
-
 import userUpdateRoutes from './routes/userUpdateRoutes';
 import searchRoutes from './routes/searchRoutes';
 import showUserInfoRoutes from './routes/showUserInfoRoutes';
@@ -10,11 +6,37 @@ import makeCommentsRoutes from './routes/makeCommentsRoutes';
 import updateRelationRoutes from './routes/updateRelationRoutes';
 import showRelationRoutes from './routes/showRelationRoutes';
 
+import express from 'express';
+import path from 'path';
+const cors = require('cors');
+
 const app = express();
+
+app.use(function(req, res, next) {
+  const origin = req.header('Origin');
+  res.setHeader("Access-Control-Allow-Origin", origin ?? '*');
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+  
+});
+
+var corsOptions = {
+  origin: true,
+  optionsSuccessStatus: 200,
+  methods: "GET,POST,OPTIONS,DELETE,PUT",
+}
+
+app.use(cors(corsOptions));
+app.options("*", (req, res) => {
+  const origin = req.header('Origin');
+  res.setHeader("Access-Control-Allow-Origin", origin ?? '*');
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.sendStatus(200);
+});
+
 app.use(express.json());
-app.use(cors({
-  origin: process.env.REACT_APP_FRONTEND_URL  // Allow only this origin to access
-}));
 
 // Serve static files from the public directory in the app folder
 app.use(express.static(path.join(__dirname, '../app/public')));

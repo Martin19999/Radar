@@ -9,11 +9,16 @@ export const search = <T>(req: SearchRequest): Promise<T[]> => {
   const url = new URL(`${process.env.REACT_APP_BACKEND_URL}/api/search`);  // Adjust as necessary
   url.searchParams.append('searchType', req.searchType);
   url.searchParams.append('inputQuery', req.inputQuery);
+  const origin = window.location.origin;
+  console.log(origin);
 
   return fetch(url, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': origin,
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With'
     },
   })
   .then(response => {
