@@ -5,7 +5,6 @@ import { UserData } from '../types/userData';
 export const updateRelation = async (req: Request, res: Response) => {
   const { actor_uid, acceptor_uid, request_type } = req.body
   try {
-    console.log(request_type+"aaaaa");
     switch(request_type) {
       case 'follow':
         const insertQuery = `INSERT INTO follows (follower_id, followed_id) VALUES ($1, $2)`;
