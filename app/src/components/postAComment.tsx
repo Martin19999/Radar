@@ -39,11 +39,11 @@ const PostAComment: React.FC<PostACommentProps> = ({post_id, onCommentAdded}) =>
     return false;
   };
 
-  function post () {
+  async function post () {
     setIsSubmitting(true);
-    onCommentAdded();
     try {
-      makeComments(comment, currentUser!.uid, post_id);
+      await makeComments(comment, currentUser!.uid, post_id);
+      onCommentAdded();
     } catch (error) {
       showErrorNonFirebase((error as Error).message);
     } finally {

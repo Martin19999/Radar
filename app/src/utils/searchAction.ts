@@ -10,7 +10,6 @@ export const search = <T>(req: SearchRequest): Promise<T[]> => {
   url.searchParams.append('searchType', req.searchType);
   url.searchParams.append('inputQuery', req.inputQuery);
   const origin = window.location.origin;
-  console.log(origin);
 
   return fetch(url, {
     method: 'GET',

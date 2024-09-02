@@ -27,7 +27,6 @@ export const makeComments = async(comment: string, uid: string, post_id: string)
     }
     return response.json();
   })
-  .then(data => console.log('Posted!!:', data))
   .catch(error => { console.log('Error with posting this comment:', error.message);
                     // setTimeout(() => makePosts(post, uid), 3000); // Retry after 3 seconds
   });
