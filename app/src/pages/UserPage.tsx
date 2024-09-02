@@ -74,7 +74,7 @@ const UserPage = () => {
 			setIsFollowing((await getRelations<{boolean5: boolean}>(currentUser!.uid, uid ?? '', 'find-if-following')).boolean5);
 		}
 		if(currentUser) fetchData();
-	},[location])
+	},[])
 
 	async function follow() {
 		try {
