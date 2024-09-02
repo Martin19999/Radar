@@ -8,9 +8,10 @@ import React, { useEffect, useState } from "react";
 import { PostsPreview as PostsPreviewType } from "../types";
 import { search } from "../utils/searchAction";
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
 import { timeCalculator } from "../utils/timeCalulator";
 import { Card, CardBody, HStack } from '@chakra-ui/react';
+import { PiSpinnerBallDuotone } from "react-icons/pi";
+
 
 import "../styles/common.css";
 
@@ -25,7 +26,7 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
 
   useEffect(() => {
     const fetchData = async () => {
-      setSearchResult(await search<PostsPreviewType>({searchType: 'posts'+'-'+searchCondition, inputQuery: searchQuery}));
+      setSearchResult(await search<PostsPreviewType>({searchType: 'posts-'+searchCondition, inputQuery: searchQuery}));
     }
     fetchData();
   },[searchQuery]);
@@ -33,7 +34,7 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
   return (
     <>
     {(searchResult === null || searchResult === undefined) ? (
-      <p>No results found or still loading...</p>
+      <p><PiSpinnerBallDuotone className="spinner" /></p>
     ) : typeof searchResult === 'string' ? (
       <p>Error: {searchResult}</p>  // Render error message
     ) : (
@@ -45,7 +46,7 @@ const PostsPreview: React.FC<searchConditionType> = ({searchCondition, searchQue
               <CardBody>
               {searchCondition !== 'by-user' ?
                   (<HStack>
-                  <img src={post.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${post.uid}/posts`)}/>
+                  <img src={post.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${post.uid}/posts`)} alt="profile-pic"/>
                   <p onClick={() => navigate(`/userdetail/${post.uid}/posts`)}>{post.display_name}</p>
                   <p>&#x2022; {timeCalculator(post.created_at.toString())}</p>
                   </HStack>)

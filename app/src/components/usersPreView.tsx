@@ -8,10 +8,11 @@ import React, { useEffect, useState } from "react";
 import { UserInfo } from "../types";
 import { search } from "../utils/searchAction";
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
 import { Card, CardBody, Stack } from '@chakra-ui/react';
 import { formatDate } from "../utils/formatDate";
 import { getRelations } from "../utils/getRelations";
+import { PiSpinnerBallDuotone } from "react-icons/pi";
+
 
 import "../styles/common.css";
 
@@ -49,7 +50,7 @@ const UsersPreview: React.FC<searchConditionType> = ({searchType, searchQuery, t
   return (
     <>
     {searchResult === null || searchResult === undefined ? 
-      <p>Loading</p>
+      <p><PiSpinnerBallDuotone className="spinner" /></p>
      : typeof searchResult === 'string' ? 
       <p>Error: {searchResult}</p>  // Render error message
      : 
@@ -59,7 +60,7 @@ const UsersPreview: React.FC<searchConditionType> = ({searchType, searchQuery, t
           <Card key={index}
                 onClick={()=>navigate(`/userdetail/${user.uid}/posts`, {state: {userinfo: user}})}
                 variant='outline'>
-            <img src={user.photo_url} className='pfp-in-cards'/>
+            <img src={user.photo_url} className='pfp-in-cards' alt="profile-pic"/>
             <Stack>
               <CardBody>
                 <strong><h2>{user.display_name}</h2></strong>

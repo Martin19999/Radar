@@ -8,3 +8,9 @@
 .post-preview-time {
   white-space: nowrap;
 }
+
+@media (max-width: 480px) {
+  .pfp-in-cards {
+    height: 50px;
+  }
+}

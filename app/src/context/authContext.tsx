@@ -8,6 +8,7 @@
 import { auth } from '../firebase';
 import { User, onAuthStateChanged } from 'firebase/auth';
 import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { PiSpinnerBallDuotone } from "react-icons/pi";
 
 export interface AuthContextType {
   currentUser: User | null;
@@ -65,7 +66,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, [])
 
   if (loading) {
-    return <div>Loading...</div>; // Or any loading spinner or similar component
+    return <div><PiSpinnerBallDuotone className="spinner" /></div>; 
   }
 
   return (

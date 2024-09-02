@@ -7,14 +7,15 @@
 import React, { useEffect, useState } from "react";
 import { CommentsPreview } from "../types";
 import { search } from "../utils/searchAction";
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
 import { timeCalculator } from "../utils/timeCalulator";
-import { Card, CardBody, CardFooter, HStack, Stack } from '@chakra-ui/react';
+import { Card, CardBody, HStack, Stack } from '@chakra-ui/react';
+import { PiSpinnerBallDuotone } from "react-icons/pi";
+
 
 import "../styles/postDetail.css";
 import "../styles/common.css";
-import { formatDate, formatDateMore } from "../utils/formatDate";
+import { formatDateMore } from "../utils/formatDate";
 
 interface searchConditionType{
   searchType: string;
@@ -36,7 +37,7 @@ const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery, r
   return (
     <>
     {searchResult === null || searchResult === undefined 
-    ? <p>Loading</p>
+    ? <p><PiSpinnerBallDuotone className="spinner" /></p>
     : typeof searchResult === 'string' 
       ? <p>Error: {searchResult}</p>  // Render error message
       : 
@@ -47,9 +48,9 @@ const CommentsView: React.FC<searchConditionType> = ({searchType, searchQuery, r
               <Stack className="comment-posts-card-stack">
                 <CardBody>     
                   <HStack>
-                    <img src={comment.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${comment.uid}/posts`)}/>
+                    <img src={comment.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${comment.uid}/posts`)} alt="profile-pic"/>
                     <p onClick={() => navigate(`/userdetail/${comment.uid}/posts`)}>{comment.display_name}</p>
-                    {searchType != "by-post" ? <p>&#x2022; {timeCalculator(comment.created_at.toString())}</p> : null}
+                    {searchType !== "by-post" ? <p>&#x2022; {timeCalculator(comment.created_at.toString())}</p> : null}
                   </HStack>
                     {searchType === "by-post" ?
                       <>

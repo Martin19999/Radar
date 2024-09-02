@@ -10,6 +10,19 @@ body {
 	min-width: 360px;
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
 /* when new users are created */
 .fresh-user-popup {
 	position: absolute;
@@ -77,6 +90,10 @@ body {
 	height: 100%;
 }
 
+#searchField {
+	width: clamp(200px, 40vw, 800px);
+}
+
 .search-form button {
 	display: flex;
 }
@@ -115,6 +132,7 @@ body {
 @media (max-width: 1400px) {
 	#searchField {
 		width: clamp(200px, 40vw, 600px);
+
 	}
 }
 

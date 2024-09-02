@@ -14,12 +14,11 @@ const Logo: React.FC = () => {
 	const { colorMode } = useColorMode();
 
 	return(
-		<div>
-      	<img src= { colorMode === "light" ? "/logo.png" : "/logoN.png" } 
-						 alt="Website Logo" 
-						 id="logo" 
-						 onClick={() => navigate('/')} />
-  	</div>
+		<img src= { colorMode === "light" ? "/logo.png" : "/logoN.png" } 
+					alt="Website Logo" 
+					id="logo" 
+					onClick={() => navigate('/')} />
+  	
 	)
 };
 

@@ -11,21 +11,22 @@ import { UserInfo } from "../types";
 import { getUserInfo } from "../utils/getUserInfo";
 import { formatDate } from "../utils/formatDate";
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate, useLocation, Link as RouterLink  } from 'react-router-dom';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, IconButton, Button, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery, HStack } from '@chakra-ui/react'
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, IconButton, Modal, ModalOverlay, ModalContent, ModalCloseButton, ModalBody, Tooltip, useMediaQuery, HStack } from '@chakra-ui/react'
 import PostsPreview from "../components/postsPreView";
 import UsersPreview from "../components/usersPreView";
 import { getRelations } from "../utils/getRelations";
 import { changeRelation } from "../utils/changeRelation";
 import { useEasyToast } from "../components/toast";
 import { SlUserFollow, SlUserFollowing } from "react-icons/sl";
+import { PiSpinnerBallDuotone } from "react-icons/pi";
 
 
 import "../styles/common.css";
 import "../styles/userinfo.css";
 
 const UserPage = () => {
-	const { currentUser, userDetails } = useAuth();
+	const { currentUser } = useAuth();
   // make sure the user exists (logged in), is it alway true???/
 
   const { uid } = useParams();
@@ -102,14 +103,14 @@ const UserPage = () => {
 	}
 
 	if (!userInfo) {
-		return <div>Loading...</div>;
+		return <div><PiSpinnerBallDuotone className="spinner" /></div>;
 	}	else {
 	
 		return (
 			<Page>
 				<div className='userinfo-container'>
 					<div className='basic-userinfo-container'>
-						<img src={userInfo.photo_url} alt="profile picture" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
+						<img src={userInfo.photo_url} alt="profile" className="userinfo-profile-pic" onClick={()=>{setPfpMagnified(true)}}/>
 						<Modal isOpen={pfpMagnified} onClose={()=> setPfpMagnified(false)} variant='displayPfp'>
 							<ModalOverlay />
 							<ModalContent>

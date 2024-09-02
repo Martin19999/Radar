@@ -7,11 +7,9 @@
 import React, { useEffect, useState } from "react";
 import { PostsPreview as PostsPreviewType } from "../types";
 import { search } from "../utils/searchAction";
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/authContext';
-import { timeCalculator } from "../utils/timeCalulator";
+import { useNavigate } from 'react-router-dom';
 import { Card, CardBody, HStack } from '@chakra-ui/react';
-import { formatDate, formatDateMore } from "../utils/formatDate";
+import { formatDateMore } from "../utils/formatDate";
 
 import "../styles/common.css";
 
@@ -33,7 +31,7 @@ const PostFullView: React.FC<searchConditionType> = ({searchQuery}) => {
   return (
     <>
     {searchResult === null || searchResult === undefined 
-      ? <p>Loading...</p>
+      ? <p></p>
       : typeof searchResult === 'string' 
         ? <p>Error: {searchResult}</p>  // Render error message
         : 
@@ -42,7 +40,7 @@ const PostFullView: React.FC<searchConditionType> = ({searchQuery}) => {
                   variant="postView">    
                 <CardBody>     
                   <HStack>
-                    <img src={post.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${post.uid}/posts`)}/>
+                    <img src={post.photo_url} className="mini-profile-pic" onClick={() => navigate(`/userdetail/${post.uid}/posts`)} alt="profile-pic"/>
                     <p onClick={() => navigate(`/userdetail/${post.uid}/posts`)}>{post.display_name}</p>
                     
                   </HStack>

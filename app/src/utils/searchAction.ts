@@ -1,5 +1,5 @@
 // src/utils/searchAction.ts
-import { SearchRequest, UserInfo } from '../types';  // Assuming you define your types somewhere
+import { SearchRequest } from '../types';  // Assuming you define your types somewhere
 
 /**
  * perform search request
