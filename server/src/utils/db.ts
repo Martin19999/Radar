@@ -12,4 +12,12 @@ const pool = new Pool({
   database: process.env.PGDATABASE
 });
 
+pool.connect((err) => {
+  if (err) {
+    console.error('Connection error', err.stack);
+  } else {
+    console.log('Connected to the database');
+  }
+});
+
 export const query = (text: string, params?: any[]) => pool.query(text, params);
