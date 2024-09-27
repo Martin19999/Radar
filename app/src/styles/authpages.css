@@ -4,6 +4,7 @@
   width: 100%;
   justify-content: center;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 950px) {
@@ -33,6 +34,7 @@
   flex-wrap: wrap;
   align-content: center;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .auth-container .description-container li {
@@ -48,6 +50,7 @@
   padding: 0 2em;
   position: relative;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .form-container a {
@@ -77,6 +80,7 @@
   /* border: 1px black;
   border-style: solid; */
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 950px) {
