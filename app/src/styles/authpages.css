@@ -5,7 +5,6 @@
   justify-content: center;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
 }
 
 @media (max-width: 950px) {
@@ -36,7 +35,6 @@
   align-content: center;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
 }
 
 .auth-container .description-container li {
@@ -53,7 +51,6 @@
   position: relative;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
 }
 
 .form-container a {
@@ -84,7 +81,6 @@
   border-style: solid; */
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
 }
 
 @media (max-width: 950px) {

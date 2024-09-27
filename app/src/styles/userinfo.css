@@ -6,7 +6,6 @@
   padding: 2em;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
 }
 
 .userinfo-container::-webkit-scrollbar {
