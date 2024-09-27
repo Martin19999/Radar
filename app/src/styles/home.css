@@ -1,8 +1,16 @@
 /* Welcome pop up window */
+.chakra-portal .css-1u2cvaz {
+	max-width: 80vw;
+	left: 10vw;
+}
 .welcome-content-container {
 	display: flex;
 	flex-direction: row;
 	margin: 2em 0;
+}
+
+.welcome-content-container p {
+	margin-right: 1em;
 }
 
 /* content for home page */
@@ -13,6 +21,7 @@
 	height: calc(100vh - 4em);
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
+	touch-action: pan-y;
 	width: 100%;
 	/* border: 1px black;
 	border-style: solid; */
@@ -26,6 +35,7 @@
 	padding: 0 1em;
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
+	touch-action: pan-y;
 }
 
 .blog-home::-webkit-scrollbar {

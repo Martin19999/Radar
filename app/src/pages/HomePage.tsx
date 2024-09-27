@@ -31,8 +31,8 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <>
-      <Modal isOpen={fresh} onClose={() => {}}>
+    <> 
+      <Modal isOpen={fresh} onClose={() => {}} >
         <ModalOverlay />
         <ModalContent data-testid="welcom-guide">
           <ModalBody>

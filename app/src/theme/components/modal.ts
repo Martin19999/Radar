@@ -4,9 +4,9 @@ import { ComponentStyleConfig, theme as baseTheme } from "@chakra-ui/react";
 
 const Modal: ComponentStyleConfig= {
   baseStyle: (props) => ({
-    fontSize: ["sm","md"], 
+    fontSize: ["xs", "sm","md"], 
     dialog: {
-      bg: mode('white', 'gray.800')(props),
+      bg: mode('white', 'gray.800')(props),  
     }
   }),
   variants: {
