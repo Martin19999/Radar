@@ -5,7 +5,7 @@
  * 
  */
 import Banner from "./Banner/index";
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/common.css";
 
 interface ContentProps {
@@ -13,6 +13,18 @@ interface ContentProps {
 }
 
 const Page: React.FC<ContentProps> = ({ children }) => {
+  useEffect(() => {
+    const setVh = () => {
+      document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+
+    setVh();
+    window.addEventListener('resize', setVh);
+    return () => {
+      window.removeEventListener('resize', setVh);
+    };
+  }, []);
+  
   return (
     <div className='content'>
       <Banner />
